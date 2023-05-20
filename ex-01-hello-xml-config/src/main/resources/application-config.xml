@@ -9,6 +9,15 @@
 	<context:component-scan base-package="com.jdc.demo"></context:component-scan>
 	
     <!-- bean definitions here -->
-    <bean id="messageBean" name="message,message2" class="com.jdc.demo.Message"></bean>
+    <bean id="messageBean" name="message,message2" lazy-init="true" class="com.jdc.demo.Message">
+    	<constructor-arg value="This is message from Configuration"></constructor-arg>
+   		<property name="type" value="Demo Type"></property>
+    </bean>
+    
+    <bean id="randomGen" 
+    	class="java.util.concurrent.ThreadLocalRandom" 
+    	factory-method="current" ></bean>
+    
+    <bean id="randomNumber" factory-bean="randomGen" factory-method="nextInt"></bean>
     
  </beans>

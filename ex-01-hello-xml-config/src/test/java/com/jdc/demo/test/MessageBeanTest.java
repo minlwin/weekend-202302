@@ -28,6 +28,9 @@ public class MessageBeanTest {
 		context.publishEvent(message);
 		
 		context.publishEvent(new Message("This is not a bean."));
+		
+		var randomNum = context.getBean("randomNumber");
+		System.out.println(randomNum);
 	}
 	
 	@AfterEach

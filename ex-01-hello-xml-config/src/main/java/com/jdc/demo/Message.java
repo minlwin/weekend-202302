@@ -1,13 +1,15 @@
 package com.jdc.demo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Message implements ValueHolder{
 
 	private String value;
+	private String type;
+
+	public Message(String value) {
+		super();
+		this.value = value;
+	}
 }
