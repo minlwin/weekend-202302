@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+     
+    <context:component-scan base-package="com.jdc.demo" />
+    <context:property-placeholder location="classpath:/settings.properties" />
+     
+    <bean class="com.jdc.demo.MyService">
+    	<qualifier value="defaultService"></qualifier>
+    	<constructor-arg value="jdc.com" />
+    	<constructor-arg value="8080" />
+    	<constructor-arg value="5" />
+    </bean> 
+    
+</beans>
