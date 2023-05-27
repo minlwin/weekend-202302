@@ -17,7 +17,7 @@
 
 	<div class="container mt-4">
 	
-		<h3>Edit Course</h3>
+		<h3>${ form.id eq 0 ? 'Add New' : 'Edit' } Course</h3>
 		
 		<c:url value="/course" var="saveAction"></c:url>
 		<sf:form action="${saveAction}" method="POST" modelAttribute="form">

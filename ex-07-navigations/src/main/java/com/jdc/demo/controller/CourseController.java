@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jdc.demo.service.CourseService;
 import com.jdc.demo.service.entity.Course;
@@ -40,15 +41,23 @@ public class CourseController {
 	}
 	
 	@PostMapping
-	String save(@Validated @ModelAttribute("form") Course course, BindingResult result) {
+	String save(
+			@Validated @ModelAttribute("form") Course course, 
+			BindingResult result,
+			RedirectAttributes redirect) {
 		
 		// validate inputs
 		if(result.hasErrors()) {
 			return "course-edit";
 		}
 		
+		var isNewEntity = course.getId() == 0;
+		
 		// save to database
 		var id = service.save(course);
+		
+		redirect.addFlashAttribute("message", 
+				"Course has benn %s successfully.".formatted(isNewEntity ? "Created" : "Updated"));
 		
 		// redirect to details page
 		return "redirect:/course/%d".formatted(id);

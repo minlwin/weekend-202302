@@ -8,7 +8,6 @@
 <title>JDC | Course</title>
 
 <jsp:include page="/includes/resources.jsp"></jsp:include>
-<link rel="stylesheet" href="" />
 </head>
 <body>
 
@@ -39,7 +38,9 @@
 			
 			<div class="col btn-wrapper">
 				<!-- Search Button -->
-				<button type="submit" class="btn btn-outline-primary">Search</button>
+				<button type="submit" class="btn btn-outline-primary">
+					<i class="bi bi-search"></i> Search
+				</button>
 								
 				<!-- Add New Button -->
 				<c:url value="/course/edit" var="addNew"></c:url>
@@ -62,9 +63,8 @@
 					
 					<thead>
 						<tr>
-							<td>Id</td>
-							<td>Name</td>
 							<td>Level</td>
+							<td>Name</td>
 							<td>Hours</td>
 							<td>Fees</td>
 							<td>Description</td>
@@ -75,13 +75,24 @@
 					<tbody>
 						<c:forEach items="${list}" var="c">
 							<tr>
-								<td>${c.id}</td>
-								<td>${c.name}</td>
 								<td>${c.level}</td>
+								<td>${c.name}</td>
 								<td>${c.hours}</td>
 								<td>${c.price}</td>
 								<td>${c.description}</td>
-								<td></td>
+								<td>
+									<c:url value="/course/edit" var="editLink">
+										<c:param name="id" value="${c.id}"></c:param>
+									</c:url>
+									<a href="${editLink}" class="icon-link me-2">
+										<i class="bi bi-pencil"></i>
+									</a>
+									
+									<c:url value="/course/${c.id}" var="detailsLink"></c:url>
+									<a href="${detailsLink}" class="icon-link">
+										<i class="bi bi-send"></i>
+									</a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
