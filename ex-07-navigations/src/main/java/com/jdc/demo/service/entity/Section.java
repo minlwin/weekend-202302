@@ -26,6 +26,7 @@ public class Section {
 	
 	@ManyToOne(optional = false)
 	private Course course;
+	
 	@ManyToOne(optional = false)
 	private Teacher teacher;
 	
@@ -38,6 +39,7 @@ public class Section {
 	
 	@Column(nullable = false, name = "start_time")
 	private String startTime;
+	
 	@Column(nullable = false, name = "end_time")
 	private String endTime;
 

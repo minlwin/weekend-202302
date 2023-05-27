@@ -37,7 +37,7 @@
 			<!-- Name -->
 			<div class="mb-3">
 				<label class="form-label">Course Name</label>
-				<sf:input path="name" cssClass="form-control"/>
+				<sf:input path="name" placeholder="Enter Course Name" cssClass="form-control"/>
 				<sf:errors path="name" cssClass="text-secondary"></sf:errors>
 			</div>
 			
@@ -60,7 +60,7 @@
 			<!-- Description -->
 			<div class="mb-3">
 				<label class="form-label">Description</label>
-				<sf:textarea path="description" cssClass="form-control"/>
+				<sf:textarea path="description" placeholder="Enter Course Description" cssClass="form-control"/>
 			</div>
 			
 			<!-- Action Button -->
