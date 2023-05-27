@@ -8,7 +8,7 @@
 <title>JDC | Course</title>
 
 <jsp:include page="/includes/resources.jsp"></jsp:include>
-
+<link rel="stylesheet" href="" />
 </head>
 <body>
 
@@ -43,7 +43,9 @@
 								
 				<!-- Add New Button -->
 				<c:url value="/course/edit" var="addNew"></c:url>
-				<a href="${addNew}" class="btn btn-outline-danger">Add New Course</a>
+				<a href="${addNew}" class="btn btn-outline-danger">
+					<i class="bi bi-plus-lg"></i> Add New
+				</a>
 			
 			</div>
 		
