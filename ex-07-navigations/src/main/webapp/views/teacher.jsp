@@ -22,11 +22,11 @@
 		<form class="row">
 			<div class="col-auto">
 				<label class="form-label">Search Name</label>
-				<input type="text" placeholder="Search Name" name="name" />
+				<input class="form-control" type="text" placeholder="Search Name" name="name" />
 			</div>
 			<div class="col-auto">
 				<label class="form-label">Search Phone</label>
-				<input type="text" placeholder="Search Phone" name="phone" />
+				<input class="form-control" type="text" placeholder="Search Phone" name="phone" />
 			</div>
 			<div class="col btn-wrapper">
 				<button class="btn btn-outline-primary" type="submit">

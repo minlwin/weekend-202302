@@ -28,12 +28,12 @@
 			<div class="row mb-3">
 				<div class="col">
 					<label class="form-label">Name</label>
-					<sf:input path="name" placeholder="Enter Name"/>
+					<sf:input path="name" class="form-control" placeholder="Enter Name"/>
 					<sf:errors path="name" cssClass="text-secondary" />
 				</div>
 				<div class="col">
 					<label class="form-label">Entry Date</label>
-					<sf:input path="entryDate" type="date" placeholder="Enter Entry Date"/>
+					<sf:input path="entryDate" class="form-control" type="date" placeholder="Enter Entry Date"/>
 					<sf:errors path="entryDate" cssClass="text-secondary" />
 				</div>
 			</div>
@@ -41,12 +41,12 @@
 			<div class="row mb-3">
 				<div class="col">
 					<label class="form-label">Phone</label>
-					<sf:input path="phone" type="tel" placeholder="Enter Phone Number"/>
+					<sf:input path="phone" class="form-control" type="tel" placeholder="Enter Phone Number"/>
 					<sf:errors path="phone" cssClass="text-secondary" />
 				</div>
 				<div class="col">
 					<label class="form-label">Email Address</label>
-					<sf:input path="email" type="email" placeholder="Enter Email Address"/>
+					<sf:input path="email" class="form-control" type="email" placeholder="Enter Email Address"/>
 					<sf:errors path="email" cssClass="text-secondary" />
 				</div>
 			</div>
