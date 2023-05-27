@@ -31,12 +31,14 @@
 				<sf:select path="level" cssClass="form-select">
 					<sf:options items="${levels}" />
 				</sf:select>
+				<sf:errors path="level" cssClass="text-secondary"></sf:errors>
 			</div>
 			
 			<!-- Name -->
 			<div class="mb-3">
 				<label class="form-label">Course Name</label>
 				<sf:input path="name" cssClass="form-control"/>
+				<sf:errors path="name" cssClass="text-secondary"></sf:errors>
 			</div>
 			
 			<div class="row mb-3">
@@ -44,11 +46,13 @@
 				<div class="col">
 					<label class="form-label">Total Hours</label>
 					<sf:input type="number" path="hours" cssClass="form-control"/>
+					<sf:errors path="hours" cssClass="text-secondary"></sf:errors>
 				</div>
 				<!-- Fees -->
 				<div class="col">
 					<label class="form-label">Fees</label>
 					<sf:input type="number" path="price" cssClass="form-control"/>
+					<sf:errors path="price" cssClass="text-secondary"></sf:errors>
 				</div>
 			</div>
 			

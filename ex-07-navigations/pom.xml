@@ -74,6 +74,13 @@
 			<version>1.4</version>
 		</dependency>
 		
+		<!-- Bean Validation Dependencies -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>8.0.0.Final</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>

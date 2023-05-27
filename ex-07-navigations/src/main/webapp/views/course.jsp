@@ -26,7 +26,7 @@
 				<select name="level" class="form-select">
 					<option value="">All Level</option>
 					<c:forEach items="${levels}" var="item">
-						<option value="${item}">${item}</option>
+						<option value="${item}" ${item eq param.level ? 'selected="selected"' : ''} >${item}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -34,7 +34,7 @@
 			<!-- Keyword -->
 			<div class="col-auto">
 				<label class="form-label">Keyword</label>
-				<input name="keyword" type="text" class="form-control" placeholder="Search Keyword" />
+				<input name="keyword" value="${param.keyword}" type="text" class="form-control" placeholder="Search Keyword" />
 			</div>
 			
 			<div class="col btn-wrapper">
@@ -50,6 +50,52 @@
 		</form>
 		
 		<!-- Search Result -->	
+		<div class="mt-4">
+				
+		<c:choose>
+			
+			<c:when test="${not empty list}">
+				
+				<table class="table table-striped table-hover">
+					
+					<thead>
+						<tr>
+							<td>Id</td>
+							<td>Name</td>
+							<td>Level</td>
+							<td>Hours</td>
+							<td>Fees</td>
+							<td>Description</td>
+							<td></td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<c:forEach items="${list}" var="c">
+							<tr>
+								<td>${c.id}</td>
+								<td>${c.name}</td>
+								<td>${c.level}</td>
+								<td>${c.hours}</td>
+								<td>${c.price}</td>
+								<td>${c.description}</td>
+								<td></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			
+			</c:when>
+			
+			<c:otherwise>
+				<div class="alert alert-info">
+					There is no courses.
+				</div>
+			</c:otherwise>
+		</c:choose>	
+		
+		</div>
+		
 	</div>
 
 </body>
