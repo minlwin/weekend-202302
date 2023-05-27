@@ -1,5 +1,7 @@
 package com.jdc.demo.service.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,24 +12,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "COURSE")
-public class Course {
+@Table(name = "TEACHER")
+public class Teacher {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false, unique = true)
-	private String name;
-	
 	@Column(nullable = false)
-	private Level level;
+	private String name;
+	@Column(nullable = false)
+	private String phone;
+	@Column(nullable = false)
+	private String email;
 	
-	private int price;
-	private int hours;
-	private String description;
-	
-	public enum Level {
-		Basic, Intermediate, Advance, Professional
-	}
+	@Column(name = "entry_date")
+	private LocalDate entryDate;
 }
