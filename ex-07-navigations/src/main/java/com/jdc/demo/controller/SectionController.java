@@ -5,11 +5,14 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.support.ConfigurableConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jdc.demo.controller.commons.CourseConverter;
+import com.jdc.demo.controller.commons.TeacherConverter;
 import com.jdc.demo.service.CourseService;
 import com.jdc.demo.service.SectionService;
 import com.jdc.demo.service.TeacherService;
@@ -34,10 +39,28 @@ public class SectionController {
 
 	@Autowired
 	private TeacherService teacherService;
+	
+	@Autowired
+	private TeacherConverter taConverter;
+	@Autowired
+	private CourseConverter courseConverter;
+	
+	@InitBinder
+	void init(WebDataBinder binder) {
+		
+		if(binder.getConversionService() instanceof ConfigurableConversionService conf) {
+			conf.addConverter(taConverter);
+			conf.addConverter(courseConverter);
+		}
+		
+	}
 
 	@GetMapping
-	String index(@RequestParam Optional<LocalDate> dateFrom, @RequestParam Optional<String> teacher,
-			@RequestParam Optional<String> course, ModelMap model) {
+	String index(
+			@RequestParam Optional<LocalDate> dateFrom, 
+			@RequestParam Optional<String> teacher,
+			@RequestParam Optional<String> course, 
+			ModelMap model) {
 
 		model.put("list", service.search(dateFrom, teacher, course));
 		return "section";
