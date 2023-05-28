@@ -87,6 +87,7 @@
 				<div class="d-flex">
 					<sf:checkboxes cssClass="me-1" element="div class='me-3'" items="${days}" path="days"/>
 				</div>
+				<sf:errors path="days" cssClass="text-secondary" />
 			</div>	
 			
 			<div>

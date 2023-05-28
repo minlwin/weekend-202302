@@ -1,7 +1,10 @@
 package com.jdc.demo.controller.commons;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -29,9 +32,8 @@ public class SectionValidator implements Validator {
 		}
 	}
 
-	private LocalDateTime getDateTime(String startTime) {
-		// TODO Auto-generated method stub
-		return null;
+	private LocalDateTime getDateTime(String string) {
+		return StringUtils.hasLength(string) ? LocalDateTime.of(LocalDate.now(), LocalTime.parse(string)) : null;
 	}
 
 }
