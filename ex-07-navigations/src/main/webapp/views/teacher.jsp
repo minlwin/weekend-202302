@@ -20,11 +20,11 @@
 		
 		
 		<form class="row">
-			<div class="col-auto">
+			<div class="col-auto col-sm-3">
 				<label class="form-label">Search Name</label>
 				<input class="form-control" type="text" placeholder="Search Name" name="name" />
 			</div>
-			<div class="col-auto">
+			<div class="col-auto col-sm-3">
 				<label class="form-label">Search Phone</label>
 				<input class="form-control" type="text" placeholder="Search Phone" name="phone" />
 			</div>

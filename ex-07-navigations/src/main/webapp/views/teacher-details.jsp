@@ -25,22 +25,22 @@
 		<div class="row mb-3">
 			<div class="col">
 				<label class="form-label">Name</label>
-				<span>${data.name}</span>
+				<span class="form-control">${data.name}</span>
 			</div>
 			<div class="col">
 				<label class="form-label">Entry Date</label>
-				<span>${data.entryDate}</span>
+				<span class="form-control">${data.entryDate}</span>
 			</div>
 		</div>
 
 		<div class="row mb-3">
 			<div class="col">
 				<label class="form-label">Phone</label>
-				<span>${data.phone}</span>
+				<span class="form-control">${data.phone}</span>
 			</div>
 			<div class="col">
 				<label class="form-label">Email Address</label>
-				<span>${data.email}</span>
+				<span class="form-control">${data.email}</span>
 			</div>
 		</div>
 		

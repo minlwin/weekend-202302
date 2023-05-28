@@ -24,7 +24,7 @@ public class TeacherController {
 	
 	@Autowired
 	private TeacherService service;
-
+	
 	@GetMapping
 	String index(
 			@RequestParam Optional<String> name,
@@ -42,7 +42,7 @@ public class TeacherController {
 	
 	@PostMapping
 	String save(
-			@Validated @ModelAttribute Teacher form, 
+			@Validated @ModelAttribute("form") Teacher form, 
 			BindingResult result, RedirectAttributes redirect) {
 		
 		if(result.hasErrors()) {

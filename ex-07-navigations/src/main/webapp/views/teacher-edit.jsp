@@ -57,8 +57,8 @@
 				</button>
 			</div>
 
-		</sf:form>		
-	
+		</sf:form>	
+			
 	</div>
 
 </body>
