@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jdc.demo.controller.commons.CourseConverter;
+import com.jdc.demo.controller.commons.SectionValidator;
 import com.jdc.demo.controller.commons.TeacherConverter;
 import com.jdc.demo.service.CourseService;
 import com.jdc.demo.service.SectionService;
@@ -53,6 +54,7 @@ public class SectionController {
 			conf.addConverter(courseConverter);
 		}
 		
+		binder.addValidators(new SectionValidator());
 	}
 
 	@GetMapping
