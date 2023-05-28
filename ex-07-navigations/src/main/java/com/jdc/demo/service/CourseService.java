@@ -20,6 +20,10 @@ public class CourseService {
 	@PersistenceContext
 	private EntityManager em;
 
+	public List<Course> searchAll() {
+		return search(Optional.empty(), Optional.empty());
+	}
+	
 	public List<Course> search(Optional<Level> level, Optional<String> keyword) {
 		
 		var sb = new StringBuffer("select c from Course c where 1 = 1");
@@ -53,5 +57,7 @@ public class CourseService {
 		course = em.merge(course);
 		return course.getId();
 	}
+
+
 
 }

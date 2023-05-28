@@ -19,7 +19,11 @@ public class TeacherService {
 	
 	@PersistenceContext
 	private EntityManager em;
-
+	
+	public List<Teacher> searchAll() {
+		return search(Optional.empty(), Optional.empty());
+	}
+	
 	public List<Teacher> search(Optional<String> name, Optional<String> phone) {
 		
 		var sb = new StringBuffer("select t from Teacher t where 1 = 1");
@@ -51,5 +55,7 @@ public class TeacherService {
 	public Integer save(Teacher form) {
 		return em.merge(form).getId();
 	}
+
+
 
 }
