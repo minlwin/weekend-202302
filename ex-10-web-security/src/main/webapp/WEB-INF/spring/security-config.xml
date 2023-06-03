@@ -9,18 +9,26 @@
         http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- bean definitions here -->
-    <security:user-service>
-    	<security:user name="Admin" authorities="Admin" password="{noop}Admin"/>
-    	<security:user name="Member" authorities="Member" password="{noop}Member"/>
-    </security:user-service>
-    
+    <context:component-scan base-package="com.jdc.demo.security" />
+	
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />	
+
+	<security:authentication-manager>
+		<security:authentication-provider >
+			<security:user-service>
+				<security:user name="Admin" authorities="Admin" password="$2a$10$C90YyF1rw7uYhCxvtNYpz.QiO8HaDnQXoc3wFEq2tMhi6cW6Ua0eO"/>
+			</security:user-service>		
+		</security:authentication-provider>
+		<security:authentication-provider user-service-ref="accountDetailsService" />
+	</security:authentication-manager>
+	
     <security:http pattern="/" security="none" />
     <security:http pattern="/resources/**" security="none" />
 
     <security:http>
 
-    	<security:intercept-url pattern="/admin/**" access="hasAuthority('Admin')"/>
-    	<security:intercept-url pattern="/member/**" access="hasAnyAuthority('Admin', 'Member')"/>
+    	<security:intercept-url pattern="/admin/**" access="hasAnyAuthority('Admin', 'Office')"/>
+    	<security:intercept-url pattern="/member/**" access="hasAnyAuthority('Admin', 'Office', 'Student')"/>
     	
     	<security:form-login/>
     	<security:logout/>

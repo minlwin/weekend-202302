@@ -9,8 +9,11 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- bean definitions here -->
-    <mvc:annotation-driven />
     
+    <context:component-scan base-package="com.jdc.demo.controller"></context:component-scan>
+    
+    <mvc:annotation-driven />
+
     <mvc:view-resolvers>
     	<mvc:jsp prefix="/views/" suffix=".jsp"/>
     </mvc:view-resolvers>
