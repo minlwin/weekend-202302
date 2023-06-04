@@ -27,11 +27,14 @@
 
     <security:http>
 
+		<security:intercept-url pattern="/login" access="permitAll" />
     	<security:intercept-url pattern="/admin/**" access="hasAnyAuthority('Admin', 'Office')"/>
     	<security:intercept-url pattern="/member/**" access="hasAnyAuthority('Admin', 'Office', 'Student')"/>
     	
-    	<security:form-login/>
-    	<security:logout/>
+    	<security:form-login login-page="/login" />
+    	<security:remember-me user-service-ref="accountDetailsService" />
+    	
+    	<security:logout logout-success-url="/"  />
 
     </security:http>
 
