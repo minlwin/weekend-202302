@@ -17,6 +17,7 @@
     </mvc:view-resolvers>
     
     <mvc:redirect-view-controller path="/" redirect-url="/course" />
+    <mvc:view-controller path="/login" view-name="login"/>
     
     <mvc:resources location="/resources/" mapping="/static/**"></mvc:resources>
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:security="http://www.springframework.org/schema/security" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- bean definitions here -->
+    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"></bean>
+    
+    <security:user-service>
+    	<security:user name="Student" authorities="Student" password="{noop}Student"/>
+    	<security:user name="Office" authorities="Office" password="{noop}Office"/>
+    	<security:user name="Teacher" authorities="Teacher" password="{noop}Teacher"/>
+    </security:user-service>
+    
+    <security:http>
+
+    	<security:intercept-url pattern="/" method="GET" access="permitAll"/>
+    	<security:intercept-url pattern="/course" method="GET" access="permitAll"/>
+    	<security:intercept-url pattern="/login" method="GET" access="permitAll"/>
+    	<security:intercept-url pattern="/static/**" method="GET" access="permitAll"/>
+    	<security:intercept-url pattern="/section/**" method="GET" access="permitAll"/>
+    	
+    	<security:intercept-url pattern="/office/**" access="hasAuthority('Office')"/>
+    	<security:intercept-url pattern="/student/**" access="hasAuthority('Student')"/>
+    	<security:intercept-url pattern="/teacher/**" access="hasAuthority('Teacher')"/>
+    	<security:intercept-url pattern="/**" access="denyAll"/>
+    	
+    	<security:form-login login-page="/login"/>
+    	
+    	<security:logout logout-success-url="/"/>
+    
+    </security:http>
+
+</beans>

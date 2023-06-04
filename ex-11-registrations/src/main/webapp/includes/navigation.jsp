@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>        
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>        
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>       
 
 <nav class="navbar navbar-expand navbar-dark bg-primary">
 	
@@ -17,30 +18,40 @@
 		<a href="${home}" class="navbar-brand">JDC Portal</a>
 
 		<ul class="navbar-nav">
-			<!-- Office -->
-			<li class="nav-item">
-				<a href="${editCourse}" class="nav-link">Add New Course</a>
-			</li>
-			<li class="nav-item">
-				<a href="${accountList}" class="nav-link">Accounts</a>
-			</li>
-			
-			<!-- Teacher or Student -->
-			<li class="nav-item">
-				<a href="${myClassForStudent}" class="nav-link">My Classes</a>
-			</li>
 
-			<li class="nav-item">
-				<a href="#" id="logoutMenu" class="nav-link">Sign Out</a>
-			</li>
-			
 			<li class="nav-item">
 				<a href="${section}" class="nav-link">Classes</a>
 			</li>
+							
+			<!-- Office -->
+			<sec:authorize access="hasAuthority('Office')">
+				<li class="nav-item">
+					<a href="${editCourse}" class="nav-link">Add New Course</a>
+				</li>
+				<li class="nav-item">
+					<a href="${accountList}" class="nav-link">Accounts</a>
+				</li>
+			</sec:authorize>
+			
+			<!-- Teacher or Student -->
+			<sec:authorize access="hasAnyAuthority('Teacher', 'Student')">
+				<li class="nav-item">
+					<a href="${myClassForStudent}" class="nav-link">My Classes</a>
+				</li>
+			</sec:authorize>
 
-			<li class="nav-item">
-				<a href="${signIn}" class="nav-link">Sign In</a>
-			</li>
+			<sec:authorize access="isAuthenticated()">
+				<li class="nav-item">
+					<a href="#" id="logoutMenu" class="nav-link">Sign Out</a>
+				</li>
+			</sec:authorize>
+			
+			
+			<sec:authorize access="isAnonymous()">
+				<li class="nav-item">
+					<a href="${signIn}" class="nav-link">Sign In</a>
+				</li>
+			</sec:authorize>
 		</ul>
 	</div>
 	

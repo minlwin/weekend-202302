@@ -11,6 +11,7 @@ public class AccountController {
 
 	@GetMapping
 	String index() {
+		
 		return "account/list";
 	}
 	
