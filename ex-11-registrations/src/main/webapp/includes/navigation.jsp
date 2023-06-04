@@ -20,36 +20,36 @@
 		<ul class="navbar-nav">
 
 			<li class="nav-item">
-				<a href="${section}" class="nav-link">Classes</a>
+				<a href="${section}" class="nav-link"><i class="bi bi-calendar"></i> Classes</a>
 			</li>
 							
 			<!-- Office -->
 			<sec:authorize access="hasAuthority('Office')">
 				<li class="nav-item">
-					<a href="${editCourse}" class="nav-link">Add New Course</a>
+					<a href="${editCourse}" class="nav-link"><i class="bi bi-plus-lg"></i> Add New Course</a>
 				</li>
 				<li class="nav-item">
-					<a href="${accountList}" class="nav-link">Accounts</a>
+					<a href="${accountList}" class="nav-link"><i class="bi bi-people"></i> Accounts</a>
 				</li>
 			</sec:authorize>
 			
 			<!-- Teacher or Student -->
 			<sec:authorize access="hasAnyAuthority('Teacher', 'Student')">
 				<li class="nav-item">
-					<a href="${myClassForStudent}" class="nav-link">My Classes</a>
+					<a href="${myClassForStudent}" class="nav-link"><i class="bi bi-calendar-check"></i> My Classes</a>
 				</li>
 			</sec:authorize>
 
 			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
-					<a href="#" id="logoutMenu" class="nav-link">Sign Out</a>
+					<a href="#" id="logoutMenu" class="nav-link"><i class="bi bi-lock"></i> Sign Out</a>
 				</li>
 			</sec:authorize>
 			
 			
 			<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
-					<a href="${signIn}" class="nav-link">Sign In</a>
+					<a href="${signIn}" class="nav-link"><i class="bi bi-unlock"></i> Sign In</a>
 				</li>
 			</sec:authorize>
 		</ul>

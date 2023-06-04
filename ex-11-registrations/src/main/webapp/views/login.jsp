@@ -26,8 +26,8 @@
 			<sec:csrfInput/>
 			
 			<div class="mb-3">
-				<label class="form-label">Login Id</label>
-				<input type="text" class="form-control" required="required" name="username" placeholder="Enter Login Id" />
+				<label class="form-label">Email </label>
+				<input type="email" class="form-control" required="required" name="username" placeholder="Enter Login Id" />
 			</div>
 		
 			<div class="mb-3">

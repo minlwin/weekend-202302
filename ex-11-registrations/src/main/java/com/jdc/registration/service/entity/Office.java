@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 @Entity
 public class Office extends Account{
 
-	protected Office() {
+	public Office() {
 		super(Role.Office);
 	}
 

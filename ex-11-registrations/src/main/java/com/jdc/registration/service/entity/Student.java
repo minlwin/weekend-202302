@@ -11,7 +11,7 @@ public class Student extends Account{
 	
 	private String phone;
 
-	protected Student() {
+	public Student() {
 		super(Role.Student);
 	}
 

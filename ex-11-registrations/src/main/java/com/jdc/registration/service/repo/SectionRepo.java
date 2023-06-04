@@ -2,6 +2,8 @@ package com.jdc.registration.service.repo;
 
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 
-public interface SectionRepo extends JpaRepositoryImplementation<Integer, Integer>{
+import com.jdc.registration.service.entity.Section;
+
+public interface SectionRepo extends JpaRepositoryImplementation<Section, Integer>{
 
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class Teacher extends Account{
 	
-	protected Teacher() {
+	public Teacher() {
 		super(Role.Teacher);
 	}
 
