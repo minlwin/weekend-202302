@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
     
 <!DOCTYPE html>
 <html>
@@ -15,7 +17,36 @@
 </head>
 <body>
 	
-	<jsp:include page="/includes/navigation.jsp"></jsp:include>
+	<app:page-content title="Edit Class Room">
+		
+		<sf:form modelAttribute="form" method="post">
+			// ID
+			<sf:hidden path="id"/>
+			
+			<div class="row">
+				// Course
+				
+	
+				// Months
+				
+				// Acceptable
+			
+			</div>
+			
+			<div class="row">
+				// Start Date
+				
+				// Start Time
+				
+				// End Time
+			</div>
+			
+			// Days
+			
+
+		</sf:form>
+	
+	</app:page-content>
 
 </body>
 </html>

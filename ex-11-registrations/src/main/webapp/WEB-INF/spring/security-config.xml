@@ -25,6 +25,7 @@
     	<security:intercept-url pattern="/office/**" access="hasAuthority('Office')"/>
     	<security:intercept-url pattern="/student/**" access="hasAuthority('Student')"/>
     	<security:intercept-url pattern="/teacher/**" access="hasAuthority('Teacher')"/>
+    	<security:intercept-url pattern="/member/home" access="hasAnyAuthority('Teacher', 'Student')"/>
     	<security:intercept-url pattern="/**" access="denyAll"/>
     	
     	<security:form-login default-target-url="/" login-page="/login"/>

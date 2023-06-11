@@ -7,10 +7,14 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -21,25 +25,31 @@ public class Section {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@NotNull(message = "Please select course.")
 	@ManyToOne(optional = false)
 	private Course course;
 	
 	@ManyToOne(optional = false)
 	private Teacher teacher;
 	
+	@NotNull(message = "Please enter start date.")
 	@Column(nullable = false)
 	private LocalDate startDate;
-	@Column(nullable = false)
-	private int months;
 	
-	@ElementCollection
+	@NotEmpty(message = "Please select days.")
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<DayOfWeek> days;
 	
-	
+	@NotBlank(message = "Please enter start time.")
 	@Column(nullable = false)
 	private String startTime;
+
+	@NotBlank(message = "Please enter end time.")
 	@Column(nullable = false)
 	private String endTime;
+	
+	@Column(nullable = false)
+	private int months;
 	
 	private boolean acceptable;
 }

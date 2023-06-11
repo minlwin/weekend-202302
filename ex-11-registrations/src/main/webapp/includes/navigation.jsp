@@ -9,8 +9,9 @@
 	<c:url value="/" var="home"></c:url>
 	<c:url value="/office/course" var="editCourse"></c:url>
 	<c:url value="/office/account" var="accountList"></c:url>
-	<c:url value="/student/section" var="myClassForStudent"></c:url>
-	<c:url value="/teacher/section" var="myClassForTeacher"></c:url>
+
+	<c:url value="/member/home" var="memberHome"></c:url>
+
 	<c:url value="/login" var="signIn"></c:url>
 	<c:url value="/public/section" var="section"></c:url>
 
@@ -39,26 +40,15 @@
 				</li>
 			</sec:authorize>
 			
-			<!-- Teacher -->
-			<sec:authorize access="hasAuthority('Teacher')">
+			<!-- Teacher or Student -->
+			<sec:authorize access="hasAnyAuthority('Teacher', 'Student')">
 
 				<li class="nav-item">
-					<a href="${myClassForTeacher}" class="nav-link"><i class="bi bi-calendar-check"></i> My Classes</a>
+					<a href="${memberHome}" class="nav-link"><i class="bi bi-house"></i> Dashboard</a>
 				</li>
 
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="bi bi-person"></i> Profile
-					</a>
-				</li>
 			</sec:authorize>
 
-			<!-- Student -->
-			<sec:authorize access="hasAuthority('Student')">
-				<li class="nav-item">
-					<a href="${myClassForStudent}" class="nav-link"><i class="bi bi-calendar-check"></i> My Classes</a>
-				</li>
-			</sec:authorize>
 
 			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">

@@ -15,13 +15,10 @@
 </head>
 <body>
 	
-	<jsp:include page="/includes/navigation.jsp"></jsp:include>
-
 	<sec:authentication property="principal.username" var="loginId" />
-	
-	<div class="container mt-3">
-		<h3>Account Management</h3>
-		
+
+	<app:page-content title="Account Management">
+
 		<!-- Search Form -->
 		<form class="row">
 			<div class="col-auto">
@@ -88,9 +85,8 @@
 					</tbody>					
 				</table>
 			</app:result-list>
-		</div>
-		
-	</div>
+		</div>	
+	</app:page-content>	
 
 </body>
 </html>
