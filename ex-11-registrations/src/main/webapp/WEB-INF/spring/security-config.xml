@@ -27,7 +27,7 @@
     	<security:intercept-url pattern="/teacher/**" access="hasAuthority('Teacher')"/>
     	<security:intercept-url pattern="/**" access="denyAll"/>
     	
-    	<security:form-login login-page="/login"/>
+    	<security:form-login default-target-url="/" login-page="/login"/>
     	
     	<security:logout logout-success-url="/"/>
     

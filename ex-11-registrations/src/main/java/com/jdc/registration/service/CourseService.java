@@ -20,4 +20,13 @@ public class CourseService {
 		return repo.findAll();
 	}
 
+	public Course findById(int id) {
+		return repo.findById(id).orElseThrow();
+	}
+
+	@Transactional
+	public void save(Course dto) {
+		repo.save(dto);
+	}
+
 }

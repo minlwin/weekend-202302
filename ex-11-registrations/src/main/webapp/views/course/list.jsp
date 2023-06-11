@@ -20,13 +20,14 @@
 	
 		<!-- Controls -->
 		<div class="mb-3">
-			<a href="#" class="btn btn-outline-primary">
+			<c:url value="/office/course/edit" var="addNewLink"></c:url>
+			<a href="${addNewLink}" class="btn btn-outline-primary">
 				<i class="bi bi-plus-lg"></i> Add New Course
 			</a>
 		</div>
 		
 		<!-- Result Tables -->
-		<app:result-list isEmpty="false">
+		<app:result-list isEmpty="${empty list}">
 			
 			<table class="table table-striped">
 				
@@ -40,6 +41,26 @@
 						<th></th>
 					</tr>
 				</thead>
+				
+				<tbody>
+				<c:forEach items="${list}" var="item">
+					<tr>
+						<td>${item.id}</td>
+						<td>${item.name}</td>
+						<td>${item.level}</td>
+						<td>${item.hours} Hours</td>
+						<td>${item.fees} MMK</td>
+						<td>
+							<c:url value="/office/course/edit" var="editLink">
+								<c:param name="id" value="${item.id}" />
+							</c:url>
+							<a href="${editLink}" class="btn-link">
+								<i class="bi bi-pencil"></i>
+							</a>
+						</td>
+					</tr>								
+				</c:forEach>	
+				</tbody>
 			
 			</table>
 		
