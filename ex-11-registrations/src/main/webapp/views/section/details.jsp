@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
     
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
 </head>
 <body>
 	
-	<jsp:include page="/includes/navigation.jsp"></jsp:include>
+	<app:page-content title="Class Room Details"></app:page-content>
 
 </body>
 </html>

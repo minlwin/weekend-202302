@@ -20,14 +20,13 @@ public class SectionService {
 		return repo.findByTeacherEmail(loginId);
 	}
 
-	public Section findById(Integer integer) {
-		// TODO Auto-generated method stub
-		return null;
+	public Section findById(Integer id) {
+		return repo.findById(id).orElseThrow();
 	}
 
+	@Transactional
 	public Section save(Section section) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.save(section);
 	}
 
 }

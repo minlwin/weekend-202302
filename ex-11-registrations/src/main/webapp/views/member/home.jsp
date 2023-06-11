@@ -22,7 +22,19 @@
 		<div class="row">
 			
 			<!-- My Sections -->
-			<div class="col"></div>
+			<div class="col">
+				<app:result-list isEmpty="${empty mySections}">
+					
+					<div class="row row-cols-2">
+					<c:forEach items="${mySections}" var="item">
+						<div class="col">
+							<app:section-item dto="${item}"></app:section-item>					
+						</div>
+					</c:forEach>	
+					</div>
+									
+				</app:result-list>
+			</div>
 
 			<!-- Profile -->
 			<div class="col-3">
