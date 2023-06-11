@@ -5,16 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("section")
-public class SectionReferenceController {
+@RequestMapping("public/course")
+public class PublicCourseController {
 
 	@GetMapping
-	String showSections() {
-		return "section/list";
-	}
-	
-	@GetMapping("{id}")
-	String showSectionDetails() {
-		return "section/details";
+	String index() {
+		return "course/list";
 	}
 }

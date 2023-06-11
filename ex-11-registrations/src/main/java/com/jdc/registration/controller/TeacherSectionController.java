@@ -6,16 +6,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("office/course")
-public class CourseEditController {
-
+@RequestMapping("teacher/section")
+public class TeacherSectionController {
+	
 	@GetMapping
+	String index() {
+		return "my-sections";
+	}	
+
+	@GetMapping("edit")
 	String edit() {
-		return "course/edit";
+		return "section/edit";
 	}
 	
 	@PostMapping
 	String save() {
-		return "redirect:/course";
+		return "redirect:/section/{id}";
 	}
 }

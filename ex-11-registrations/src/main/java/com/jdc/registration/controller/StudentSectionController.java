@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("course")
-public class CourseReferenceController {
+@RequestMapping({
+	"/student/section",
+})
+public class StudentSectionController {
 
 	@GetMapping
 	String index() {
-		return "course/list";
+		return "my-sections";
 	}
 }

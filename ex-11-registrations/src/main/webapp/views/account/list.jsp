@@ -16,6 +16,7 @@
 <body>
 	
 	<jsp:include page="/includes/navigation.jsp"></jsp:include>
+
 	<sec:authentication property="principal.username" var="loginId" />
 	
 	<div class="container mt-3">

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("registration")
-public class RegistrationController {
+@RequestMapping("public/registration")
+public class PublicRegistrationController {
 
 	@GetMapping
 	String edit() {

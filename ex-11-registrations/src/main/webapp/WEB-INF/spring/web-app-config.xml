@@ -16,7 +16,7 @@
     	<mvc:jsp prefix="/views/" suffix=".jsp"/>
     </mvc:view-resolvers>
     
-    <mvc:redirect-view-controller path="/" redirect-url="/course" />
+    <mvc:redirect-view-controller path="/" redirect-url="/public/course" />
     <mvc:view-controller path="/login" view-name="login"/>
     
     <mvc:resources location="/resources/" mapping="/static/**"></mvc:resources>

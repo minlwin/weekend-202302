@@ -12,7 +12,7 @@
 	<c:url value="/student/section" var="myClassForStudent"></c:url>
 	<c:url value="/teacher/section" var="myClassForTeacher"></c:url>
 	<c:url value="/login" var="signIn"></c:url>
-	<c:url value="/section" var="section"></c:url>
+	<c:url value="/public/section" var="section"></c:url>
 
 	<div class="container">
 		<a href="${home}" class="navbar-brand">JDC Portal</a>
@@ -33,8 +33,15 @@
 				</li>
 			</sec:authorize>
 			
-			<!-- Teacher or Student -->
-			<sec:authorize access="hasAnyAuthority('Teacher', 'Student')">
+			<!-- Teacher -->
+			<sec:authorize access="hasAuthority('Teacher')">
+				<li class="nav-item">
+					<a href="${myClassForTeacher}" class="nav-link"><i class="bi bi-calendar-check"></i> My Classes</a>
+				</li>
+			</sec:authorize>
+
+			<!-- Student -->
+			<sec:authorize access="hasAuthority('Student')">
 				<li class="nav-item">
 					<a href="${myClassForStudent}" class="nav-link"><i class="bi bi-calendar-check"></i> My Classes</a>
 				</li>

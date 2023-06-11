@@ -19,7 +19,7 @@ import com.jdc.registration.service.form.AccountForm;
 
 @Controller
 @RequestMapping("office/account")
-public class AccountController {
+public class OfficeAccountController {
 	
 	@Autowired
 	private AccountService service;
