@@ -2,6 +2,8 @@ package com.jdc.registration.service.entity;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,9 @@ public class Registration {
 	private Student student;
 	
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime registAt;
+	
+	
 	private String remark;
 }

@@ -10,13 +10,13 @@
 <meta charset="UTF-8">
 
 	<jsp:include page="/includes/header.jsp">
-		<jsp:param value="Classes" name="title"/>
+		<jsp:param value="Registrations" name="title"/>
 	</jsp:include>
 
 </head>
 <body>
 	
-	<app:page-content title="Class Rooms">
+	<app:page-content title="Registration">
 		
 		<!-- Search Form -->
 		<form class="row">
@@ -58,36 +58,42 @@
 		
 		<!-- Search Result -->
 		<app:result-list isEmpty="${empty list}">
+			
 			<table class="table table-striped">
+			
 				<thead>
 					<tr>
+						<th>Student</th>
+						<th>Registration At</th>
 						<th>Teacher</th>
 						<th>Course</th>
-						<th>Level</th>
 						<th>Start Date</th>
-						<th>Months</th>
 						<th>Start Time</th>
 						<th>End Time</th>
 					</tr>
-				</thead>	
+				</thead>
 				
 				<tbody>
 					<c:forEach items="${list}" var="item">
 						<tr>
-							<td>${item.teacher.name}</td>
-							<td>${item.course.name}</td>
-							<td>${item.course.level}</td>
-							<td>${item.startDate}</td>
-							<td>${item.months} Months</td>
-							<td>${item.startTime}</td>
-							<td>${item.endTime}</td>
-						</tr>					
+							<td>${item.student.name}</td>
+							<td>${item.registAt}</td>
+							<td>${item.section.teacher.name}</td>
+							<td>${item.section.teacher.name}</td>
+							<td>${item.section.course.name}</td>
+							<td>${item.section.startDate}</td>
+							<td>${item.section.startTime}</td>
+							<td>${item.section.endTime}</td>
+						</tr>
 					</c:forEach>
-				</tbody>		
+				</tbody>
+			
 			</table>
+		
 		</app:result-list>
-
-	</app:page-content>
+		
 	
+	</app:page-content>
+
 </body>
 </html>

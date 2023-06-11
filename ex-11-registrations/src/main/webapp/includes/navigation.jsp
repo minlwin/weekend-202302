@@ -7,8 +7,10 @@
 <nav class="navbar navbar-expand navbar-dark bg-primary">
 	
 	<c:url value="/" var="home"></c:url>
-	<c:url value="/office/course" var="editCourse"></c:url>
+	<c:url value="/office/course" var="courseList"></c:url>
 	<c:url value="/office/account" var="accountList"></c:url>
+	<c:url value="/office/section" var="sectionList"></c:url>
+	<c:url value="/office/registration" var="registrationList"></c:url>
 
 	<c:url value="/member/home" var="memberHome"></c:url>
 
@@ -23,20 +25,24 @@
 			<!-- Office -->
 			<sec:authorize access="hasAuthority('Office')">
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="${registrationList}" class="nav-link">
 						<i class="bi bi-pen"></i> Registrations
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="${sectionList}" class="nav-link">
 						<i class="bi bi-calendar"></i> Classes
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${editCourse}" class="nav-link"><i class="bi bi-book"></i> Courses</a>
+					<a href="${courseList}" class="nav-link">
+						<i class="bi bi-book"></i> Courses
+					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${accountList}" class="nav-link"><i class="bi bi-people"></i> Accounts</a>
+					<a href="${accountList}" class="nav-link">
+						<i class="bi bi-people"></i> Accounts
+					</a>
 				</li>
 			</sec:authorize>
 			
@@ -44,7 +50,9 @@
 			<sec:authorize access="hasAnyAuthority('Teacher', 'Student')">
 
 				<li class="nav-item">
-					<a href="${memberHome}" class="nav-link"><i class="bi bi-house"></i> Dashboard</a>
+					<a href="${memberHome}" class="nav-link">
+						<i class="bi bi-house"></i> Dashboard
+					</a>
 				</li>
 
 			</sec:authorize>
@@ -52,14 +60,18 @@
 
 			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
-					<a href="#" id="logoutMenu" class="nav-link"><i class="bi bi-lock"></i> Sign Out</a>
+					<a href="#" id="logoutMenu" class="nav-link">
+						<i class="bi bi-lock"></i> Sign Out
+					</a>
 				</li>
 			</sec:authorize>
 			
 			
 			<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
-					<a href="${signIn}" class="nav-link"><i class="bi bi-unlock"></i> Sign In</a>
+					<a href="${signIn}" class="nav-link">
+						<i class="bi bi-unlock"></i> Sign In
+					</a>
 				</li>
 			</sec:authorize>
 		</ul>

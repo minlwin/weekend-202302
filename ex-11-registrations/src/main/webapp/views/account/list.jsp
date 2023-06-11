@@ -49,43 +49,41 @@
 		</form>
 		
 		<!-- Search Result -->
-		<div class="mt-4">
-			<app:result-list isEmpty="${empty list}">
-				<table class="table table-striped">
-					<thead>
+		<app:result-list isEmpty="${empty list}">
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th>Role</th>
+					<th>Email</th>
+					<th>Active</th>
+					<th>Retired At</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${list}" var="item">
 					<tr>
-						<th>Name</th>
-						<th>Role</th>
-						<th>Email</th>
-						<th>Active</th>
-						<th>Retired At</th>
-						<th></th>
+						<td>${item.name}</td>
+						<td>${item.role}</td>
+						<td>${item.email}</td>
+						<td>${item.activated ? 'Yes' : 'No'}</td>
+						<td>${item.retiredAt}</td>
+						<td>
+							<c:if test="${loginId ne item.email}">
+								<c:url value="/office/account/edit" var="editLink">
+									<c:param name="id" value="${item.id}" />
+								</c:url>
+								<a href="${editLink}" class="btn-link">
+									<i class="bi bi-pencil"></i>
+								</a>
+							</c:if>
+						</td>
 					</tr>
-					</thead>
-					<tbody>
-					<c:forEach items="${list}" var="item">
-						<tr>
-							<td>${item.name}</td>
-							<td>${item.role}</td>
-							<td>${item.email}</td>
-							<td>${item.activated ? 'Yes' : 'No'}</td>
-							<td>${item.retiredAt}</td>
-							<td>
-								<c:if test="${loginId ne item.email}">
-									<c:url value="/office/account/edit" var="editLink">
-										<c:param name="id" value="${item.id}" />
-									</c:url>
-									<a href="${editLink}" class="btn-link">
-										<i class="bi bi-pencil"></i>
-									</a>
-								</c:if>
-							</td>
-						</tr>
-					</c:forEach>
-					</tbody>					
-				</table>
-			</app:result-list>
-		</div>	
+				</c:forEach>
+				</tbody>					
+			</table>
+		</app:result-list>	
 	</app:page-content>	
 
 </body>

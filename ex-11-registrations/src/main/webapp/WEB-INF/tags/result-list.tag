@@ -4,7 +4,7 @@
 
 <%@ attribute name="isEmpty" required="true" %>
 
-<section>
+<section class="mt-2">
 
 	<c:choose>
 		<c:when test="${isEmpty}">
