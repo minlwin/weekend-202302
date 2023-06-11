@@ -17,7 +17,15 @@ public class Course {
 	
 	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
+	private Level level;
+
 	private int hours;
 	private String description;
 	private int fees;
+	
+	
+	public enum Level {
+		Entry, Basic, Intermediate, Advance
+	}
 }

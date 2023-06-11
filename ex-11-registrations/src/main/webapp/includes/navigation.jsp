@@ -19,14 +19,20 @@
 
 		<ul class="navbar-nav">
 
-			<li class="nav-item">
-				<a href="${section}" class="nav-link"><i class="bi bi-calendar"></i> Classes</a>
-			</li>
-							
 			<!-- Office -->
 			<sec:authorize access="hasAuthority('Office')">
 				<li class="nav-item">
-					<a href="${editCourse}" class="nav-link"><i class="bi bi-plus-lg"></i> Add New Course</a>
+					<a href="#" class="nav-link">
+						<i class="bi bi-pen"></i> Registrations
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="bi bi-calendar"></i> Classes
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="${editCourse}" class="nav-link"><i class="bi bi-book"></i> Courses</a>
 				</li>
 				<li class="nav-item">
 					<a href="${accountList}" class="nav-link"><i class="bi bi-people"></i> Accounts</a>
@@ -35,8 +41,15 @@
 			
 			<!-- Teacher -->
 			<sec:authorize access="hasAuthority('Teacher')">
+
 				<li class="nav-item">
 					<a href="${myClassForTeacher}" class="nav-link"><i class="bi bi-calendar-check"></i> My Classes</a>
+				</li>
+
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="bi bi-person"></i> Profile
+					</a>
 				</li>
 			</sec:authorize>
 

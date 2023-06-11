@@ -19,6 +19,7 @@
 
     	<security:intercept-url pattern="/" method="GET" access="permitAll"/>
     	<security:intercept-url pattern="/login" method="GET" access="permitAll"/>
+    	<security:intercept-url pattern="/static/**" method="GET" access="permitAll"/>
     	<security:intercept-url pattern="/public/**" access="permitAll"/>
     	
     	<security:intercept-url pattern="/office/**" access="hasAuthority('Office')"/>

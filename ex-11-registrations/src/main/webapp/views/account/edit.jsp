@@ -15,12 +15,7 @@
 </head>
 <body>
 	
-	<jsp:include page="/includes/navigation.jsp"></jsp:include>
-	
-	<div class="container mt-3">
-		
-		<h3>${form.id eq 0 ? 'Add New' : 'Edit'} Account</h3>
-		
+	<app:page-content title="${form.id eq 0 ? 'Add New' : 'Edit'} Account">
 		<div class="row">
 			<div class="col-6">
 				
@@ -51,9 +46,8 @@
 				</sf:form>
 				
 			</div>
-		</div>
-	
-	</div>
+		</div>	
+	</app:page-content>
 
 </body>
 </html>

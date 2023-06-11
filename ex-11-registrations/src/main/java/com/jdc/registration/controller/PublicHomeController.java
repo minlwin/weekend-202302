@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("public/course")
-public class PublicCourseController {
+@RequestMapping("public/home")
+public class PublicHomeController {
 
 	@GetMapping
 	String index() {
-		return "course/list";
+		return "home";
 	}
 }
