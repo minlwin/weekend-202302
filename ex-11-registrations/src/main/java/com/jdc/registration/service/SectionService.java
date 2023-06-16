@@ -20,13 +20,17 @@ public class SectionService {
 	@Autowired
 	private SectionRepo repo;
 
+	public List<Section> getAvailables() {
+		return repo.findByAcceptableIsTrue();
+	}
+	
+	public Section findById(Integer id) {
+		return repo.findById(id).orElseThrow();
+	}
+
 	@PreAuthorize("hasAuthority('Teacher')")
 	public List<Section> findForTeacher(String loginId) {
 		return repo.findByTeacherEmail(loginId);
-	}
-
-	public Section findById(Integer id) {
-		return repo.findById(id).orElseThrow();
 	}
 
 	@Transactional
@@ -64,4 +68,6 @@ public class SectionService {
 		
 		return (root, query, cb) -> cb.greaterThanOrEqualTo(root.get("startDate"), data.get());
 	}
+
+
 }
