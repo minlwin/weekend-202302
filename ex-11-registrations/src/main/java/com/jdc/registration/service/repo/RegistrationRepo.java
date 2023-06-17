@@ -9,6 +9,6 @@ import com.jdc.registration.service.entity.Section;
 
 public interface RegistrationRepo extends JpaRepositoryImplementation<Registration, Integer>{
 
-	// select r.section from Registration r where r.student.email = ?1
-	List<Section> findSectionByStudentEmail(String email);
+	// select r from Registration r where r.student.email = ?1
+	List<Registration> findByStudentEmail(String email);
 }

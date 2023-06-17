@@ -58,7 +58,8 @@ public class RegistrationService {
 
 	@PreAuthorize("hasAuthority('Student')")
 	public List<Section> findSectionForStudent(String loginId) {
-		return registrationRepo.findSectionByStudentEmail(loginId);
+		return registrationRepo.findByStudentEmail(loginId)
+				.stream().map(a -> a.getSection()).distinct().toList();
 	}
 
 	@PreAuthorize("hasAuthority('Office')")

@@ -39,7 +39,7 @@ public class OfficeRegistrationController {
 		
 		model.put("list", service.search(course, teacher, from));
 		
-		return "registartion/list";
+		return "registration/list";
 	}
 
 }

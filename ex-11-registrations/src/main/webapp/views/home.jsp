@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 
 	<jsp:include page="/includes/header.jsp">
-		<jsp:param value="Sign In" name="title"/>
+		<jsp:param value="Home" name="title"/>
 	</jsp:include>
 
 </head>

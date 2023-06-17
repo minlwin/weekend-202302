@@ -34,5 +34,8 @@
     
     </security:http>
     
+    <security:authentication-manager id="authenticationManager">
+    	<security:authentication-provider user-service-ref="appUserDetailsService" />
+    </security:authentication-manager>
 
 </beans>

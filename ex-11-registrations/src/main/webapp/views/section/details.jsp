@@ -85,13 +85,18 @@
 						</div>
 						
 						
-						<sec:authorize access="hasAuthority('Student') or isAnonymous()">
+						<sec:authorize access="isAnonymous()">
 							<div class="mt-3">
 								<!-- Apply Course Button -->
-								<a href="#" class="btn btn-outline-primary">
+								<c:url value="/public/registration/${dto.id}" var="registration"></c:url>
+								<a href="${registration}" class="btn btn-outline-primary">
 									<i class="bi bi-send"></i> Apply Course
 								</a>
 							</div>
+						</sec:authorize>
+						
+						<sec:authorize access="hasAuthority('Student')">
+						
 						</sec:authorize>
 					</div>
 				</div>
