@@ -16,9 +16,7 @@
 </head>
 <body>
 	
-	<app:page-content title="Welcome to JDC!"></app:page-content>
-
-		<div class="container">
+	<app:page-content title="Welcome to JDC!">
 		<!-- Courses -->
 		<div class="row row-cols-3 mb-4">
 			<c:forEach items="${courses}" var="item">
@@ -36,7 +34,8 @@
 					<app:section-item dto="${item}"></app:section-item>
 				</div>
 			</c:forEach>
-		</div>
-	</div>
+		</div>	
+	</app:page-content>
+
 </body>
 </html>

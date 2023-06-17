@@ -35,7 +35,7 @@ public class AppUserDetailsService implements UserDetailsService{
 			return false;
 		}
 		
-		return retiredAt.isAfter(LocalDate.now());
+		return retiredAt.isBefore(LocalDate.now());
 	}
 
 }

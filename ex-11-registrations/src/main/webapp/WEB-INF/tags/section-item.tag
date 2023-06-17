@@ -22,8 +22,8 @@
 			<app:group-item icon="bi-clock" value="${dto.endTime}" title="End Time" />
 		</div>
 		
-		<sec:authorize access="hasAnyAuthority('Teacher', 'Office')">
 		<div class="mt-3">
+			<sec:authorize access="hasAnyAuthority('Teacher', 'Office')">
 			<sec:authentication var="loginId" property="name"/>
 			
 			<c:if test="${dto.teacher.email eq loginId}">
@@ -34,13 +34,14 @@
 					<i class="bi bi-pencil"></i> Edit
 				</a>
 			</c:if>
+			</sec:authorize>
+
+			<c:url value="/public/section/${dto.id}" var="detailsUrl" />
+			<a href="${detailsUrl}" class="btn btn-outline-primary">
+				<i class="bi bi-send"></i> Show Details
+			</a>
 		</div>
-		</sec:authorize>
 		
-		<c:url value="/public/section/${dto.id}" var="detailsUrl" />
-		<a href="${detailsUrl}" class="btn btn-outline-primary">
-			<i class="bi bi-send"></i> Show Details
-		</a>
 		
 	</div>
 
