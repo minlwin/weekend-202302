@@ -11,5 +11,6 @@ public interface SectionRepo extends JpaRepositoryImplementation<Section, Intege
 	// select s from Section s where s.teacher.email = ?1
 	List<Section> findByTeacherEmail(String email);
 	
+	// select s from Section s where s.acceptable = true
 	List<Section> findByAcceptableIsTrue();
 }

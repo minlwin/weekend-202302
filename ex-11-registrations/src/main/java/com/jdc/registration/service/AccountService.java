@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class AccountService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@PreAuthorize("hasAuthority('Office')")
 	public List<AccountDto> search(Optional<Role> role, Optional<String> name) {
 		return accountRepo.findAll(whichRole(role).and(whichName(name)))
 				.stream().map(AccountDto::new).toList();

@@ -24,19 +24,24 @@
 		
 		<sec:authorize access="hasAnyAuthority('Teacher', 'Office')">
 		<div class="mt-3">
-			<c:url value="/teacher/section" var="editUrl">
-				<c:param name="id" value="${dto.id}" />
-			</c:url>
-			<a href="${editUrl}" class="btn btn-outline-danger">
-				<i class="bi bi-pencil"></i> Edit
-			</a>
+			<sec:authentication var="loginId" property="name"/>
 			
-			<c:url value="/teacher/section/${dto.id}" var="detailsUrl" />
-			<a href="${detailsUrl}" class="btn btn-outline-primary">
-				<i class="bi bi-send"></i> Show Details
-			</a>
+			<c:if test="${dto.teacher.email eq loginId}">
+				<c:url value="/teacher/section" var="editUrl">
+					<c:param name="id" value="${dto.id}" />
+				</c:url>
+				<a href="${editUrl}" class="btn btn-outline-danger">
+					<i class="bi bi-pencil"></i> Edit
+				</a>
+			</c:if>
 		</div>
 		</sec:authorize>
+		
+		<c:url value="/public/section/${dto.id}" var="detailsUrl" />
+		<a href="${detailsUrl}" class="btn btn-outline-primary">
+			<i class="bi bi-send"></i> Show Details
+		</a>
+		
 	</div>
 
 </section>
