@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Create Company</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="container mt-4">
+		<h1>Add New Company</h1>
+		
+		<form th:object="${form}" method="post" class="w-50">
+			<input type="hidden" th:field="*{id}" />
+			
+			<!-- Name -->
+			<div class="mb-3">
+				<label class="form-label">Company Name</label>
+				<input th:field="*{name}" type="text" class="form-control" placeholder="Enter Company Name" />
+				<span th:errors="*{name}" class="text-secondary"></span>
+			</div>
+			
+			<!-- Category -->
+			<div class="mb-3">
+				<label class="form-label">Category</label>
+				<input th:field="*{category}" type="text" class="form-control" placeholder="Enter Category" />
+				<span th:errors="*{category}" class="text-secondary"></span>
+			</div>
+			
+			<!-- Email -->
+			<div class="mb-3">
+				<label class="form-label">Email</label>
+				<input th:field="*{email}" type="email" class="form-control" placeholder="Enter Email Address" />
+				<span th:errors="*{email}" class="text-secondary"></span>
+			</div>
+			
+			<!-- Phone -->
+			
+			<button class="btn btn-primary" type="submit">Save</button>
+		</form>
+	</div>
+
+</body>
+</html>

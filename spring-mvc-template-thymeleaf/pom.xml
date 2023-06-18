@@ -17,6 +17,7 @@
 		<mysql.version>8.0.33</mysql.version>
 		<thymeleaf.version>3.1.1.RELEASE</thymeleaf.version>
 		<servlet.version>6.0.0</servlet.version>
+		<lombok.version>1.18.28</lombok.version>
 	</properties>
 	
 	<dependencies>
@@ -85,6 +86,12 @@
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 		</dependency>
 		
 	</dependencies>
