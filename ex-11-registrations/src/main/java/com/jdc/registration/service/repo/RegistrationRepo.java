@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 
 import com.jdc.registration.service.entity.Registration;
-import com.jdc.registration.service.entity.Section;
 
 public interface RegistrationRepo extends JpaRepositoryImplementation<Registration, Integer>{
 
