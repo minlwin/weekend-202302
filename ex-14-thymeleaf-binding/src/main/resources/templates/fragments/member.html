@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Menber Fragments</title>
+</head>
+<body>
+
+	<!-- Profile -->
+	<section th:fragment="profile">
+	
+		<div class="card">
+			<!-- Image -->
+			<img th:src="@{/images/profile.png}" alt="Profile Image" />
+			
+			<div class="card-body">
+				<!-- Name -->
+				<div class="mb-2">
+					<i class="bi bi-person"></i> <span>Maung Maung</span>
+				</div>
+				<!-- Phone -->
+				<div class="mb-2">
+					<i class="bi bi-telephone"></i> <span>0918181811</span>
+				</div>
+				
+				<!-- Email -->
+				<div class="mb-2">
+					<i class="bi bi-envelope"></i> <span>maung@gmail.com</span>
+				</div>
+						
+			</div>
+		</div>
+		
+		<!-- Controls -->
+		<div class="mt-3 list-group">
+			<a class="list-group-item"><i class="bi bi-camera"></i> Upload Photo</a>
+			<a class="list-group-item"><i class="bi bi-pencil"></i> Edit Profile</a>
+			<a class="list-group-item"><i class="bi bi-lock"></i> Change Password</a>
+		</div>
+		
+	</section>
+	
+	<section th:fragment="listGroup" class="list-group">
+		<div class="list-group-item active d-flex justify-content-between">
+			<div>
+				<i class="bi" th:classappend="${icon}"></i>
+				<span th:text="${header}"></span>
+			</div>
+			
+			<a href="#" class="btn-link text-white">
+				<i class="bi bi-plus-lg"></i>
+			</a>
+		</div>
+		
+		<a href="#" class="list-group-item">
+			<i class="bi bi-check-circle"></i> Dream USA
+		</a>
+	
+	</section>
+
+</body>
+</html>

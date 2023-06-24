@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Cart', content = ~{::main}, main = 'setting', sub='home')}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		<h3><i class="bi bi-house"></i> Member Home</h3>
+		
+		<div class="row">
+			<!-- Profile -->
+			<div class="col-3" th:insert="~{/fragments/member :: profile}">
+			
+			</div>
+		
+			<!-- Resent Orders -->
+			<div class="col">
+			
+			</div>		
+			
+			<!-- Shops -->
+			<div class="col-3">
+				<!-- My Shops -->
+				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='My Shops', icon='bi-shop')}"></div>
+				
+				<!-- Fav Shops -->
+				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='My Favurite Shops', icon='bi-shop-window')}"></div>
+				
+				<!-- Best Customers -->
+				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='Top Customers', icon='bi-person-check')}"></div>
+			</div>
+		</div>
+		
+		
+		
+	</main>
+
+</body>
+</html>
