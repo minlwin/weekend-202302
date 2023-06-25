@@ -27,6 +27,12 @@ public class Product {
 
 	@ManyToOne(optional = false)
 	private Category category;
+	
+	@Column(nullable = false)
+	private String brand;
+
+	private String coverImage;
+	private List<String> images;
 
 	@ElementCollection
 	@CollectionTable(name = "PRODUCT_FEATURES")

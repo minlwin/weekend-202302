@@ -2,6 +2,7 @@ package com.jdc.demo.binding.domain.dto.form;
 
 import com.jdc.demo.binding.domain.entity.Shop;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,11 @@ import lombok.NoArgsConstructor;
 public class ShopForm {
 
 	private int id;
+	
+	@NotBlank(message = "Please enter shop name.")
 	private String name;
 	private String coverImage;
+	@NotBlank(message = "Please enter greeting message.")
 	private String greeting;
 	
 	public Shop entity() {

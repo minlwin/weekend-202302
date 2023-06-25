@@ -29,7 +29,14 @@ public class MemberShopController {
 	
 	@PostMapping("edit")
 	public String save(@Validated @ModelAttribute("form") ShopForm form, BindingResult result) {
-		return "";
+		
+		if(result.hasErrors()) {
+			return "member/shop/edit";
+		}
+		
+		int id = service.save(form);
+		
+		return "redirect:/public/shop/%d".formatted(id);
 	}
 	
 	@ModelAttribute("form")
