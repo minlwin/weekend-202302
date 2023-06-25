@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -18,20 +20,25 @@
 					<a th:href="@{/public/cart}" class="nav-link" th:classappend="${main == 'my-cart' ? 'active' : ''}"><i class="bi bi-cart"></i> Cart</a>
 				</li>
 				
-				<li class="nav-item dropdown">
+				<!-- Member Menu -->
+				<li sec:authorize="hasAnyAuthority('Admin', 'Member')" class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" th:classappend="${main == 'setting' ? 'active' : ''}" data-bs-toggle="dropdown">
-						<i class="bi bi-person-circle"></i> Name
+						<i class="bi bi-person-circle"></i> <span sec:authentication='name'>Name</span>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a th:href="@{/member/home}" th:classappend="${sub == 'home' ? 'active' : ''}" class="dropdown-item">Home</a></li>
 						<li><a href="#" th:classappend="${sub == 'sales' ? 'active' : ''}" class="dropdown-item">Sales</a></li>
 						<li><a href="#" th:classappend="${sub == 'purchases' ? 'active' : ''}" class="dropdown-item">Purchases</a></li>
 						<li><hr class="dropdown-divider"></hr></li>
-						<li><a th:href="@{/public/signin}" th:classappend="${sub == 'signin' ? 'active' : ''}" class="dropdown-item ">Sign In</a></li>
-						<li><a th:href="@{/public/signup}" th:classappend="${sub == 'signup' ? 'active' : ''}" class="dropdown-item">Sign Up</a></li>
 						<li><a href="#" class="dropdown-item">Sign Out</a></li>
 					</ul>
 				</li>
+				
+				<!-- Anonymous -->
+				<li sec:authorize="isAnonymous()" class="nav-item">
+					<a th:href="@{/public/signin}" class="nav-link">Sign In</a>
+				</li>
+				
 			</ul>
 		</div>
 	</div>

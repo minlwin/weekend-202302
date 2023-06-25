@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'Sign In', content = ~{::main}, main = 'setting', sub = 'signin')}">
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/fragments/layout :: common(title = 'Sign In', content = ~{::main}, main = 'setting', sub = 'signin')}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -7,7 +8,84 @@
 <body>
 
 	<main>
-		<h1>Sign In</h1>
+		<h3><i class="bi bi-person"></i> Welcome to Shoppers!</h3>
+		
+		<div class="row">
+			<div class="col-8">
+				<img th:src="@{/images/shop-cover.png}" alt="Shop Cover" class="img-fluid w-100 img-thumbnail" />
+			</div>
+			
+			<div class="col">
+				
+				<form id="signInForm" th:action="@{/public/signin}"
+					th:classappend="${error == null ? '' : 'd-none'}" method="post">
+					
+					<h5>Sign In</h5>
+					
+					<div class="mb-3">
+						<label class="form-label">Email</label>
+						<input name="username" required="required" type="text" placeholder="Enter email for login" class="form-control" />
+					</div>
+					
+					<div class="mb-3">
+						<label class="form-label">Password</label>
+						<input name="password" required="required" type="password" placeholder="Enter password" class="form-control" />
+					</div>
+					
+					<div>
+						<button type="submit" class="btn btn-primary">
+							<i class="bi bi-unlock"></i> Sign In
+						</button>
+						
+						<button id="signUpBtn" type="button" class="btn btn-danger">
+							<i class="bi bi-person-plus"></i> Sign Up
+						</button>
+					</div>
+
+				</form>
+				
+				<form id="signUpForm" 
+					th:classappend="${error != null ? '' : 'd-none'}" 
+					th:action="@{/public/signup}" 
+					th:object="${form}"
+					method="post">
+					
+					<h5>Sign Up</h5>
+					
+					<div class="mb-3">
+						<label class="form-label">Name</label>
+						<input th:field="*{name}" required="required" type="text" placeholder="Enter your name" class="form-control" />
+						<span th:errors="*{name}" class="text-secondary"></span>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Email</label>
+						<input th:field="*{email}" required="required" type="text" placeholder="Enter email for login" class="form-control" />
+						<span th:errors="*{email}" class="text-secondary"></span>
+					</div>
+					
+					<div class="mb-3">
+						<label class="form-label">Password</label>
+						<input th:field="*{password}" required="required" type="password" placeholder="Enter password" class="form-control" />
+						<span th:errors="*{password}" class="text-secondary"></span>
+					</div>
+					
+					<div>
+						<button type="submit" class="btn btn-danger">
+							<i class="bi bi-person-plus"></i> Sign Up
+						</button>
+
+						<button id="signInBtn" type="button" class="btn btn-primary">
+							<i class="bi bi-unlock"></i> Sign In
+						</button>
+					</div>
+
+				</form>				
+				
+			</div>
+		</div>
+		
+		<script th:src="@{/js/signin.js}"></script>
 	</main>
 
 </body>

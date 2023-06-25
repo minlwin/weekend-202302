@@ -2,8 +2,11 @@ package com.jdc.demo.binding.domain.entity;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,6 +17,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "PURCHASE")
+@EntityListeners(value = AuditingEntityListener.class)
 public class Purchase {
 
 	@Id
@@ -32,6 +36,8 @@ public class Purchase {
 	private int subTotal;
 
 	private int tax;
+	
+	private AuditInfo audit = new AuditInfo();
 
 	public enum Status {
 		Ordered,
