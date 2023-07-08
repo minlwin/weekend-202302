@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="col-3">
 				<!-- Shop Information -->
-				<div class="mb-3" th:insert="~{/fragments/shop :: information(data = ${shopInfo})}"></div>
+				<div class="mb-3" th:insert="~{/fragments/shop :: information(data = ${shopInfo}, listView = false)}"></div>
 				
 				<!-- Owner Controls -->
 				<div th:if="${owner}">

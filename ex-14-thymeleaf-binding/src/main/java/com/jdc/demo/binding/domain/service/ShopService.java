@@ -1,15 +1,19 @@
 package com.jdc.demo.binding.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.demo.binding.domain.dto.form.ShopForm;
 import com.jdc.demo.binding.domain.dto.vo.ShopListVO;
 import com.jdc.demo.binding.domain.dto.vo.ShopSummaryVO;
+import com.jdc.demo.binding.domain.entity.Shop;
 import com.jdc.demo.binding.domain.repo.AccountRepo;
 import com.jdc.demo.binding.domain.repo.ShopRepo;
 
@@ -71,4 +75,19 @@ public class ShopService {
 				.map(ShopListVO::from).orElseThrow();
 	}
 
+	public List<ShopListVO> search(Optional<String> keyword) {
+		return repo.findAll(whichKeyword(keyword)).stream()
+				.map(ShopListVO::from).toList();
+	}
+	
+	private Specification<Shop> whichKeyword(Optional<String> keyword) {
+		
+		if(keyword.filter(StringUtils::hasLength).isEmpty()) {
+			return Specification.where(null);
+		}
+		
+		// lower(s.name) like ?
+		return (root, query, cb) -> cb.like(cb.lower(root.get("name")), 
+				keyword.get().toLowerCase().concat("%"));
+	}
 }
