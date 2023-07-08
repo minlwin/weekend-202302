@@ -1,5 +1,8 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
@@ -9,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,6 +43,9 @@ public class Shop {
 	
 	@ManyToOne(optional = false)
 	private Account owner;
+	
+	@OneToMany(mappedBy = "shop")
+	private List<ShopReview> reviews = new ArrayList<>();
 	
 	private AuditInfo audit = new AuditInfo();
 

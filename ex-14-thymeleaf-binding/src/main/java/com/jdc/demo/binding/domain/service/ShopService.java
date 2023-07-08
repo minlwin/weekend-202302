@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.demo.binding.domain.dto.form.ShopForm;
+import com.jdc.demo.binding.domain.dto.vo.ShopListVO;
 import com.jdc.demo.binding.domain.dto.vo.ShopSummaryVO;
 import com.jdc.demo.binding.domain.repo.AccountRepo;
 import com.jdc.demo.binding.domain.repo.ShopRepo;
@@ -63,6 +64,11 @@ public class ShopService {
 		var username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return repo.findByOwnerEmail(username)
 				.map(ShopSummaryVO::from).toList();
+	}
+
+	public ShopListVO findInformation(int id) {
+		return repo.findById(id)
+				.map(ShopListVO::from).orElseThrow();
 	}
 
 }

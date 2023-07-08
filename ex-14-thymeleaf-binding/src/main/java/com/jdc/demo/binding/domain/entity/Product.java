@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -32,17 +33,21 @@ public class Product {
 	@ManyToOne(optional = false)
 	private Category category;
 	
+	@ManyToOne(optional = false)
+	private Shop shop;
+	
 	@Column(nullable = false)
 	private String brand;
 
 	private String coverImage;
-	private List<String> images;
+	private int price;
+
+	private List<String> images = new ArrayList<>();
 
 	@ElementCollection
 	@CollectionTable(name = "PRODUCT_FEATURES")
-	private List<Feature> features;
+	private List<Feature> features = new ArrayList<>();
 
-	private int price;
 	
 	private AuditInfo audit = new AuditInfo();
 

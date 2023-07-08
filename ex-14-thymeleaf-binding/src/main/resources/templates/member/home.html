@@ -28,7 +28,7 @@
 					</a>
 				</div>
 				<!-- My Shops -->
-				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='My Shops', icon='bi-shop')}"></div>
+				<div class="mb-3" th:if="${#lists.size(myShops) > 0}" th:insert="~{/fragments/member :: listGroup(header='My Shops', icon='bi-shop', list = ${myShops})}"></div>
 				
 				<!-- Fav Shops -->
 				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='My Favurite Shops', icon='bi-shop-window')}"></div>

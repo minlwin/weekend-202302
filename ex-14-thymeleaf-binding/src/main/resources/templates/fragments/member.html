@@ -44,8 +44,8 @@
 			</div>
 		</div>
 		
-		<a href="#" class="list-group-item">
-			<i class="bi bi-check-circle"></i> Dream USA
+		<a th:each="shop : ${list}" th:href="@{|/public/shop/${shop.id}|}" class="list-group-item">
+			<i class="bi bi-check-circle"></i> [[${shop.name}]]
 		</a>
 	
 	</section>

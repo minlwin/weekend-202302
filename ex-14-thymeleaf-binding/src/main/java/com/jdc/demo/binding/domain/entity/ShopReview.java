@@ -31,4 +31,5 @@ public class ShopReview {
 	
 	@Column(name = "review_at")
 	private LocalDateTime reviewAt;
+	
 }

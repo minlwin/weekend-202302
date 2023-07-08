@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section th:fragment="information" th:object="${data}" class="card">
+		<img class="card-img-top" th:src="@{/images/shop-cover.png}" alt="Shop Image" />
+		<div class="card-body">
+			<div class="mb-2 text-secondary" th:text="*{greeting}">
+				Greeting Message
+			</div>
+			
+			<div>
+				<i class="bi bi-person"></i>
+				<span th:text="*{ownerName}">Owner Name</span>
+			</div>
+			
+			<div>
+				<i class="bi bi-envelope"></i>
+				<span th:text="*{email}">Email Address</span>
+			</div>
+		</div>
+		<div class="card-footer d-flex justify-content-between">
+			<div>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+			</div>
+			
+			<a href="#" th:unless="${owner}" class="text-decoration-none">Review</a>
+		</div>
+	</section>
+
+</body>
+</html>
