@@ -20,7 +20,7 @@
 			<!-- Form -->
 			<div class="col">
 							
-				<form method="post" th:object="${form}">
+				<form th:action="@{/member/shop/edit}" method="post" th:object="${form}">
 					<!-- ID -->
 					<input type="hidden" th:field="*{id}" />
 					

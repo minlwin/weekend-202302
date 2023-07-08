@@ -21,7 +21,7 @@ public class ShopForm {
 	private String greeting;
 	
 	public Shop entity() {
-		return new Shop(name, coverImage, greeting);
+		return new Shop(name, greeting);
 	}
 	
 	public static ShopForm from(Shop entity) {

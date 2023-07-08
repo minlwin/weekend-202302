@@ -17,26 +17,24 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "SHOP")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "SHOP")
 @EntityListeners(value = AuditingEntityListener.class)
 public class Shop {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	
 	@NonNull
 	@Column(nullable = false)
 	private String name;
 
-	@NonNull
 	@Column(name = "cover_image")
 	private String coverImage;
 
 	@NonNull
-	@Column(nullable = false)
 	private String greeting;
 	
 	@ManyToOne(optional = false)
