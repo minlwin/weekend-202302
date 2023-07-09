@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jdc.demo.binding.domain.dto.form.ProductForm;
 import com.jdc.demo.binding.domain.entity.Feature;
+import com.jdc.demo.binding.domain.service.ProductService;
 import com.jdc.demo.binding.domain.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberProductController {
 	
 	private final ShopService shopService;
+	private final ProductService productService;
 	
 	@GetMapping("{id}")
 	public String findById(@PathVariable int id) {
@@ -61,7 +63,9 @@ public class MemberProductController {
 			return "member/product/edit";
 		}
 		
-		return "redirect:/member/product/%d".formatted(1);
+		var id = productService.save(form);
+		
+		return "redirect:/member/product/%d".formatted(id);
 	}
 	
 	@ModelAttribute("form")
