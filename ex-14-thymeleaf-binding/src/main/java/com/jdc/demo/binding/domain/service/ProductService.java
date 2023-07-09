@@ -1,6 +1,7 @@
 package com.jdc.demo.binding.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,5 +64,9 @@ public class ProductService {
 					entity.setFeatures(form.getFeatures());
 					return entity.getId();
 				}).orElseThrow();
+	}
+
+	public List<ProductListVO> search(Optional<Integer> category, Optional<String> keyword) {
+		return List.of();
 	}
 }

@@ -10,7 +10,28 @@
 
 
 	<main>
-		<h1>Shop Home</h1>
+		<div class="d-flex justify-content-between mb-3">
+			<h3><i class="bi bi-gift"></i> Products</h3>
+			
+			<form th:action="@{/public/home}">
+				<div class="input-group">
+					<input class="form-control" type="text" name="keyword" placeholder="Search Keyword" />
+					<button type="submit" class="btn btn-outline-primary">
+						<i class="bi bi-search"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+		
+		<div class="row">
+			<div class="col-3">
+				<!-- Categories -->
+			</div>
+			
+			<div class="col">
+				<!-- Products -->
+			</div>
+		</div>
 	</main>	
 
 

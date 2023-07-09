@@ -10,6 +10,7 @@ public class ProductListVO {
 	private int id;
 	private String name;
 	private String category;
+	private String brand;
 	private int price;
 	private String coverImage;
 	
@@ -18,6 +19,7 @@ public class ProductListVO {
 		vo.id = entity.getId();
 		vo.name = entity.getName();
 		vo.category = entity.getCategory().getName();
+		vo.brand = entity.getBrand();
 		vo.price = entity.getPrice();
 		vo.coverImage = entity.getCoverImage();
 		return vo;
