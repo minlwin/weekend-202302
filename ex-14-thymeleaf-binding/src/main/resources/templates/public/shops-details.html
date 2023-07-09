@@ -16,7 +16,7 @@
 				
 				<!-- Owner Controls -->
 				<div th:if="${owner}">
-					<a href="#" class="btn btn-primary d-block mb-2">
+					<a th:href="@{/member/product/edit(shop=${shopInfo.id})}" class="btn btn-primary d-block mb-2">
 						<i class="bi bi-plus-lg"></i> Add New Product
 					</a>
 
@@ -25,7 +25,7 @@
 					</a>
 
 					<a href="#" class="btn btn-primary d-block">
-						<i class="bi bi-pencil"></i> Edit Shop Infomation
+						<i class="bi bi-pencil"></i> Edit Shop Information
 					</a>
 				</div>
 			

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/fragments/layout :: common(title = 'Edit Shop', content=~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		
+		<h3><i class="bi bi-gift"></i> [[${form.id == 0 ? 'Create New' : 'Edit' }]] Product</h3>
+
+		<div class="row">
+
+		</div>
+	
+	</main>
+
+</body>
+</html>
