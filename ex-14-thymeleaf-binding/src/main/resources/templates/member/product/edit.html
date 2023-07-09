@@ -64,17 +64,19 @@
 						<div class="col">
 							<label th:if="${row.index == 0}" class="form-label">Feature Name</label>
 							<div class="input-group">
-								<button class="btn btn-outline-danger">
+								<button type="button" th:attr="data-app-index=${row.index}" class="delete-btn btn btn-outline-danger">
 									<i class="bi bi-trash"></i>
 								</button>
 								<input type="text" th:field="*{features[__${row.index}__].name}" class="form-control" 
 									placeholder="Enter Feature Name" />
 							</div>
+							<span th:errors="*{features[__${row.index}__].name}" class="text-secondary" />
 						</div>
 						<div class="col">
 							<label th:if="${row.index == 0}" class="form-label">Feature Value</label>
 							<input type="text" th:field="*{features[__${row.index}__].feature}" class="form-control" 
 								placeholder="Enter Feature Value" />
+							<span th:errors="*{features[__${row.index}__].feature}" class="text-secondary" />
 						</div>
 					</div>
 					

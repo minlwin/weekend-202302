@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jdc.demo.binding.domain.entity.Feature;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -26,5 +27,6 @@ public class ProductForm {
 	
 	private int price;
 	
+	@Valid
 	private List<Feature> features = new ArrayList<>();	
 }

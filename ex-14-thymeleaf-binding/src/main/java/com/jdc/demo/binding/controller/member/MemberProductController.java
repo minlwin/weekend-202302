@@ -42,19 +42,21 @@ public class MemberProductController {
 			@Validated @ModelAttribute("form") ProductForm form, BindingResult bindingResult,
 			ModelMap model, @RequestParam int addFeature, @RequestParam int deleteIndex) {
 		
-		if(bindingResult.hasErrors()) {
-			model.put("shopInfo", shopService.findInformation(form.getShop()));
-			return "member/product/edit";
-		}
-		
 		if(addFeature > 0) {
 			form.getFeatures().add(new Feature());
+			model.remove("org.springframework.validation.BindingResult.form");
 			model.put("shopInfo", shopService.findInformation(form.getShop()));
 			return "member/product/edit";
 		}
 		
 		if(deleteIndex >= 0) {
 			form.getFeatures().remove(deleteIndex);
+			model.remove("org.springframework.validation.BindingResult.form");
+			model.put("shopInfo", shopService.findInformation(form.getShop()));
+			return "member/product/edit";
+		}
+		
+		if(bindingResult.hasErrors()) {
 			model.put("shopInfo", shopService.findInformation(form.getShop()));
 			return "member/product/edit";
 		}
@@ -66,7 +68,6 @@ public class MemberProductController {
 	public ProductForm form(@RequestParam int shop) {
 		var form = new ProductForm();
 		form.setShop(shop);
-		form.getFeatures().add(new Feature());
 		return form;
 	}
 }

@@ -9,4 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
 			editForm.submit()
 		})
 	}
+	
+	const deleteButtons = Array.from(document.getElementsByClassName('delete-btn'))
+	const deleteIndex = document.getElementById('deleteIndex')
+	
+	if(deleteButtons && deleteIndex && editForm) {
+		deleteButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				deleteIndex.value = button.dataset.appIndex
+				editForm.submit()
+			})
+		})
+	}
 })
