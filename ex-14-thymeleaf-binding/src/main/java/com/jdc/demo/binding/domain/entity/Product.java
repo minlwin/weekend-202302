@@ -42,6 +42,8 @@ public class Product {
 	private String coverImage;
 	private int price;
 
+	@ElementCollection
+	@CollectionTable(name = "PRODUCT_IMAGES")
 	private List<String> images = new ArrayList<>();
 
 	@ElementCollection

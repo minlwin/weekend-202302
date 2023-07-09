@@ -33,6 +33,11 @@
 			
 			<div class="col">
 				<!-- Products -->
+				<div class="row row-cols-3">
+					
+					<div class="col" th:each="item : ${products}" th:insert="~{/fragments/product :: information(data = ${item})}"></div>
+				
+				</div>
 			
 			</div>
 		</div>

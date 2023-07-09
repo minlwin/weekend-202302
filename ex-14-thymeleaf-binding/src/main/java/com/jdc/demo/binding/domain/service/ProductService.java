@@ -48,7 +48,7 @@ public class ProductService {
 			entity.setPrice(form.getPrice());
 			entity.setFeatures(form.getFeatures());
 			
-			var shop = shopRepo.findById(form.getId()).orElseThrow();
+			var shop = shopRepo.findById(form.getShop()).orElseThrow();
 			entity.setShop(shop);
 			
 			return repo.save(entity).getId();
