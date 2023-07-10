@@ -68,6 +68,16 @@ public class MemberProductController {
 		return "redirect:/member/product/%d".formatted(id);
 	}
 	
+	String uploadPhoto() {
+		// TODO
+		return "";
+	}
+	
+	String deletePhoto() {
+		// TODO
+		return "";
+	}
+	
 	@ModelAttribute("form")
 	public ProductForm form(@RequestParam int shop) {
 		var form = new ProductForm();

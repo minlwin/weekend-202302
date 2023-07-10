@@ -16,11 +16,22 @@
 				<div class="d-flex justify-content-between">
 					<span th:text="|${data.price} MMK|">Price</span>
 					
-					<a href="#" class="btn-link">
+					<a th:href="@{|/public/product/${data.id}|}" class="btn-link">
 						<i class="bi bi-cart"></i>
 					</a>
 				</div>
 			</div>
+		</div>
+		
+	</section>
+	
+	<section th:fragment="images" class="row">
+	
+		<div th:if="${#lists.size(list) gt 0}" class="col-3">
+		</div>
+		
+		<div class="col">
+			<img th:src="@{/images/product.jpg}" class="img-fluid img-thumbnail w-100" alt="Product Cover Image" />
 		</div>
 		
 	</section>

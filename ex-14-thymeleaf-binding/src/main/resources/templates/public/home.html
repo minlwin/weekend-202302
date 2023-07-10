@@ -26,10 +26,19 @@
 		<div class="row">
 			<div class="col-3">
 				<!-- Categories -->
+				<div class="list-group">
+					<span class="list-group-item active">Categories</span>
+					<a href="#" th:each="category : ${categories}" class="list-group-item">[[${category.name}]]</a>
+				</div>
 			</div>
 			
 			<div class="col">
 				<!-- Products -->
+				<div class="row row-cols-3 g-4">
+					<div class="col" th:each="item : ${list}">
+						<div th:replace="~{/fragments/product :: information(data = ${item})}"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</main>	

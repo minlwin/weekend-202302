@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/fragments/layout :: common(title = 'Product Details', content=~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		
+		<h3><i class="bi bi-gift"></i> <span th:text="${data.name}">Product Name</span></h3>
+		<h5 class="text-secondary" th:text="${data.categoryName}">Category</h5>
+		
+		<div class="row">
+			<div class="col" th:insert="~{/fragments/product :: images(list = ${data.images})}"></div>	
+			
+			<div class="col-6">
+				<!-- Product Informations -->
+				
+				<!-- Category -->
+				<!-- Brand -->
+				<!-- Features -->
+				<!-- Price -->
+				
+				<div>
+					<!-- Controls for owner -->
+					<!-- Upload Photos -->
+					
+					<!-- Delete Photos -->
+					
+					<!-- Edit Product -->
+				</div>
+				
+				<div>
+					<!-- Add To Cart Button -->
+				</div>
+			</div>
+		</div>
+		
+		
+
+	
+	</main>
+
+</body>
+</html>

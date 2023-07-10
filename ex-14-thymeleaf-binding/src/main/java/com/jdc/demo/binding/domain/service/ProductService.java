@@ -3,10 +3,12 @@ package com.jdc.demo.binding.domain.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.demo.binding.domain.dto.form.ProductForm;
+import com.jdc.demo.binding.domain.dto.vo.ProductDetailsVO;
 import com.jdc.demo.binding.domain.dto.vo.ProductListVO;
 import com.jdc.demo.binding.domain.entity.Category;
 import com.jdc.demo.binding.domain.entity.Product;
@@ -18,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ProductService {
 	
 	private final ProductRepo repo;
@@ -66,7 +68,31 @@ public class ProductService {
 				}).orElseThrow();
 	}
 
+	public Optional<ProductDetailsVO> findDetailsById(int id) {
+		return repo.findById(id).map(ProductDetailsVO::from);
+	}
+
 	public List<ProductListVO> search(Optional<Integer> category, Optional<String> keyword) {
-		return List.of();
+		return repo.findAll(withCategory(category)
+					.and(withKeyword(keyword)))
+				.stream().map(ProductListVO::from).toList();
+	}
+	
+	private Specification<Product> withCategory(Optional<Integer> data) {
+		if(data.isPresent()) {
+			return (root, query, cb) -> cb.equal(root.get("category").get("id"), data.get());
+		}
+		return Specification.where(null);
+	}
+
+	private Specification<Product> withKeyword(Optional<String> data) {
+		if(data.isPresent()) {
+			return (root, query, cb) -> cb.or(
+					cb.like(cb.lower(root.get("name")), data.get().toLowerCase().concat("%")),
+					cb.like(cb.lower(root.get("brand")), data.get().toLowerCase().concat("%")),
+					cb.like(cb.lower(root.get("category").get("name")), data.get().toLowerCase().concat("%"))
+			);
+		}
+		return Specification.where(null);
 	}
 }
