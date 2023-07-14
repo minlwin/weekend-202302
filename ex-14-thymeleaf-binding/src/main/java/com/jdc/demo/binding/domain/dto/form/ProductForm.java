@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jdc.demo.binding.domain.entity.Feature;
+import com.jdc.demo.binding.domain.entity.Product;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -29,4 +30,16 @@ public class ProductForm {
 	
 	@Valid
 	private List<Feature> features = new ArrayList<>();	
+	
+	public static ProductForm from(Product entity) {
+		var form = new ProductForm();
+		form.id = entity.getId();
+		form.shop = entity.getShop().getId();
+		form.name = entity.getName();
+		form.category = entity.getCategory().getName();
+		form.brand = entity.getBrand();
+		form.price = entity.getPrice();
+		form.features = entity.getFeatures();
+		return form;
+	}
 }

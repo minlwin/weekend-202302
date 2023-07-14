@@ -1,5 +1,6 @@
 package com.jdc.demo.binding;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -15,7 +16,10 @@ import org.springframework.security.web.context.SecurityContextRepository;
 @Configuration(proxyBeanMethods = false)
 @EnableJpaAuditing(auditorAwareRef = "appAuditorProvider")
 public class SecurityConfig {
-	
+
+	@Value("${app.photo.path}")
+	private String photoUrlPath;
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -37,7 +41,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(config -> {
 			
 			config.requestMatchers(
-					"/", "/public/**", "/images/**", "/js/**", "/login").permitAll();
+					"/", "/public/**", "/images/**", "/js/**", "/style/**","/login", photoUrlPath).permitAll();
 			
 			config.requestMatchers("/admin/**").hasAuthority("Admin");
 			config.requestMatchers("/member/**").hasAnyAuthority("Admin", "Member");

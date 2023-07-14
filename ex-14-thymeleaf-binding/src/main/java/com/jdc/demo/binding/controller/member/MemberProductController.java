@@ -1,12 +1,13 @@
 package com.jdc.demo.binding.controller.member;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,13 +27,8 @@ public class MemberProductController {
 	private final ShopService shopService;
 	private final ProductService productService;
 	
-	@GetMapping("{id}")
-	public String findById(@PathVariable int id) {
-		return "member/product/details";
-	}
-
 	@GetMapping("edit")
-	public String edit(@RequestParam int shop, ModelMap model) {
+	public String edit(@RequestParam int shop, @RequestParam("id") Optional<Integer> productId, ModelMap model) {
 		
 		model.put("shopInfo", shopService.findInformation(shop));
 		
@@ -65,23 +61,15 @@ public class MemberProductController {
 		
 		var id = productService.save(form);
 		
-		return "redirect:/member/product/%d".formatted(id);
-	}
-	
-	String uploadPhoto() {
-		// TODO
-		return "";
-	}
-	
-	String deletePhoto() {
-		// TODO
-		return "";
+		return "redirect:/public/product/%d".formatted(id);
 	}
 	
 	@ModelAttribute("form")
-	public ProductForm form(@RequestParam int shop) {
-		var form = new ProductForm();
-		form.setShop(shop);
-		return form;
+	public ProductForm form(@RequestParam int shop, @RequestParam("id") Optional<Integer> productId) {
+		return productId.map(id -> productService.getFormById(id)).orElseGet(() -> {
+			var form = new ProductForm();
+			form.setShop(shop);
+			return form;
+		});
 	}
 }

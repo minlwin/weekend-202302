@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.jdc.demo.binding.domain.ShopBusinessException;
 import com.jdc.demo.binding.domain.dto.form.ProductForm;
 import com.jdc.demo.binding.domain.dto.vo.ProductDetailsVO;
 import com.jdc.demo.binding.domain.dto.vo.ProductListVO;
@@ -15,6 +18,7 @@ import com.jdc.demo.binding.domain.entity.Product;
 import com.jdc.demo.binding.domain.repo.CategoryRepo;
 import com.jdc.demo.binding.domain.repo.ProductRepo;
 import com.jdc.demo.binding.domain.repo.ShopRepo;
+import com.jdc.demo.binding.domain.service.PhotoUploadService.Type;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +31,7 @@ public class ProductService {
 	private final ProductRepo repo;
 	private final CategoryRepo categoryRepo;
 	private final ShopRepo shopRepo;
+	private final PhotoUploadService photoUploadService;
 
 	public List<ProductListVO> findByShop(int id) {
 		return repo.findByShopId(id)
@@ -78,6 +83,17 @@ public class ProductService {
 				.stream().map(ProductListVO::from).toList();
 	}
 	
+	@Transactional(rollbackFor = ShopBusinessException.class)
+	public void uploadPhoto(int id, MultipartFile ... files) {
+		var photos = photoUploadService.upload(Type.Product, files);
+		var product = repo.findById(id).orElseThrow();
+		product.addImages(photos);
+		
+		if(!StringUtils.hasLength(product.getCoverImage()) && photos.size() > 0) {
+			product.setCoverImage(photos.get(0));
+		}
+	}
+	
 	private Specification<Product> withCategory(Optional<Integer> data) {
 		if(data.isPresent()) {
 			return (root, query, cb) -> cb.equal(root.get("category").get("id"), data.get());
@@ -95,4 +111,10 @@ public class ProductService {
 		}
 		return Specification.where(null);
 	}
+
+	public ProductForm getFormById(Integer id) {
+		return repo.findById(id).map(ProductForm::from).orElseThrow();
+	}
+
+
 }

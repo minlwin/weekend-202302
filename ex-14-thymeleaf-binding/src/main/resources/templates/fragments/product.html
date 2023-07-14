@@ -7,7 +7,8 @@
 <body>
 
 	<section th:fragment="information" class="card">
-		<img th:src="@{/images/product.jpg}" alt="Product Image" class="card-img-top" />
+		<img th:if="${data.coverImage == null}" th:src="@{/images/product.jpg}" alt="Product Image" class="card-img-top product-list-image" />
+		<img th:unless="${data.coverImage == null}" th:src="@{|/photos/product/${data.coverImage}|}" alt="Product Image" class="card-img-top product-list-image" />
 		
 		<div class="card-body">
 			<h5 class="card-title" th:text="${data.name}">Product Name</h5>
@@ -25,14 +26,20 @@
 		
 	</section>
 	
-	<section th:fragment="images" class="row">
+	<section th:fragment="images" class="d-flex">
 	
-		<div th:if="${#lists.size(list) gt 0}" class="col-3">
+		<div class="controls-wrapper">
+			<div th:each="image : ${list}" class="mb-3">
+				<img th:src="@{|/photos/product/${image}|}" class="controllImages shadow" alt="Control Image" />
+			</div>
 		</div>
 		
-		<div class="col">
-			<img th:src="@{/images/product.jpg}" class="img-fluid img-thumbnail w-100" alt="Product Cover Image" />
+		<div class="cover-wrapper">
+			<img th:if="${cover == null}" th:src="@{/images/product.jpg}" class="shadow" alt="Product Cover Image" />
+			<img id="coverImage" th:unless="${cover == null}"  th:src="@{|/photos/product/${cover}|}" class="shadow" alt="Product Cover Image" />
 		</div>
+		
+		<script th:src="@{/js/product-photo-select.js}"></script>
 		
 	</section>
 

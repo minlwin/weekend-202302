@@ -9,38 +9,74 @@
 
 	<main>
 		
-		<h3><i class="bi bi-gift"></i> <span th:text="${data.name}">Product Name</span></h3>
-		<h5 class="text-secondary" th:text="${data.categoryName}">Category</h5>
 		
-		<div class="row">
-			<div class="col" th:insert="~{/fragments/product :: images(list = ${data.images})}"></div>	
+		<div class="d-flex mt-5">
+			<div th:insert="~{/fragments/product :: images(list = ${data.images}, cover = ${data.coverImage})}"></div>	
 			
-			<div class="col-6">
-				<!-- Product Informations -->
+			<!-- Product Informations -->
+			<div>
+				<section class="mb-4">
+					<h3>
+						<i class="bi bi-gift"></i> 
+						<!-- Category -->
+						<span th:text="${data.brand}">Brand Name</span>
+						<!-- Brand -->
+						<span th:text="${data.name}">Product Name</span>
+					</h3>
+					<h5 class="text-secondary" th:text="${data.categoryName}">Category</h5>
+				</section>
 				
-				<!-- Category -->
-				<!-- Brand -->
-				<!-- Features -->
-				<!-- Price -->
-				
-				<div>
-					<!-- Controls for owner -->
-					<!-- Upload Photos -->
+				<section>
+					<h4>Features</h4>
 					
-					<!-- Delete Photos -->
-					
-					<!-- Edit Product -->
-				</div>
+					<div th:each="item : ${data.features}" class="mb-3">
+						<div th:text="${item.name}" class="text-secondary">Feature Name</div>
+						<div th:text="${item.feature}" class="fs-5">Feature Value</div>
+					</div>
+				</section>			
+
+				<section class="mb-5">
+					<!-- Price -->
+					<h2 class="text-danger"><span th:text="${data.price}">100</span> MMK</h2>
+				</section>	
 				
-				<div>
-					<!-- Add To Cart Button -->
-				</div>
+				<section>
+					<div th:unless="${owner}">
+						<!-- Add To Cart Button -->
+						<button class="btn btn-outline-primary">
+							<i class="bi bi-cart"></i> Add To Cart
+						</button>
+					</div>
+
+					<div th:if="${owner}">
+						<!-- Controls for owner -->
+						<!-- Upload Photos -->
+						<button id="photoUploadBtn" class="btn btn-outline-primary">
+							<i class="bi bi-camera"></i> Upload Photos
+						</button>
+						
+						<!-- Delete Photos -->
+						<button class="btn btn-outline-primary">
+							<i class="bi bi-trash"></i> Delete Photos
+						</button>
+						
+						<!-- Edit Product -->
+						<a th:href="@{/member/product/edit(id=${data.id},shop=${data.shopId})}" class="btn btn-outline-primary">
+							<i class="bi bi-pencil"></i> Edit Product
+						</a>
+
+						<form enctype="multipart/form-data" id="photoUploadForm" th:action="@{|/member/product/${data.id}/photo|}" method="post" class="d-none">
+							<input type="file" name="photos" multiple="multiple" id="photoUploadInput" />
+						</form>
+				
+						<script th:src="@{/js/product-photo-upload.js}"></script>
+					</div>
+
+				</section>				
+				
 			</div>
 		</div>
 		
-		
-
-	
 	</main>
 
 </body>

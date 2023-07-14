@@ -53,4 +53,9 @@ public class Product {
 	
 	private AuditInfo audit = new AuditInfo();
 
+
+	public void addImages(List<String> photos) {
+		images.addAll(photos);
+	}
+
 }
