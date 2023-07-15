@@ -30,13 +30,13 @@
 	
 		<div class="controls-wrapper">
 			<div th:each="image : ${list}" class="mb-3">
-				<img th:src="@{|/photos/product/${image}|}" class="controllImages shadow" alt="Control Image" />
+				<img th:src="@{|/photos/product/${image}|}" class="controllImages" alt="Control Image" />
 			</div>
 		</div>
 		
 		<div class="cover-wrapper">
-			<img th:if="${cover == null}" th:src="@{/images/product.jpg}" class="shadow" alt="Product Cover Image" />
-			<img id="coverImage" th:unless="${cover == null}"  th:src="@{|/photos/product/${cover}|}" class="shadow" alt="Product Cover Image" />
+			<img th:if="${cover == null}" th:src="@{/images/product.jpg}" class="shadowUp" alt="Product Cover Image" />
+			<img id="coverImage" th:unless="${cover == null}"  th:src="@{|/photos/product/${cover}|}" class="shadowUp" alt="Product Cover Image" />
 		</div>
 		
 		<script th:src="@{/js/product-photo-select.js}"></script>
