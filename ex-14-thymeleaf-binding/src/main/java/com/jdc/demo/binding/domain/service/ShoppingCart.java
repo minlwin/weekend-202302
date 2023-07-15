@@ -18,14 +18,6 @@ public class ShoppingCart {
 		items.put(productId, count);
 	}
 	
-	public void plusOne(int productId) {
-		
-	}
-	
-	public void minusOne(int productId) {
-		
-	}
-	
 	public int getCount() {
 		
 		if(items.isEmpty()) {
@@ -36,7 +28,7 @@ public class ShoppingCart {
 	}
 
 	public void clear() {
-		
+		items.clear();
 	}
 	
 }
