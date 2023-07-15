@@ -20,6 +20,11 @@ public class ShoppingCartController {
 	
 	@GetMapping
 	String index(ModelMap model) {
+		
+		// Product Informations
+		
+		// Summary Informations
+		
 		return "";
 	}
 	
