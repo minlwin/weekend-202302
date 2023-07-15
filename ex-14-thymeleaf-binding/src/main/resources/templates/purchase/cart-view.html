@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Cart', content = ~{::main}, main = 'my-cart')}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		<h3><i class="bi bi-cart"></i> In My Cart</h3>
+		
+		<div class="row mt-4">
+			<div class="col">
+				<!-- Item List -->
+				<div th:each="item: ${items}" class="mb-5">
+					<div th:replace="~{/fragments/purchase :: item(data = ${item})}"></div>
+				</div>
+			</div>
+			
+			<div class="col-4">
+				<!-- Purchase Summary -->
+				<div class="card bg-primary text-white">
+					<div class="card-body">
+						<h4 class="cart-title d-flex justify-content-between mb-5">
+							<div>
+								<i class="bi bi-cart"></i> My Cart
+							</div>
+							
+							<span>150,000 MMK</span>
+						</h4>
+						
+						<!-- Sub Total -->
+						<div th:insert="~{/fragments/purchase :: information(name='Sub Total', value= '150000')}"></div>
+						
+						<!-- Tax -->
+						<div th:insert="~{/fragments/purchase :: information(name='Tax', value= '150000')}"></div>
+						
+						<!-- Delivery Fees -->
+						<div th:insert="~{/fragments/purchase :: information(name='Delivery Fees', value= '150000')}"></div>
+						<hr />
+						<!-- Total -->
+						<div th:insert="~{/fragments/purchase :: information(name='Total', value= '150000')}"></div>
+						
+						<!-- Check Out Button -->
+						<div class="mt-2 d-flex justify-content-end">
+							<button class="btn btn-info">
+								<i class="bi bi-check-lg"></i> Check Out
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.jdc.demo.binding.domain.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.jpa.domain.Specification;
@@ -13,6 +15,7 @@ import com.jdc.demo.binding.domain.ShopBusinessException;
 import com.jdc.demo.binding.domain.dto.form.ProductForm;
 import com.jdc.demo.binding.domain.dto.vo.ProductDetailsVO;
 import com.jdc.demo.binding.domain.dto.vo.ProductListVO;
+import com.jdc.demo.binding.domain.dto.vo.PurchaseItemVO;
 import com.jdc.demo.binding.domain.entity.Category;
 import com.jdc.demo.binding.domain.entity.Product;
 import com.jdc.demo.binding.domain.repo.CategoryRepo;
@@ -114,6 +117,19 @@ public class ProductService {
 
 	public ProductForm getFormById(Integer id) {
 		return repo.findById(id).map(ProductForm::from).orElseThrow();
+	}
+
+	public List<PurchaseItemVO> getPurchaseItems(Map<Integer, Integer> items) {
+		List<PurchaseItemVO> list = new ArrayList<>();
+		
+		for(var entry : items.entrySet()) {
+			var vo = repo.findById(entry.getKey())
+					.map(product -> PurchaseItemVO.from(product).quantity(entry.getValue()))
+					.orElseThrow();
+			list.add(vo);
+		}
+		
+		return list;
 	}
 
 

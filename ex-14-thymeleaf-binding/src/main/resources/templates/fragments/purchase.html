@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section th:fragment="item" class="d-flex">
+		<div class="me-5">
+			<!-- Image -->
+			<img th:if="${data.coverImage} == null" th:src="@{/images/product.jpg}" class="purchase-item-image" alt="Product Cover Image" />
+			<img th:unless="${data.coverImage} == null" th:src="@{|/photos/product/${data.coverImage}|}" class="purchase-item-image" alt="Product Cover Image" />
+		</div>
+		
+		<div class="w-100">
+			<!-- Product Information -->
+			<!-- Brand & Category -->
+			<h5>
+				<span th:text="${data.brand}">Brand</span> 
+				<span th:text="${data.category}">Category</span>
+			</h5>
+			<!-- Name -->
+			<h4 th:text="${data.name}" class="text-primary">Product Name</h4>
+			
+			<!-- Features -->
+			<div class="my-4">
+				<div th:each="item : ${data.features}" class="row">
+					<div class="col-3">
+						<label th:text="${item.name}" class="text-secondary">Feature Name</label>
+					</div>
+					<div class="col">
+						<span th:text="${item.feature}">Feature</span>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Purchase Item Information -->
+			<div class="row">
+				<div class="col">
+					<!-- Unit Price -->
+					<label class="form-label">Unit Price</label>
+					<span class="form-control">87000</span>
+				</div>
+				
+				<div class="col">
+					<!-- Quantity -->
+					<label class="form-label">Quantity</label>
+					<div class="d-flex">
+						<button class="btn btn-outline-primary me-2">
+							<i class="bi bi-dash-lg"></i>
+						</button>	
+						
+						<span class="form-control text-center me-2">
+							1
+						</span>	
+						
+						<button class="btn btn-outline-primary">
+							<i class="bi bi-plus-lg"></i>
+						</button>	
+					</div>
+				</div>
+				
+				<div class="col">
+					<!-- Total -->
+					<label class="form-label">Total</label>
+					<span class="form-control">50000</span>
+				</div>
+			</div>
+		</div>
+	
+	</section>
+	
+	<section th:fragment="information" class="d-flex justify-content-between">
+		<label class="form-label" th:text="${name} ?: 'Name'"></label>
+		<span th:text="${value} ?: 'Value'"></span>
+	</section>
+
+</body>
+</html>

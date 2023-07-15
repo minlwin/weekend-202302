@@ -31,4 +31,7 @@ public class ShoppingCart {
 		items.clear();
 	}
 	
+	public Map<Integer, Integer> getItems() {
+		return new LinkedHashMap<>(items);
+	}
 }
