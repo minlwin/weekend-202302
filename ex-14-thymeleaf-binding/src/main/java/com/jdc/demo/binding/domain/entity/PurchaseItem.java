@@ -19,7 +19,7 @@ public class PurchaseItem {
 	private int id;
 
 	@ManyToOne(optional = false)
-	private Purchase purchase;
+	private PurchaseShop purchase;
 
 	@ManyToOne(optional = false)
 	private Product product;

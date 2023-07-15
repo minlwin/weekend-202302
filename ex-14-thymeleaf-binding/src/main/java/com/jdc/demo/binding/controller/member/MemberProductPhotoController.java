@@ -19,10 +19,10 @@ public class MemberProductPhotoController {
 	private final ProductService productService;
 
 	@PostMapping("{id}/photo")
-	String uploadPhoto(@PathVariable int id, @RequestParam MultipartFile [] photos) {
+	String uploadPhoto(@PathVariable int id, @RequestParam("photos") MultipartFile [] files) {
 		
 		try {
-			productService.uploadPhoto(id, photos);
+			productService.uploadPhoto(id, files);
 		} catch (Exception e) {
 		}
 		
