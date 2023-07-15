@@ -42,10 +42,14 @@
 				
 				<section>
 					<div th:unless="${owner}">
-						<!-- Add To Cart Button -->
-						<button class="btn btn-outline-primary">
-							<i class="bi bi-cart"></i> Add To Cart
-						</button>
+						<form th:action="@{/public/cart}" method="post">
+							<input type="hidden" name="productId" th:value="${data.id}" />
+							<input type="hidden" name="count" value="1" />
+							<!-- Add To Cart Button -->
+							<button type="submit" class="btn btn-outline-primary">
+								<i class="bi bi-cart"></i> Add To Cart
+							</button>
+						</form>
 					</div>
 
 					<div th:if="${owner}">

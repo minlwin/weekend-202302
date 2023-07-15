@@ -16,8 +16,11 @@
 				<li class="nav-item">
 					<a th:href="@{/public/shop}" class="nav-link" th:classappend="${main == 'shops' ? 'active' : ''}"><i class="bi bi-shop"></i> Shops</a>
 				</li>
-				<li class="nav-item">
-					<a th:href="@{/public/cart}" class="nav-link" th:classappend="${main == 'my-cart' ? 'active' : ''}"><i class="bi bi-cart"></i> Cart</a>
+				<li th:if="${@shoppingCart.count > 0}" class="nav-item">
+					<a th:href="@{/public/cart}" class="nav-link" th:classappend="${main == 'my-cart' ? 'active' : ''}">
+						<i class="bi bi-cart"></i> 
+						<span th:text="${@shoppingCart.count}">0</span>
+					</a>
 				</li>
 				
 				<!-- Member Menu -->

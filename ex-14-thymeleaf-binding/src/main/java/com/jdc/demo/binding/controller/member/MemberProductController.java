@@ -66,7 +66,7 @@ public class MemberProductController {
 	
 	@ModelAttribute("form")
 	public ProductForm form(@RequestParam int shop, @RequestParam("id") Optional<Integer> productId) {
-		return productId.map(id -> productService.getFormById(id)).orElseGet(() -> {
+		return productId.filter(a -> a > 0).map(id -> productService.getFormById(id)).orElseGet(() -> {
 			var form = new ProductForm();
 			form.setShop(shop);
 			return form;
