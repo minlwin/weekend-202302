@@ -15,7 +15,11 @@ public class ShoppingCart {
 	public void addToCart(int productId, int count) {
 		var previous = items.get(productId);
 		count = (null != previous) ? previous + count : count; 
-		items.put(productId, count);
+		if(count == 0) {
+			items.remove(productId);
+		} else {
+			items.put(productId, count);
+		}
 	}
 	
 	public int getCount() {

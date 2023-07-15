@@ -34,6 +34,7 @@ public class PurchaseItemVO {
 		dto.brand = product.getBrand();
 		dto.features = product.getFeatures();
 		dto.coverImage = product.getCoverImage();
+		dto.price = product.getPrice();
 		return dto;
 	}
 	

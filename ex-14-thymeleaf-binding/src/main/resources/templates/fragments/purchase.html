@@ -40,22 +40,22 @@
 				<div class="col">
 					<!-- Unit Price -->
 					<label class="form-label">Unit Price</label>
-					<span class="form-control">87000</span>
+					<span th:text="${data.price}" class="form-control">87000</span>
 				</div>
 				
 				<div class="col">
 					<!-- Quantity -->
 					<label class="form-label">Quantity</label>
 					<div class="d-flex">
-						<button class="btn btn-outline-primary me-2">
+						<button th:data-product-id="${data.id}" th:data-product-count="-1" class="cartCountBtn btn btn-outline-primary me-2">
 							<i class="bi bi-dash-lg"></i>
 						</button>	
 						
-						<span class="form-control text-center me-2">
+						<span th:text="${data.quantity}" class="form-control text-center me-2">
 							1
 						</span>	
 						
-						<button class="btn btn-outline-primary">
+						<button th:data-product-id="${data.id}" th:data-product-count="1" class="cartCountBtn btn btn-outline-primary">
 							<i class="bi bi-plus-lg"></i>
 						</button>	
 					</div>
@@ -64,7 +64,7 @@
 				<div class="col">
 					<!-- Total -->
 					<label class="form-label">Total</label>
-					<span class="form-control">50000</span>
+					<span th:text="${data.total}" class="form-control">50000</span>
 				</div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 	
 	<section th:fragment="information" class="d-flex justify-content-between">
 		<label class="form-label" th:text="${name} ?: 'Name'"></label>
-		<span th:text="${value} ?: 'Value'"></span>
+		<span th:text="${@numbers.format(value)} ?: 'Value'"></span>
 	</section>
 
 </body>

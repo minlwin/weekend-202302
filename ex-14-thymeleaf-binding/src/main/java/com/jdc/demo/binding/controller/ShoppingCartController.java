@@ -1,5 +1,7 @@
 package com.jdc.demo.binding.controller;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jdc.demo.binding.domain.dto.vo.PurchaseItemVO;
 import com.jdc.demo.binding.domain.service.ProductService;
 import com.jdc.demo.binding.domain.service.ShoppingCart;
 
@@ -28,14 +31,28 @@ public class ShoppingCartController {
 		model.put("items", purchaseItems);
 		
 		// Summary Informations
+		var subTotal = purchaseItems.stream().mapToInt(PurchaseItemVO::getTotal).sum();
+		var tax = subTotal / 100 * 5;
+		var total = subTotal + tax;
+		
+		var summary = new HashMap<String, Integer>();
+		summary.put("subTotal", subTotal);
+		summary.put("tax", tax);
+		summary.put("total", total);
+		
+		model.put("summary", summary);
 		
 		return "purchase/cart-view";
 	}
 	
 	@PostMapping
-	String addToCart(@RequestParam int productId, @RequestParam int count) {
+	String addToCart(@RequestParam int productId, @RequestParam int count, @RequestParam(required = false, defaultValue = "false") Boolean cartView) {
 		cart.addToCart(productId, count);
-		return "redirect:/public/product/%s".formatted(productId);
+		if(cart.getCount() > 0) {
+			return cartView ? "redirect:/public/cart" : "redirect:/public/product/%s".formatted(productId);
+		}
+		
+		return "redirect:/";
 	}
 	
 	@GetMapping("clear")

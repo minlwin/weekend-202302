@@ -26,20 +26,18 @@
 								<i class="bi bi-cart"></i> My Cart
 							</div>
 							
-							<span>150,000 MMK</span>
+							<span th:text="${@numbers.format(summary['total'])} + ' MMK'">150,000 MMK</span>
 						</h4>
 						
 						<!-- Sub Total -->
-						<div th:insert="~{/fragments/purchase :: information(name='Sub Total', value= '150000')}"></div>
+						<div th:insert="~{/fragments/purchase :: information(name='Sub Total', value= ${summary['subTotal']})}"></div>
 						
 						<!-- Tax -->
-						<div th:insert="~{/fragments/purchase :: information(name='Tax', value= '150000')}"></div>
-						
-						<!-- Delivery Fees -->
-						<div th:insert="~{/fragments/purchase :: information(name='Delivery Fees', value= '150000')}"></div>
+						<div th:insert="~{/fragments/purchase :: information(name='Tax', value= ${summary['tax']})}"></div>
+
 						<hr />
 						<!-- Total -->
-						<div th:insert="~{/fragments/purchase :: information(name='Total', value= '150000')}"></div>
+						<div th:insert="~{/fragments/purchase :: information(name='Total', value= ${summary['total']})}"></div>
 						
 						<!-- Check Out Button -->
 						<div class="mt-2 d-flex justify-content-end">
@@ -51,6 +49,15 @@
 				</div>
 			</div>
 		</div>
+		
+		<form id="cartItemForm" th:action="@{/public/cart}" method="post" class="d-none">
+			<input type="hidden" name="cartView" value="true" />
+			<input id="productIdInput" type="hidden" name="productId" />
+			<input id="countInput" type="hidden" name="count" />
+		</form>
+		
+		<script type="text/javascript" th:src="@{/js/cart-view.js}"></script>
+		
 	</main>
 
 </body>
