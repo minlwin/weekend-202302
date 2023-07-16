@@ -2,7 +2,7 @@ package com.jdc.demo.binding.domain.entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.jdc.demo.binding.domain.entity.Purchase.Status;
+import com.jdc.demo.binding.domain.entity.Invoice.Status;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -17,14 +17,14 @@ import lombok.Data;
 @Entity
 @Table(name = "PURCHASE_SHOP")
 @EntityListeners(value = AuditingEntityListener.class)
-public class PurchaseShop {
+public class InvoiceShop {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne(optional = false)
-	private Purchase purchase;
+	private Invoice purchase;
 
 	private Status status;
 

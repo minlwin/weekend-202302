@@ -75,6 +75,29 @@
 		<label class="form-label" th:text="${name} ?: 'Name'"></label>
 		<span th:text="${@numbers.format(value)} ?: 'Value'"></span>
 	</section>
+	
+	<div th:fragment="summary" class="card bg-primary text-white">
+		<div class="card-body">
+			<h4 class="cart-title d-flex justify-content-between mb-5">
+				<div>
+					<i class="bi bi-cart"></i> My Cart
+				</div>
+				
+				<span th:text="${@numbers.format(data.total)} + ' MMK'">150,000 MMK</span>
+			</h4>
+			
+			<!-- Sub Total -->
+			<div th:insert="~{::information(name='Sub Total', value= ${data.subTotal})}"></div>
+			
+			<!-- Tax -->
+			<div th:insert="~{::information(name='Tax', value= ${data.tax})}"></div>
+
+			<hr />
+			<!-- Total -->
+			<div th:insert="~{::information(name='Total', value= ${data.total})}"></div>
+			
+		</div>
+	</div>	
 
 </body>
 </html>

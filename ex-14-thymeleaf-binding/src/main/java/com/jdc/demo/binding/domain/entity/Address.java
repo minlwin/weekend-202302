@@ -22,6 +22,9 @@ public class Address {
 	private Account account;
 	
 	@Column(nullable = false)
+	private String name;
+	
+	@Column(nullable = false)
 	private String building;
 	@Column(nullable = false)
 	private String street;

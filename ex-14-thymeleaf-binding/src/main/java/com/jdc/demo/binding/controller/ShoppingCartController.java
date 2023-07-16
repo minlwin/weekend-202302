@@ -1,7 +1,5 @@
 package com.jdc.demo.binding.controller;
 
-import java.util.HashMap;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,17 +30,9 @@ public class ShoppingCartController {
 		
 		// Summary Informations
 		var subTotal = purchaseItems.stream().mapToInt(PurchaseItemVO::getTotal).sum();
-		var tax = subTotal / 100 * 5;
-		var total = subTotal + tax;
+		cart.setSummary(subTotal);
 		
-		var summary = new HashMap<String, Integer>();
-		summary.put("subTotal", subTotal);
-		summary.put("tax", tax);
-		summary.put("total", total);
-		
-		model.put("summary", summary);
-		
-		return "purchase/cart-view";
+		return "invoice/cart-view";
 	}
 	
 	@PostMapping

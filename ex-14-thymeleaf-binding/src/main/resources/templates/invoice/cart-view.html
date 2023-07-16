@@ -19,34 +19,15 @@
 			
 			<div class="col-4">
 				<!-- Purchase Summary -->
-				<div class="card bg-primary text-white">
-					<div class="card-body">
-						<h4 class="cart-title d-flex justify-content-between mb-5">
-							<div>
-								<i class="bi bi-cart"></i> My Cart
-							</div>
-							
-							<span th:text="${@numbers.format(summary['total'])} + ' MMK'">150,000 MMK</span>
-						</h4>
-						
-						<!-- Sub Total -->
-						<div th:insert="~{/fragments/purchase :: information(name='Sub Total', value= ${summary['subTotal']})}"></div>
-						
-						<!-- Tax -->
-						<div th:insert="~{/fragments/purchase :: information(name='Tax', value= ${summary['tax']})}"></div>
-
-						<hr />
-						<!-- Total -->
-						<div th:insert="~{/fragments/purchase :: information(name='Total', value= ${summary['total']})}"></div>
-						
-						<!-- Check Out Button -->
-						<div class="mt-2 d-flex justify-content-end">
-							<button class="btn btn-info">
-								<i class="bi bi-check-lg"></i> Check Out
-							</button>
-						</div>
-					</div>
+				<div th:replace="~{/fragments/purchase :: summary(data = ${@shoppingCart.summary})}"></div>
+				
+				<!-- Check Out Button -->
+				<div class="mt-3 d-flex justify-content-end">
+					<a th:href="@{/member/checkout}" class="btn btn-outline-primary">
+						<i class="bi bi-check-lg"></i> Check Out
+					</a>
 				</div>
+				
 			</div>
 		</div>
 		

@@ -12,14 +12,14 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "PURCHASE_ITEM")
-public class PurchaseItem {
+public class InvoiceItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@ManyToOne(optional = false)
-	private PurchaseShop purchase;
+	private InvoiceShop purchase;
 
 	@ManyToOne(optional = false)
 	private Product product;

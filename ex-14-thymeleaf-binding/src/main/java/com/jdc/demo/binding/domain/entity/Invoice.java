@@ -18,7 +18,7 @@ import lombok.Data;
 @Entity
 @Table(name = "PURCHASE")
 @EntityListeners(value = AuditingEntityListener.class)
-public class Purchase {
+public class Invoice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,9 @@ public class Purchase {
 	private Status status;
 
 	private int subTotal;
+	
+	@ManyToOne
+	private Address shipping;
 
 	private int tax;
 	
