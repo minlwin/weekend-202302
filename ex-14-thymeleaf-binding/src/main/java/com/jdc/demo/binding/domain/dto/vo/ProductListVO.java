@@ -1,12 +1,16 @@
 package com.jdc.demo.binding.domain.dto.vo;
 
+import java.io.Serializable;
+
 import com.jdc.demo.binding.domain.entity.Product;
 
 import lombok.Data;
 
 @Data
-public class ProductListVO {
+public class ProductListVO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String name;
 	private String category;

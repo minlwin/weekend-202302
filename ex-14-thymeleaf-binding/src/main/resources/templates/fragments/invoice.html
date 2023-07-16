@@ -98,6 +98,25 @@
 			
 		</div>
 	</div>	
+	
+	<div th:fragment="address">
+		<!-- Name -->
+		<h5><i class="bi bi-person"></i> <span th:text="${data.name}">Name</span></h5>
+		
+		<!-- Building & Street -->
+		<div>
+			<i class="bi bi-house"></i>
+			<span th:text="${data.building}">Building Address</span>, 
+			<span th:text="${data.street}">Street Address</span>
+		</div>
+		
+		<!-- Township & State -->
+		<div>
+			<i class="bi bi-map"></i>
+			<span th:text="${data.township}">Township</span>, 
+			<span th:text="${data.state}">State</span>
+		</div>
+	</div>
 
 </body>
 </html>

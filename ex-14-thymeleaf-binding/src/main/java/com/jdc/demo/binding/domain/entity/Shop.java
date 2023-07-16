@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Table(name = "SHOP")
 @EntityListeners(value = AuditingEntityListener.class)
-public class Shop {
+public class Shop implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

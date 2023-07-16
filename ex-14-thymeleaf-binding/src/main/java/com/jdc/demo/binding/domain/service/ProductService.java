@@ -12,10 +12,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.demo.binding.domain.ShopBusinessException;
+import com.jdc.demo.binding.domain.dto.form.FeatureForm;
 import com.jdc.demo.binding.domain.dto.form.ProductForm;
+import com.jdc.demo.binding.domain.dto.vo.InvoiceItemVO;
 import com.jdc.demo.binding.domain.dto.vo.ProductDetailsVO;
 import com.jdc.demo.binding.domain.dto.vo.ProductListVO;
-import com.jdc.demo.binding.domain.dto.vo.PurchaseItemVO;
 import com.jdc.demo.binding.domain.entity.Category;
 import com.jdc.demo.binding.domain.entity.Product;
 import com.jdc.demo.binding.domain.repo.CategoryRepo;
@@ -57,7 +58,7 @@ public class ProductService {
 			entity.setCategory(category);
 			entity.setBrand(form.getBrand());
 			entity.setPrice(form.getPrice());
-			entity.setFeatures(form.getFeatures());
+			entity.setFeatures(form.getFeatures().stream().map(FeatureForm::entity).toList());
 			
 			var shop = shopRepo.findById(form.getShop()).orElseThrow();
 			entity.setShop(shop);
@@ -71,7 +72,7 @@ public class ProductService {
 					entity.setCategory(category);
 					entity.setBrand(form.getBrand());
 					entity.setPrice(form.getPrice());
-					entity.setFeatures(form.getFeatures());
+					entity.setFeatures(form.getFeatures().stream().map(FeatureForm::entity).toList());
 					return entity.getId();
 				}).orElseThrow();
 	}
@@ -119,12 +120,12 @@ public class ProductService {
 		return repo.findById(id).map(ProductForm::from).orElseThrow();
 	}
 
-	public List<PurchaseItemVO> getPurchaseItems(Map<Integer, Integer> items) {
-		List<PurchaseItemVO> list = new ArrayList<>();
+	public List<InvoiceItemVO> getPurchaseItems(Map<Integer, Integer> items) {
+		List<InvoiceItemVO> list = new ArrayList<>();
 		
 		for(var entry : items.entrySet()) {
 			var vo = repo.findById(entry.getKey())
-					.map(product -> PurchaseItemVO.from(product).quantity(entry.getValue()))
+					.map(product -> InvoiceItemVO.from(product).quantity(entry.getValue()))
 					.orElseThrow();
 			list.add(vo);
 		}

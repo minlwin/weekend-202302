@@ -1,5 +1,7 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.io.Serializable;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
@@ -18,7 +20,9 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Table(name = "ACCOUNT")
 @EntityListeners(value = AuditingEntityListener.class)
-public class Account {
+public class Account implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@NonNull

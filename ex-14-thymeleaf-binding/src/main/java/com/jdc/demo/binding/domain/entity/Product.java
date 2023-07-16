@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +23,9 @@ import lombok.Data;
 @Entity
 @Table(name = "PRODUCT")
 @EntityListeners(value = AuditingEntityListener.class)
-public class Product {
+public class Product implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +50,8 @@ public class Product {
 	@CollectionTable(name = "PRODUCT_IMAGES")
 	private List<String> images = new ArrayList<>();
 
-	@ElementCollection
+	
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PRODUCT_FEATURES")
 	private List<Feature> features = new ArrayList<>();
 

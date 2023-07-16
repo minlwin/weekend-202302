@@ -10,21 +10,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.jdc.demo.binding.domain.dto.form.AddressForm;
 import com.jdc.demo.binding.domain.service.AddressService;
+import com.jdc.demo.binding.domain.service.InvoiceService;
+import com.jdc.demo.binding.domain.service.ShoppingCart;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("member/checkout")
-@SessionAttributes(names = "shipping", types = AddressForm.class)
 @RequiredArgsConstructor
 public class MemberCheckOutController {
 	
 	private final AddressService addressService;
+	private final InvoiceService invoiceService;
+	private final ShoppingCart cart;
 
 	/**
 	 * Launch Check Out View
@@ -32,8 +34,14 @@ public class MemberCheckOutController {
 	 * @return
 	 */
 	@GetMapping
-	String index(ModelMap model) {
-		model.put("addresses", addressService.findCustomerAddresses());
+	String index(ModelMap model, HttpSession session) {
+		var addresses = addressService.findCustomerAddresses();
+		model.put("addresses", addresses);
+		
+		if(!addresses.isEmpty() && session.getAttribute("shipping") == null) {
+			session.setAttribute("shipping", addresses.get(0));
+		}
+		
 		return "invoice/shipping-address";
 	}
 	
@@ -54,15 +62,21 @@ public class MemberCheckOutController {
 	 * @return
 	 */
 	@PostMapping("address")
-	String setShippingAddress(
-			@Validated @ModelAttribute AddressForm form, 
+	String setNewAddress(
+			@Validated @ModelAttribute("form") AddressForm form, 
 			BindingResult result,
 			HttpSession session,
 			ModelMap model) {
 		
 		if(result.hasErrors()) {
-			model.put("addresses", addressService.findCustomerAddresses());
-			return "invoice/shipping-addresses";
+			var addresses = addressService.findCustomerAddresses();
+			model.put("addresses", addresses);
+			
+			if(!addresses.isEmpty() && session.getAttribute("shipping") == null) {
+				session.setAttribute("shipping", addresses.get(0));
+			}
+
+			return "invoice/shipping-address";
 		}
 		
 		session.setAttribute("shipping", form);
@@ -82,12 +96,14 @@ public class MemberCheckOutController {
 	 */
 	@PostMapping
 	String checkOut(@SessionAttribute("shipping") AddressForm form) {
-		return "";
+		var invoiceId = invoiceService.invoice(form, cart.getItems());
+		cart.clear();
+		return "redirect:/member/invoice/%d".formatted(invoiceId);
 	}
 	
 	@ModelAttribute("form")
-	AddressForm form(@SessionAttribute(required = false, name = "shipping") AddressForm form) {
-		return form != null ? form : new AddressForm();
+	AddressForm form() {
+		return new AddressForm();
 	}
 	
 }

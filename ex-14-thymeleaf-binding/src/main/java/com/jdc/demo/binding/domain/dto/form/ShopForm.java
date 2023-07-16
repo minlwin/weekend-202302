@@ -1,5 +1,7 @@
 package com.jdc.demo.binding.domain.dto.form;
 
+import java.io.Serializable;
+
 import com.jdc.demo.binding.domain.entity.Shop;
 
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopForm {
+public class ShopForm implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	

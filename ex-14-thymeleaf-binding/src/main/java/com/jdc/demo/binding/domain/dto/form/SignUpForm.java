@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.dto.form;
 
+import java.io.Serializable;
 import java.util.function.Function;
 
 import com.jdc.demo.binding.domain.entity.Account;
@@ -10,7 +11,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class SignUpForm {
+public class SignUpForm implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@NotBlank(message = "Please enter your name.")
 	private String name;

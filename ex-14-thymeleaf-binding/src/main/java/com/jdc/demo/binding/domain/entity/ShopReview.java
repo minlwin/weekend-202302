@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -14,8 +15,10 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "SHOP_REVIEW")
-public class ShopReview {
+public class ShopReview implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

@@ -12,22 +12,21 @@
 		<div class="row mt-4">
 			<div class="col">
 				<!-- Item List -->
-				<div th:each="item: ${items}" class="mb-5">
-					<div th:replace="~{/fragments/purchase :: item(data = ${item})}"></div>
+				<div th:each="item: ${@shoppingCart.invoiceItems}" class="mb-5">
+					<div th:replace="~{/fragments/invoice :: item(data = ${item})}"></div>
+				</div>
+				
+				<!-- Check Out Button -->
+				<div class="mt-3">
+					<a th:href="@{/member/checkout}" class="btn btn-outline-primary">
+						<i class="bi bi-truck"></i> Delivery Address
+					</a>
 				</div>
 			</div>
 			
 			<div class="col-4">
-				<!-- Purchase Summary -->
-				<div th:replace="~{/fragments/purchase :: summary(data = ${@shoppingCart.summary})}"></div>
-				
-				<!-- Check Out Button -->
-				<div class="mt-3 d-flex justify-content-end">
-					<a th:href="@{/member/checkout}" class="btn btn-outline-primary">
-						<i class="bi bi-check-lg"></i> Check Out
-					</a>
-				</div>
-				
+				<!-- Summary -->
+				<div th:replace="~{/fragments/invoice :: summary(data = ${@shoppingCart.summary})}"></div>
 			</div>
 		</div>
 		

@@ -1,16 +1,18 @@
 package com.jdc.demo.binding.domain.dto.vo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jdc.demo.binding.domain.entity.Feature;
+import com.jdc.demo.binding.domain.dto.form.FeatureForm;
 import com.jdc.demo.binding.domain.entity.Product;
 
 import lombok.Data;
 
 @Data
-public class ProductDetailsVO {
+public class ProductDetailsVO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	
@@ -21,7 +23,7 @@ public class ProductDetailsVO {
 	private String shopName;
 	
 	private String brand;
-	private List<Feature> features = new ArrayList<>();
+	private List<FeatureForm> features = new ArrayList<>();
 	private int price;
 	private String coverImage;
 	private List<String> images = new ArrayList<>();
@@ -40,7 +42,7 @@ public class ProductDetailsVO {
 		vo.shopName = entity.getShop().getName();
 		vo.brand = entity.getBrand();
 		
-		vo.features = entity.getFeatures();
+		vo.features = entity.getFeatures().stream().map(FeatureForm::from).toList();
 		vo.price = entity.getPrice();
 		vo.coverImage = entity.getCoverImage();
 		vo.images = entity.getImages();

@@ -14,19 +14,108 @@
 		<div class="row mt-4">
 			
 			<div class="col">
+			
+				<div th:unless="${session.shipping == null}" class="mb-3">
+					<button th:unless="${session.shipping == null}" data-target="shipping" class="navBtn btn btn-primary">
+						Delivery Address
+					</button>
+					<button th:unless="${#lists.size(addresses) == 0}" data-target="userAddresses" class="navBtn btn btn-outline-primary">
+						My Addresses
+					</button>
+					<button data-target="addreesForm" class="navBtn btn btn-outline-primary">
+						Other Address
+					</button>
+				</div>
+			
+				<!-- Shipping Address -->
+				<section th:unless="${session.shipping == null}" id="shipping" class="displayTarget">
+					<div class="card mb-4">
+						<div class="card-body">
+							<div th:replace="~{/fragments/invoice :: address(data = ${session.shipping})}"></div>
+						</div>
+					</div>
+				
+					<!-- Save Button -->
+					<div class="mt-1">
+						<a th:href="@{/public/cart}" class="btn btn-outline-primary">
+							<i class="bi bi-cart"></i> Go to Cart
+						</a>
+						<a th:href="@{/member/checkout/confirm}" class="btn btn-primary">
+							<i class="bi bi-check"></i> Check Out
+						</a>
+					</div>
+				</section>
+				
+			
 				<!-- User's Addresses -->
+				<div th:unless="${#lists.size(addresses) == 0}" id="userAddresses" class="displayTarget d-none">
+					<h1>User Addresses</h1>
+				</div>
 				
 				<!-- Address Form -->
+				<div id="addreesForm" class="displayTarget" th:classappend="${session.shipping != null ? 'd-none' : ''}">
+					<form th:action="@{/member/checkout/address}" th:object="${form}" method="post">
+						<!-- ID -->
+						<input th:field="*{id}" type="hidden" />
+						
+						<!-- Name -->
+						<div class="mb-3">
+							<label class="form-label">Receiver Name</label>
+							<input th:field="*{name}" type="text" placeholder="Enter Receiver Name" class="form-control" />
+							<span th:errors="*{name}" class="text-secondary"></span>
+						</div>
+												
+						<!-- Building & Street -->
+						<div class="row mb-3">
+							<div class="col">
+								<label class="form-label">Building</label>
+								<input th:field="*{building}" type="text" placeholder="Enter Building Address" class="form-control" />
+								<span th:errors="*{building}" class="text-secondary"></span>
+							</div>
+							<div class="col">
+								<label class="form-label">Street</label>
+								<input th:field="*{street}" type="text" placeholder="Enter Street Address" class="form-control" />
+								<span th:errors="*{street}" class="text-secondary"></span>
+							</div>
+						</div>
+						
+						<!-- Township & State -->
+						<div class="row mb-3">
+							<div class="col">
+								<label class="form-label">Township</label>
+								<input th:field="*{township}" type="text" placeholder="Enter Township" class="form-control" />
+								<span th:errors="*{township}" class="text-secondary"></span>
+							</div>
+							<div class="col">
+								<label class="form-label">State</label>
+								<input th:field="*{state}" type="text" placeholder="Enter State" class="form-control" />
+								<span th:errors="*{state}" class="text-secondary"></span>
+							</div>
+						</div>
+						
+						<!-- Save Button -->
+						<div class="mt-1">
+							<a th:href="@{/public/cart}" class="btn btn-outline-primary">
+								<i class="bi bi-cart"></i> Go to Cart
+							</a>
+							<button type="submit" class="btn btn-primary">
+								<i class="bi bi-truck"></i> Set Delivery Address
+							</button>
+						</div>
+					</form>
+				</div>
 			
 			</div>
 			
 			<div class="col-4">
-				<!-- Purchase Summary -->
-				<div th:replace="~{/fragments/purchase :: summary(data = ${@shoppingCart.summary})}"></div>
+				<!-- Summary -->
+				<div th:replace="~{/fragments/invoice :: summary(data = ${@shoppingCart.summary})}"></div>
 				
 			</div>
 		
 		</div>
+		
+		<script th:src="@{/js/addresses.js}"></script>
 	</main>
 
 </body>

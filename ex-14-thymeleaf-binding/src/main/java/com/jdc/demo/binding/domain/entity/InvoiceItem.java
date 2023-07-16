@@ -1,5 +1,7 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,15 +13,17 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "PURCHASE_ITEM")
-public class InvoiceItem {
+@Table(name = "INVOICE_ITEM")
+public class InvoiceItem implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@ManyToOne(optional = false)
-	private InvoiceShop purchase;
+	private InvoiceShop shop;
 
 	@ManyToOne(optional = false)
 	private Product product;

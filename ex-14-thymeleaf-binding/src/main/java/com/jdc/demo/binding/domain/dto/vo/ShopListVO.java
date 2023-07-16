@@ -1,13 +1,17 @@
 package com.jdc.demo.binding.domain.dto.vo;
 
+import java.io.Serializable;
+
 import com.jdc.demo.binding.domain.entity.Shop;
 import com.jdc.demo.binding.domain.entity.ShopReview;
 
 import lombok.Data;
 
 @Data
-public class ShopListVO {
+public class ShopListVO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String name;
 	private String greeting;

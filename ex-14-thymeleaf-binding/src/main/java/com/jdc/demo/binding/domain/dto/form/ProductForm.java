@@ -1,9 +1,9 @@
 package com.jdc.demo.binding.domain.dto.form;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jdc.demo.binding.domain.entity.Feature;
 import com.jdc.demo.binding.domain.entity.Product;
 
 import jakarta.validation.Valid;
@@ -12,7 +12,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class ProductForm {
+public class ProductForm implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	
@@ -29,7 +31,7 @@ public class ProductForm {
 	private int price;
 	
 	@Valid
-	private List<Feature> features = new ArrayList<>();	
+	private List<FeatureForm> features = new ArrayList<>();	
 	
 	public static ProductForm from(Product entity) {
 		var form = new ProductForm();
@@ -39,7 +41,7 @@ public class ProductForm {
 		form.category = entity.getCategory().getName();
 		form.brand = entity.getBrand();
 		form.price = entity.getPrice();
-		form.features = entity.getFeatures();
+		form.features = entity.getFeatures().stream().map(FeatureForm::from).toList();
 		return form;
 	}
 }

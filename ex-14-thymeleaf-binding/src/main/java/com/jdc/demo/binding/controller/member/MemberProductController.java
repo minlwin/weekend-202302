@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jdc.demo.binding.domain.dto.form.FeatureForm;
 import com.jdc.demo.binding.domain.dto.form.ProductForm;
-import com.jdc.demo.binding.domain.entity.Feature;
 import com.jdc.demo.binding.domain.service.ProductService;
 import com.jdc.demo.binding.domain.service.ShopService;
 
@@ -41,7 +41,7 @@ public class MemberProductController {
 			ModelMap model, @RequestParam int addFeature, @RequestParam int deleteIndex) {
 		
 		if(addFeature > 0) {
-			form.getFeatures().add(new Feature());
+			form.getFeatures().add(new FeatureForm());
 			model.remove("org.springframework.validation.BindingResult.form");
 			model.put("shopInfo", shopService.findInformation(form.getShop()));
 			return "member/product/edit";

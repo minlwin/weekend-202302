@@ -25,6 +25,16 @@ public class AddressForm implements Serializable{
 	@NotBlank(message = "Please state.")
 	private String state;
 	
+	public Address entity() {
+		var entity = new Address();
+		entity.setBuilding(building);
+		entity.setName(name);
+		entity.setStreet(street);
+		entity.setTownship(township);
+		entity.setState(state);
+		return entity;
+	}
+	
 	public static AddressForm from(Address entity) {
 		var form = new AddressForm();
 		form.id = entity.getId();

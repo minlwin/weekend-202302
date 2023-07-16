@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedBy;
@@ -13,7 +14,9 @@ import lombok.Data;
 
 @Data
 @Embeddable
-public class AuditInfo {
+public class AuditInfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Column(columnDefinition = "boolean default false")
 	private boolean deleted;
