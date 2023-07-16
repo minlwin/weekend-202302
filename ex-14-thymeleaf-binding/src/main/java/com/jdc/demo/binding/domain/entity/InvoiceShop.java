@@ -33,6 +33,9 @@ public class InvoiceShop implements Serializable{
 	
 	@ManyToOne(optional = false)
 	private Invoice invoice;
+	
+	@ManyToOne(optional = false)
+	private Shop shop;
 
 	private Status status;
 

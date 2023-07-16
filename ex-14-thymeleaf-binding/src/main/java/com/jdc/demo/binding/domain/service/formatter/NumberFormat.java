@@ -1,4 +1,4 @@
-package com.jdc.demo.binding.domain.service;
+package com.jdc.demo.binding.domain.service.formatter;
 
 import java.text.DecimalFormat;
 
@@ -8,5 +8,9 @@ public class NumberFormat {
 	
 	public String format(int number) {
 		return DF.format(number);
+	}
+	
+	public String invoiceNumber(int number) {
+		return "INV%06d".formatted(number);
 	}
 }

@@ -1,14 +1,22 @@
 package com.jdc.demo.binding.domain.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.demo.binding.domain.dto.form.AddressForm;
+import com.jdc.demo.binding.domain.dto.vo.InvoiceDetailsVO;
+import com.jdc.demo.binding.domain.dto.vo.InvoiceListVO;
+import com.jdc.demo.binding.domain.dto.vo.InvoiceShopListVO;
+import com.jdc.demo.binding.domain.dto.vo.InvoiceShopVO;
 import com.jdc.demo.binding.domain.entity.Account;
 import com.jdc.demo.binding.domain.entity.Address;
 import com.jdc.demo.binding.domain.entity.Invoice;
@@ -19,6 +27,7 @@ import com.jdc.demo.binding.domain.entity.Shop;
 import com.jdc.demo.binding.domain.repo.AccountRepo;
 import com.jdc.demo.binding.domain.repo.AddressRepo;
 import com.jdc.demo.binding.domain.repo.InvoiceRepo;
+import com.jdc.demo.binding.domain.repo.InvoiceShopRepo;
 import com.jdc.demo.binding.domain.repo.ProductRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +41,7 @@ public class InvoiceService {
 	private final AddressRepo addressRepo;
 	private final ProductRepo productRepo;
 	private final InvoiceRepo invoiceRepo;
+	private final InvoiceShopRepo invoiceShopRepo;
 
 	@Transactional
 	public int invoice(AddressForm address, Map<Integer, Integer> items) {
@@ -63,6 +73,7 @@ public class InvoiceService {
 			
 			if(null == invoiceForShop) {
 				invoiceForShop = new InvoiceShop();
+				invoiceForShop.setShop(product.getShop());
 				invoiceForShop.setStatus(Status.Ordered);
 				invoice.addInvoiceForShop(invoiceForShop);
 				shops.put(product.getShop(), invoiceForShop);
@@ -74,6 +85,24 @@ public class InvoiceService {
 		return invoiceRepo.save(invoice).getId();
 	}
 
+	public List<InvoiceShopListVO> searchSales(Optional<Integer> shop, Optional<LocalDate> from, Optional<LocalDate> to) {
+		return invoiceShopRepo.findAll(ShopCriteria.shop(shop).and(ShopCriteria.from(from).and(ShopCriteria.to(to))))
+				.stream().map(InvoiceShopListVO::from).toList();
+	}
+
+	public List<InvoiceListVO> searchOrders(Optional<LocalDate> from, Optional<LocalDate> to) {
+		return invoiceRepo.findAll(InvoiceCriteria.from(from).and(InvoiceCriteria.to(to)))
+				.stream().map(InvoiceListVO::from).toList();
+	}
+	
+	public InvoiceDetailsVO findDetailsForShop(int id) {
+		return invoiceRepo.findById(id).map(InvoiceDetailsVO::from).orElseThrow();
+	}
+
+	public InvoiceShopVO findDetailsForCustomer(int id) {
+		return invoiceShopRepo.findById(id).map(InvoiceShopVO::from).orElseThrow();
+	}	
+	
 	private Address getShippingAddress(Account customer, AddressForm form) {
 		
 		if(form.getId() > 0) {
@@ -85,4 +114,49 @@ public class InvoiceService {
 		
 		return addressRepo.save(entity);
 	}
+
+	private static class InvoiceCriteria {
+		static Specification<Invoice> from(Optional<LocalDate> data) {
+			if(data.isEmpty()) {
+				return Specification.where(null);
+			}
+			
+			return (root, query, cb) -> cb.greaterThanOrEqualTo(root.get("saleTime"), data.get().atStartOfDay());
+		}
+
+		static Specification<Invoice> to(Optional<LocalDate> data) {
+			if(data.isEmpty()) {
+				return Specification.where(null);
+			}
+			
+			return (root, query, cb) -> cb.lessThan(root.get("saleTime"), data.get().plusDays(1).atStartOfDay());
+		}
+	}
+
+	private static class ShopCriteria {
+		static Specification<InvoiceShop> shop(Optional<Integer> data) {
+			if(data.isEmpty()) {
+				return Specification.where(null);
+			}
+			
+			return (root, query, cb) -> cb.equal(root.get("shop").get("id"), data.get());
+		}
+		
+		static Specification<InvoiceShop> from(Optional<LocalDate> data) {
+			if(data.isEmpty()) {
+				return Specification.where(null);
+			}
+			
+			return (root, query, cb) -> cb.greaterThanOrEqualTo(root.get("invoice").get("saleTime"), data.get().atStartOfDay());
+		}
+
+		static Specification<InvoiceShop> to(Optional<LocalDate> data) {
+			if(data.isEmpty()) {
+				return Specification.where(null);
+			}
+			
+			return (root, query, cb) -> cb.lessThan(root.get("invoice").get("saleTime"), data.get().plusDays(1).atStartOfDay());
+		}
+	}
+
 }

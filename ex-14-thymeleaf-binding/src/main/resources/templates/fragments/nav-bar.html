@@ -30,8 +30,8 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a th:href="@{/member/home}" th:classappend="${sub == 'home' ? 'active' : ''}" class="dropdown-item">Home</a></li>
-						<li><a href="#" th:classappend="${sub == 'sales' ? 'active' : ''}" class="dropdown-item">Sales</a></li>
-						<li><a href="#" th:classappend="${sub == 'purchases' ? 'active' : ''}" class="dropdown-item">Purchases</a></li>
+						<li><a th:href="@{/member/invoice/sales}" th:classappend="${sub == 'sales' ? 'active' : ''}" class="dropdown-item">Sales</a></li>
+						<li><a th:href="@{/member/invoice/orders}" th:classappend="${sub == 'purchases' ? 'active' : ''}" class="dropdown-item">Purchases</a></li>
 						<li><hr class="dropdown-divider"></hr></li>
 						<li><a id="logoutMenu" class="dropdown-item">Sign Out</a></li>
 					</ul>

@@ -31,3 +31,7 @@
 	height: 280px;
 	object-fit: cover;
 }
+
+.btn-wrapper {
+	padding-top: 2rem;
+}

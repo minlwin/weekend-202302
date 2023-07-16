@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.service;
 
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -19,7 +20,9 @@ import com.jdc.demo.binding.domain.ShopBusinessException;
 import jakarta.annotation.PostConstruct;
 
 @Service
-public class PhotoUploadService {
+public class PhotoUploadService implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Value("${app.photo.folder}")
 	private String photoFilePath;

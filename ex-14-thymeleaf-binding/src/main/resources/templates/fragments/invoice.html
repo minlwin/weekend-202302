@@ -87,6 +87,9 @@
 			</h4>
 			
 			<!-- Sub Total -->
+			<div th:insert="~{::information(name='Item Count', value= ${data.count})}"></div>
+
+			<!-- Sub Total -->
 			<div th:insert="~{::information(name='Sub Total', value= ${data.subTotal})}"></div>
 			
 			<!-- Tax -->

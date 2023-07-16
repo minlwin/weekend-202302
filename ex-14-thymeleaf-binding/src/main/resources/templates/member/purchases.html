@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Cart', content = ~{::main}, main = 'my-cart')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Purchases', content = ~{::main}, main = 'setting', sub = 'purchases')}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -7,7 +7,58 @@
 <body>
 
 	<main>
-		<h1>My Shopping Cart</h1>
+		<h3>
+			<i class="bi bi-cart"></i>
+			My Orders
+		</h3>
+		
+		<form class="row mb-3">
+			<div class="col-auto">
+				<label class="form-label">Date From</label>
+				<input type="date" class="form-control" />
+			</div>
+			<div class="col-auto">
+				<label class="form-label">Date To</label>
+				<input type="date" class="form-control" />
+			</div>
+			<div class="col btn-wrapper">
+				<button type="submit" class="btn btn-outline-primary">
+					<i class="bi bi-search"></i> Search
+				</button>
+			</div>
+		</form>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Invoice ID</th>
+					<th>Invoice Date</th>
+					<th>Status</th>
+					<th class="text-end">Item Count</th>
+					<th class="text-end">Sub Total</th>
+					<th class="text-end">Tax</th>
+					<th class="text-end">Total</th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="item : ${list}">
+					<td th:text="${@numbers.invoiceNumber(item.id)}"></td>
+					<td th:text="${@dates.formatDateTime(item.time)}"></td>
+					<td th:text="${item.status}"></td>
+					<td th:text="${item.count}" class="text-end"></td>
+					<td th:text="${item.subTotal}" class="text-end"></td>
+					<td th:text="${item.tax}" class="text-end"></td>
+					<td th:text="${item.total}" class="text-end"></td>
+					<th class="text-end">
+						<a th:href="@{|/member/invoice/orders/${item.id}|}" class="me-2">
+							<i class="bi bi-send"></i>
+						</a>
+					</th>
+				</tr>
+			</tbody>
+		</table>
 	</main>
 
 </body>

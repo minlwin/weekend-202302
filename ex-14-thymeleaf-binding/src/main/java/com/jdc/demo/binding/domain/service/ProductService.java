@@ -1,5 +1,6 @@
 package com.jdc.demo.binding.domain.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +31,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ProductService {
+public class ProductService implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private final ProductRepo repo;
 	private final CategoryRepo categoryRepo;
 	private final ShopRepo shopRepo;

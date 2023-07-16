@@ -7,7 +7,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.jdc.demo.binding.domain.service.NumberFormat;
+import com.jdc.demo.binding.domain.service.formatter.DateTimes;
+import com.jdc.demo.binding.domain.service.formatter.NumberFormat;
 
 @Configuration(proxyBeanMethods = false)
 public class WebConfig implements WebMvcConfigurer{
@@ -31,5 +32,10 @@ public class WebConfig implements WebMvcConfigurer{
 	@Bean
 	NumberFormat numbers() {
 		return new NumberFormat();
+	}
+	
+	@Bean
+	DateTimes dates() {
+		return new DateTimes();
 	}
 }

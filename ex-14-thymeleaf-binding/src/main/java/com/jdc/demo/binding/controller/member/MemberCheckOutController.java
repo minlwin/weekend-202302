@@ -98,7 +98,7 @@ public class MemberCheckOutController {
 	String checkOut(@SessionAttribute("shipping") AddressForm form) {
 		var invoiceId = invoiceService.invoice(form, cart.getItems());
 		cart.clear();
-		return "redirect:/member/invoice/%d".formatted(invoiceId);
+		return "redirect:/member/invoice/orders/%d".formatted(invoiceId);
 	}
 	
 	@ModelAttribute("form")

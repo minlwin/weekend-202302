@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Cart', content = ~{::main}, main = 'setting', sub='home')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'Home', content = ~{::main}, main = 'setting', sub='home')}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -37,8 +37,6 @@
 				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='Top Customers', icon='bi-person-check')}"></div>
 			</div>
 		</div>
-		
-		
 		
 	</main>
 
