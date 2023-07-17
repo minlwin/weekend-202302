@@ -7,7 +7,87 @@
 <body>
 
 	<main>
-		<h1>My Shopping Cart</h1>
+		<h3>
+			<i class="bi bi-cart"></i>
+			Sales History
+		</h3>
+		
+		<form class="row mb-3">
+			<!-- Shop -->
+			<div class="col-auto mb-3">
+				<label class="form-label">Shop</label>
+				<div th:if="${#lists.size(shopList) == 1}">
+					<span class="form-control" th:text="${shopList[0].name}"></span>
+					<input type="hidden" name="shop" th:value="${shopList[0].id}" />
+				</div>
+				
+				<select th:if="${#lists.size(shopList) > 1}" name="shop" class="form-select">
+					<option value="">Select Shop</option>
+					<option th:each="item : ${shopList}" th:value="${item.id}" th:text="${item.name}"></option>
+				</select>
+			</div>
+			
+			<!-- Status -->
+			<div class="col-auto mb-3">
+				<label class="form-label">Status</label>
+				<select name="status" class="form-select">
+					<option value="">Select Status</option>
+					<option th:each="item : ${statusArray}" th:value="${item}" th:text="${item}"></option>
+				</select>
+			</div>
+			
+			<div class="col-auto">
+				<label class="form-label">Date From</label>
+				<input th:value="${param?.from}" name="from" type="date" class="form-control" />
+			</div>
+
+			<div class="col-auto">
+				<label class="form-label">Date To</label>
+				<input th:value="${param?.to}" name="to" type="date" class="form-control" />
+			</div>
+
+			<div class="col btn-wrapper">
+				<button type="submit" class="btn btn-outline-primary">
+					<i class="bi bi-search"></i> Search
+				</button>
+			</div>
+		</form>	
+		
+		<table class="table table-striped shadow-sm">
+			<thead>
+				<tr>
+					<th>Shop</th>
+					<th>Status</th>
+					<th>Invoice Date</th>
+					<th>Invoice ID</th>
+					<th>Customer Name</th>
+					<th class="text-end">Items</th>
+					<th class="text-end">Sub Total</th>
+					<th class="text-end">Tax</th>
+					<th class="text-end">Total</th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="item : ${list}">
+					<td th:text="${item.shop}"></td>
+					<td th:text="${item.status}"></td>
+					<td th:text="${@dates.formatDateTime(item.invoiceTime)}"></td>
+					<td th:text="${@numbers.invoiceNumber(item.invoiceId)}"></td>
+					<td th:text="${item.customer}"></td>
+					<td th:text="${item.items}" class="text-end"></td>
+					<td th:text="${@numbers.format(item.subTotal)}" class="text-end"></td>
+					<td th:text="${@numbers.format(item.tax)}" class="text-end"></td>
+					<td th:text="${@numbers.format(item.total)}" class="text-end"></td>
+					<td class="text-end">
+						<a th:href="@{|/member/invoice/sales/${item.id}|}" class="me-2">
+							<i class="bi bi-send"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</main>
 
 </body>

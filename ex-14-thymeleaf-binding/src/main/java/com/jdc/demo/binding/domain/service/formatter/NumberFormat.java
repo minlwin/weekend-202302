@@ -11,6 +11,6 @@ public class NumberFormat {
 	}
 	
 	public String invoiceNumber(int number) {
-		return "INV%06d".formatted(number);
+		return "INV-%04d".formatted(number);
 	}
 }

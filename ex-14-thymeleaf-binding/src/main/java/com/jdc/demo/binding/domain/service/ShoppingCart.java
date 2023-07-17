@@ -69,9 +69,7 @@ public class ShoppingCart implements Serializable{
 	private void loadParchaseItems() {
 		this.invoiceItems = productService.getPurchaseItems(items);
 		var subTotal = invoiceItems.stream().mapToInt(InvoiceItemVO::getTotal).sum();
-		int tax = subTotal / 100 * 5;
-		int total = subTotal + tax;
-		summary = new InvoiceSummaryVO(getCount(), subTotal, tax, total);
+		summary = new InvoiceSummaryVO(getCount(), subTotal);
 	}
 	
 }

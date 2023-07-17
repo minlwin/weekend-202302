@@ -73,31 +73,43 @@
 	
 	<section th:fragment="information" class="d-flex justify-content-between">
 		<label class="form-label" th:text="${name} ?: 'Name'"></label>
-		<span th:text="${@numbers.format(value)} ?: 'Value'"></span>
+		<span th:text="${value}"></span>
 	</section>
+	
+	<section th:fragment="dateTimeInformation" class="d-flex justify-content-between">
+		<label class="form-label" th:text="${name} ?: 'Name'"></label>
+		<span th:text="${@dates.formatDateTime(value)} ?: 'Value'"></span>
+	</section>
+	
 	
 	<div th:fragment="summary" class="card bg-primary text-white">
 		<div class="card-body">
-			<h4 class="cart-title d-flex justify-content-between mb-5">
+			<h4 class="cart-title d-flex justify-content-between mb-3">
 				<div>
-					<i class="bi bi-cart"></i> My Cart
+					<i class="bi bi-cart"></i> Amount
 				</div>
 				
 				<span th:text="${@numbers.format(data.total)} + ' MMK'">150,000 MMK</span>
 			</h4>
 			
+			<div th:if="${data.id != null}">
+			<div th:insert="~{::information(name='Invoice ID', value= ${@numbers.invoiceNumber(data.id)})}"></div>
+			<div th:insert="~{::information(name='Invoice Date', value= ${@dates.formatDateTime(data.time)})}"></div>
+			<div th:insert="~{::information(name='Status', value= ${data.status})}"></div>
+			</div>
 			<!-- Sub Total -->
 			<div th:insert="~{::information(name='Item Count', value= ${data.count})}"></div>
-
+			<hr />
+			
 			<!-- Sub Total -->
-			<div th:insert="~{::information(name='Sub Total', value= ${data.subTotal})}"></div>
+			<div th:insert="~{::information(name='Sub Total', value= ${@numbers.format(data.subTotal)})}"></div>
 			
 			<!-- Tax -->
-			<div th:insert="~{::information(name='Tax', value= ${data.tax})}"></div>
+			<div th:insert="~{::information(name='Tax', value= ${@numbers.format(data.tax)})}"></div>
 
 			<hr />
 			<!-- Total -->
-			<div th:insert="~{::information(name='Total', value= ${data.total})}"></div>
+			<div th:insert="~{::information(name='Total', value= ${@numbers.format(data.total)})}"></div>
 			
 		</div>
 	</div>	

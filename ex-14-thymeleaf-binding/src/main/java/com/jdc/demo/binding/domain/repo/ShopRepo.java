@@ -10,5 +10,7 @@ import com.jdc.demo.binding.domain.entity.Shop;
 public interface ShopRepo extends JpaRepositoryImplementation<Shop, Integer>, Serializable {
 	
 	Stream<Shop> findByOwnerEmail(String email);
+
+	long countByOwnerEmail(String username);
 	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jdc.demo.binding.domain.dto.form.FeatureForm;
+import com.jdc.demo.binding.domain.entity.InvoiceItem;
 import com.jdc.demo.binding.domain.entity.Product;
 
 import lombok.Data;
@@ -29,6 +30,15 @@ public class InvoiceItemVO implements Serializable{
 		return price * quantity;
 	}
 	
+	public InvoiceItemVO quantity(int quantity) {
+		this.quantity = quantity;
+		return this;
+	}
+	
+	public static InvoiceItemVO from(InvoiceItem entity) {
+		return from(entity.getProduct()).quantity(entity.getQuentity());
+	}
+	
 	public static InvoiceItemVO from(Product product) {
 		var dto = new InvoiceItemVO();
 		dto.id = product.getId();
@@ -41,8 +51,5 @@ public class InvoiceItemVO implements Serializable{
 		return dto;
 	}
 	
-	public InvoiceItemVO quantity(int quantity) {
-		this.quantity = quantity;
-		return this;
-	}
+
 }

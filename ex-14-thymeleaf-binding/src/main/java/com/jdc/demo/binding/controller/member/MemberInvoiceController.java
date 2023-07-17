@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jdc.demo.binding.domain.entity.Invoice.Status;
 import com.jdc.demo.binding.domain.service.InvoiceService;
+import com.jdc.demo.binding.domain.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,13 +22,23 @@ import lombok.RequiredArgsConstructor;
 public class MemberInvoiceController {
 	
 	private final InvoiceService invoiceService;
+	private final ShopService shopService;
 	
 	@GetMapping("sales")
 	String searchSales(ModelMap model,
 			@RequestParam Optional<Integer> shop, 
+			@RequestParam Optional<Status> status, 
 			@RequestParam Optional<LocalDate> from,
 			@RequestParam Optional<LocalDate> to) {
-		model.put("list", invoiceService.searchSales(shop, from, to));
+		
+		// Status
+		model.put("statusArray", Status.values());
+		
+		// Shop List
+		model.put("shopList", shopService.findOnerShops());
+		
+		// Search Result
+		model.put("list", invoiceService.searchSales(shop, status, from, to));
 		return "member/sales";
 	}
 	
@@ -41,12 +53,12 @@ public class MemberInvoiceController {
 	@GetMapping("sales/{id}")
 	String showSalesDetails(ModelMap model, @PathVariable int id) {
 		model.put("data", invoiceService.findDetailsForShop(id));
-		return "invoice/details";
+		return "invoice/details-for-shop";
 	}
 
 	@GetMapping("orders/{id}")
 	String showOrdersDetails(ModelMap model, @PathVariable int id) {
 		model.put("data", invoiceService.findDetailsForCustomer(id));
-		return "invoice/details";
+		return "invoice/details-for-customer";
 	}
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.demo.binding.domain.dto.form.AddressForm;
-import com.jdc.demo.binding.domain.dto.vo.InvoiceDetailsVO;
+import com.jdc.demo.binding.domain.dto.vo.InvoiceVO;
 import com.jdc.demo.binding.domain.dto.vo.InvoiceListVO;
 import com.jdc.demo.binding.domain.dto.vo.InvoiceShopListVO;
 import com.jdc.demo.binding.domain.dto.vo.InvoiceShopVO;
@@ -85,8 +85,8 @@ public class InvoiceService {
 		return invoiceRepo.save(invoice).getId();
 	}
 
-	public List<InvoiceShopListVO> searchSales(Optional<Integer> shop, Optional<LocalDate> from, Optional<LocalDate> to) {
-		return invoiceShopRepo.findAll(ShopCriteria.shop(shop).and(ShopCriteria.from(from).and(ShopCriteria.to(to))))
+	public List<InvoiceShopListVO> searchSales(Optional<Integer> shop, Optional<Status> status, Optional<LocalDate> from, Optional<LocalDate> to) {
+		return invoiceShopRepo.findAll(ShopCriteria.shop(shop).and(ShopCriteria.status(status).and(ShopCriteria.from(from).and(ShopCriteria.to(to)))))
 				.stream().map(InvoiceShopListVO::from).toList();
 	}
 
@@ -95,12 +95,12 @@ public class InvoiceService {
 				.stream().map(InvoiceListVO::from).toList();
 	}
 	
-	public InvoiceDetailsVO findDetailsForShop(int id) {
-		return invoiceRepo.findById(id).map(InvoiceDetailsVO::from).orElseThrow();
+	public InvoiceShopVO findDetailsForShop(int id) {
+		return invoiceShopRepo.findById(id).map(InvoiceShopVO::from).orElseThrow();
 	}
 
-	public InvoiceShopVO findDetailsForCustomer(int id) {
-		return invoiceShopRepo.findById(id).map(InvoiceShopVO::from).orElseThrow();
+	public InvoiceVO findDetailsForCustomer(int id) {
+		return invoiceRepo.findById(id).map(InvoiceVO::from).orElseThrow();
 	}	
 	
 	private Address getShippingAddress(Account customer, AddressForm form) {
@@ -142,6 +142,14 @@ public class InvoiceService {
 			return (root, query, cb) -> cb.equal(root.get("shop").get("id"), data.get());
 		}
 		
+		static Specification<InvoiceShop> status(Optional<Status> data) {
+			if(data.isEmpty()) {
+				return Specification.where(null);
+			}
+			
+			return (root, query, cb) -> cb.equal(root.get("status"), data.get());
+		}
+
 		static Specification<InvoiceShop> from(Optional<LocalDate> data) {
 			if(data.isEmpty()) {
 				return Specification.where(null);
