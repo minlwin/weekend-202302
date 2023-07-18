@@ -23,7 +23,7 @@
 				
 				<select th:if="${#lists.size(shopList) > 1}" name="shop" class="form-select">
 					<option value="">Select Shop</option>
-					<option th:each="item : ${shopList}" th:value="${item.id}" th:text="${item.name}"></option>
+					<option th:each="item : ${shopList}" th:value="${item.id}" th:text="${item.name}" th:selected="${#strings.equals(item.id, param.shop)}"></option>
 				</select>
 			</div>
 			
@@ -32,7 +32,7 @@
 				<label class="form-label">Status</label>
 				<select name="status" class="form-select">
 					<option value="">Select Status</option>
-					<option th:each="item : ${statusArray}" th:value="${item}" th:text="${item}"></option>
+					<option th:each="item : ${statusArray}" th:value="${item}" th:text="${item}" th:selected="${#strings.equals(item, param.status)}"></option>
 				</select>
 			</div>
 			

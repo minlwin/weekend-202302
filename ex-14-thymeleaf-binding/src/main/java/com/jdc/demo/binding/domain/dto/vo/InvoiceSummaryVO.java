@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import com.jdc.demo.binding.domain.entity.Invoice;
 import com.jdc.demo.binding.domain.entity.Invoice.Status;
+import com.jdc.demo.binding.domain.entity.InvoiceShop;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -54,5 +55,13 @@ public class InvoiceSummaryVO implements Serializable{
 				.sorted((a, b) -> b.compareTo(a)).findFirst().get();
 		return new InvoiceSummaryVO(count, subTotal).id(entity.getId())
 				.status(status).time(entity.getSaleTime());
+	}
+	
+	public static InvoiceSummaryVO from(InvoiceShop entity) {
+		var count = entity.getItems().stream().mapToInt(a -> a.getQuentity()).sum();
+		var subTotal = entity.getItems().stream()
+				.mapToInt(a -> a.getQuentity() * a.getSalePrice()).sum();
+		return new InvoiceSummaryVO(count, subTotal).status(entity.getStatus()).id(entity.getInvoice().getId())
+				.time(entity.getInvoice().getSaleTime());
 	}
 }

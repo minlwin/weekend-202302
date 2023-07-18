@@ -13,7 +13,7 @@
 			<div class="col">
 				<!-- Item List -->
 				<div th:each="item: ${@shoppingCart.invoiceItems}" class="mb-5">
-					<div th:replace="~{/fragments/invoice :: item(data = ${item})}"></div>
+					<div th:replace="~{/fragments/invoice :: item(data = ${item}, editable = true)}"></div>
 				</div>
 				
 				<!-- Check Out Button -->
