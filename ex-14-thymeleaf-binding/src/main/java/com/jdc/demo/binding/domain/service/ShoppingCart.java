@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -20,15 +21,13 @@ import lombok.RequiredArgsConstructor;
 public class ShoppingCart implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
-	private final ProductService productService;
-	
+
 	private Map<Integer, Integer> items = new LinkedHashMap<Integer, Integer>();
 	List<InvoiceItemVO> invoiceItems = new ArrayList<InvoiceItemVO>();
 	
 	private InvoiceSummaryVO summary;
 
-	public void addToCart(int productId, int count) {
+	public void addToCart(int productId, int count, Supplier<ProductService> service) {
 		var previous = items.get(productId);
 		count = (null != previous) ? previous + count : count; 
 		if(count == 0) {
@@ -37,7 +36,7 @@ public class ShoppingCart implements Serializable{
 			items.put(productId, count);
 		}
 		
-		loadParchaseItems();
+		loadParchaseItems(service.get());
 	}
 	
 	public int getCount() {
@@ -66,7 +65,7 @@ public class ShoppingCart implements Serializable{
 		return invoiceItems;
 	}
 	
-	private void loadParchaseItems() {
+	private void loadParchaseItems(ProductService productService) {
 		this.invoiceItems = productService.getPurchaseItems(items);
 		var subTotal = invoiceItems.stream().mapToInt(InvoiceItemVO::getTotal).sum();
 		summary = new InvoiceSummaryVO(getCount(), subTotal);

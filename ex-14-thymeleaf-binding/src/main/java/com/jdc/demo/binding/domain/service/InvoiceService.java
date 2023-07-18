@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.demo.binding.domain.dto.form.AddressForm;
-import com.jdc.demo.binding.domain.dto.vo.InvoiceVO;
 import com.jdc.demo.binding.domain.dto.vo.InvoiceListVO;
 import com.jdc.demo.binding.domain.dto.vo.InvoiceShopListVO;
 import com.jdc.demo.binding.domain.dto.vo.InvoiceShopVO;
+import com.jdc.demo.binding.domain.dto.vo.InvoiceVO;
 import com.jdc.demo.binding.domain.entity.Account;
 import com.jdc.demo.binding.domain.entity.Address;
 import com.jdc.demo.binding.domain.entity.Invoice;
@@ -86,7 +86,7 @@ public class InvoiceService {
 	}
 
 	public List<InvoiceShopListVO> searchSales(Optional<Integer> shop, Optional<Status> status, Optional<LocalDate> from, Optional<LocalDate> to) {
-		return invoiceShopRepo.findAll(ShopCriteria.shop(shop).and(ShopCriteria.status(status).and(ShopCriteria.from(from).and(ShopCriteria.to(to)))))
+		return invoiceShopRepo.findAll(ShopCriteria.owner(SecurityContextHolder.getContext().getAuthentication().getName()).and(ShopCriteria.shop(shop).and(ShopCriteria.status(status).and(ShopCriteria.from(from).and(ShopCriteria.to(to))))))
 				.stream().map(InvoiceShopListVO::from).toList();
 	}
 
@@ -134,6 +134,11 @@ public class InvoiceService {
 	}
 
 	private static class ShopCriteria {
+		
+		static Specification<InvoiceShop> owner(String data) {
+			return (root, query, cb) -> cb.equal(root.get("shop").get("owner").get("email"), data);
+		}
+		
 		static Specification<InvoiceShop> shop(Optional<Integer> data) {
 			if(data.isEmpty()) {
 				return Specification.where(null);

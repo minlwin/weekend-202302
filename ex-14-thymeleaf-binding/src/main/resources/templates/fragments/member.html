@@ -36,7 +36,7 @@
 		
 	</section>
 	
-	<section th:fragment="listGroup" class="list-group">
+	<section th:fragment="shopListGroup" class="list-group">
 		<div class="list-group-item active d-flex justify-content-between">
 			<div>
 				<i class="bi" th:classappend="${icon}"></i>
@@ -44,11 +44,25 @@
 			</div>
 		</div>
 		
-		<a th:each="shop : ${list}" th:href="@{|/public/shop/${shop.id}|}" class="list-group-item">
-			<i class="bi bi-check-circle"></i> [[${shop.name}]]
+		<a th:each="data : ${list}" th:href="@{|/public/shop/${data.id}|}" class="list-group-item">
+			<i class="bi bi-check-circle"></i> [[${data.name}]]
 		</a>
 	
 	</section>
+	
+	<section th:fragment="customerListGroup" class="list-group">
+		<div class="list-group-item active d-flex justify-content-between">
+			<div>
+				<i class="bi" th:classappend="${icon}"></i>
+				<span th:text="${header}"></span>
+			</div>
+		</div>
+		
+		<a th:each="data : ${list}" class="list-group-item">
+			<i class="bi bi-check-circle"></i> [[${data.name}]]
+		</a>
+	
+	</section>	
 
 </body>
 </html>

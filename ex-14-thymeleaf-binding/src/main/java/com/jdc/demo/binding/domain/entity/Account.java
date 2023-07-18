@@ -1,6 +1,8 @@
 package com.jdc.demo.binding.domain.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -8,6 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +41,9 @@ public class Account implements Serializable{
 	@Column(nullable = false)
 	@NonNull
 	private String password;
+	
+	@OneToMany(mappedBy = "customer")
+	private List<Invoice> invoice = new ArrayList<>();
 
 	private AuditInfo audit = new AuditInfo();
 

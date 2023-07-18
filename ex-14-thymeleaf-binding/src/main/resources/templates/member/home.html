@@ -28,13 +28,13 @@
 					</a>
 				</div>
 				<!-- My Shops -->
-				<div class="mb-3" th:if="${#lists.size(myShops) > 0}" th:insert="~{/fragments/member :: listGroup(header='My Shops', icon='bi-shop', list = ${myShops})}"></div>
+				<div class="mb-3" th:if="${#lists.size(myShops) > 0}" th:insert="~{/fragments/member :: shopListGroup(header='My Shops', icon='bi-shop', list = ${myShops})}"></div>
 				
 				<!-- Fav Shops -->
-				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='My Favurite Shops', icon='bi-shop-window')}"></div>
+				<div class="mb-3" th:if="${#lists.size(favShops)}" th:insert="~{/fragments/member :: shopListGroup(header='My Favurite Shops', icon='bi-shop-window', list = ${favShops})}"></div>
 				
 				<!-- Best Customers -->
-				<div class="mb-3" th:insert="~{/fragments/member :: listGroup(header='Top Customers', icon='bi-person-check')}"></div>
+				<div class="mb-3" th:if="${#lists.size(topCustomers)}" th:insert="~{/fragments/member :: customerListGroup(header='Top Customers', icon='bi-person-check', list = ${topCustomers})}"></div>
 			</div>
 		</div>
 		

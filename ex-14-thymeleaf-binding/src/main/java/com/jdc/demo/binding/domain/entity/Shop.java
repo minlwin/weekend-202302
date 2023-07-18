@@ -50,6 +50,9 @@ public class Shop implements Serializable{
 	@OneToMany(mappedBy = "shop")
 	private List<ShopReview> reviews = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "shop")
+	private List<InvoiceShop> invoice = new ArrayList<>();
+	
 	private AuditInfo audit = new AuditInfo();
 
 }

@@ -11,18 +11,20 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.demo.binding.domain.dto.form.ShopForm;
+import com.jdc.demo.binding.domain.dto.vo.IdWithName;
 import com.jdc.demo.binding.domain.dto.vo.ShopListVO;
-import com.jdc.demo.binding.domain.dto.vo.ShopSummaryVO;
 import com.jdc.demo.binding.domain.entity.Shop;
 import com.jdc.demo.binding.domain.repo.AccountRepo;
 import com.jdc.demo.binding.domain.repo.ShopRepo;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ShopService {
 	
-	@Autowired
-	private ShopRepo repo;
+	private final ShopRepo repo;
 	
 	@Autowired
 	private AccountRepo accountRepo;
@@ -64,11 +66,18 @@ public class ShopService {
 		return form.getId();
 	}
 
-	public List<ShopSummaryVO> findOnerShops() {
+	public List<IdWithName<Integer>> findOnerShops() {
 		var username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return repo.findByOwnerEmail(username)
-				.map(ShopSummaryVO::from).toList();
+				.map(IdWithName::from).toList();
 	}
+	
+	public List<IdWithName<Integer>> findFavShops() {
+		var username = SecurityContextHolder.getContext().getAuthentication().getName();
+		return repo.findDistinctFirst10ByInvoiceInvoiceCustomerEmail(username)
+				.map(IdWithName::from).toList();
+	}
+	
 
 	public ShopListVO findInformation(int id) {
 		return repo.findById(id)
