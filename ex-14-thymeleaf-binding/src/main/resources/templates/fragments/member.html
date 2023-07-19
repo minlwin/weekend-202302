@@ -58,7 +58,7 @@
 			</div>
 		</div>
 		
-		<a th:each="data : ${list}" class="list-group-item">
+		<a th:each="data : ${list}" th:href="@{/member/invoice/sales/customer(customer=${data.id})}" class="list-group-item">
 			<i class="bi bi-check-circle"></i> [[${data.name}]]
 		</a>
 	

@@ -35,4 +35,5 @@ public class MemberHomeController {
 		
 		return "member/home";
 	}
+	
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jdc.demo.binding.domain.entity.Invoice.Status;
+import com.jdc.demo.binding.domain.service.AccountService;
 import com.jdc.demo.binding.domain.service.InvoiceService;
 import com.jdc.demo.binding.domain.service.ShopService;
 
@@ -23,6 +24,7 @@ public class MemberInvoiceController {
 	
 	private final InvoiceService invoiceService;
 	private final ShopService shopService;
+	private final AccountService accountService;
 	
 	@GetMapping("sales")
 	String searchSales(ModelMap model,
@@ -42,6 +44,17 @@ public class MemberInvoiceController {
 		return "member/sales";
 	}
 	
+	@GetMapping("sales/customer")
+	public String customerOrders(ModelMap model, @RequestParam String customer) {
+		
+		// Search Customer Information
+		model.put("customer", accountService.findCustomerInformation(customer));
+		
+		// Search Result	
+		model.put("list", invoiceService.searchSales(customer));
+		return "member/customer-orders";
+	}	
+	
 	@GetMapping("orders")
 	String searchOrders(ModelMap model,
 			@RequestParam Optional<LocalDate> from,
@@ -54,7 +67,8 @@ public class MemberInvoiceController {
 	String showSalesDetails(ModelMap model, @PathVariable int id) {
 		model.put("data", invoiceService.findDetailsForShop(id));
 		return "invoice/details-for-shop";
-	}
+	}	
+	
 
 	@GetMapping("orders/{id}")
 	String showOrdersDetails(ModelMap model, @PathVariable int id) {

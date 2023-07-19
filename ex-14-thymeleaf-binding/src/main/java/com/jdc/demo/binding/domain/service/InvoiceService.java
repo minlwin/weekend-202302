@@ -86,13 +86,25 @@ public class InvoiceService {
 	}
 
 	public List<InvoiceShopListVO> searchSales(Optional<Integer> shop, Optional<Status> status, Optional<LocalDate> from, Optional<LocalDate> to) {
-		return invoiceShopRepo.findAll(ShopCriteria.owner(SecurityContextHolder.getContext().getAuthentication().getName()).and(ShopCriteria.shop(shop).and(ShopCriteria.status(status).and(ShopCriteria.from(from).and(ShopCriteria.to(to))))))
-				.stream().map(InvoiceShopListVO::from).toList();
+		return searchSales(ShopCriteria.owner(SecurityContextHolder.getContext().getAuthentication().getName())
+				.and(ShopCriteria.shop(shop))
+				.and(ShopCriteria.status(status))
+				.and(ShopCriteria.from(from))
+				.and(ShopCriteria.to(to)));
 	}
+	
+	public List<InvoiceShopListVO> searchSales(String customer) {
+		return searchSales(ShopCriteria.owner(SecurityContextHolder.getContext().getAuthentication().getName())
+				.and(ShopCriteria.customer(customer)));
+	}	
 
 	public List<InvoiceListVO> searchOrders(Optional<LocalDate> from, Optional<LocalDate> to) {
 		return invoiceRepo.findAll(InvoiceCriteria.from(from).and(InvoiceCriteria.to(to)))
 				.stream().map(InvoiceListVO::from).toList();
+	}
+	
+	private List<InvoiceShopListVO> searchSales(Specification<InvoiceShop> specification) {
+		return invoiceShopRepo.findAll(specification).stream().map(InvoiceShopListVO::from).toList();
 	}
 	
 	public InvoiceShopVO findDetailsForShop(int id) {
@@ -170,6 +182,12 @@ public class InvoiceService {
 			
 			return (root, query, cb) -> cb.lessThan(root.get("invoice").get("saleTime"), data.get().plusDays(1).atStartOfDay());
 		}
+		
+		static Specification<InvoiceShop> customer(String data) {
+			return (root, query, cb) -> cb.equal(root.get("invoice").get("customer").get("email"), data);
+		}
 	}
+
+
 
 }

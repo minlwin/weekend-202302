@@ -23,4 +23,8 @@ public class AccountService {
 		return accountRepo.findDistinctFirst10ByInvoiceInvoicesForShopsShopOwnerEmail(username)
 				.map(IdWithName::from).toList();
 	}
+
+	public IdWithName<String> findCustomerInformation(String customer) {
+		return accountRepo.findById(customer).map(IdWithName::from).orElseThrow();
+	}
 }
