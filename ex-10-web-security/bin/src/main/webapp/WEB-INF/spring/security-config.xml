@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:security="http://www.springframework.org/schema/security" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- bean definitions here -->
+    <context:component-scan base-package="com.jdc.demo.security" />
+	
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />	
+
+	<security:authentication-manager>
+		<security:authentication-provider >
+			<security:user-service>
+				<security:user name="Admin" authorities="Admin" password="$2a$10$C90YyF1rw7uYhCxvtNYpz.QiO8HaDnQXoc3wFEq2tMhi6cW6Ua0eO"/>
+			</security:user-service>		
+		</security:authentication-provider>
+		<security:authentication-provider user-service-ref="accountDetailsService" />
+	</security:authentication-manager>
+	
+    <security:http pattern="/" security="none" />
+    <security:http pattern="/resources/**" security="none" />
+
+    <security:http>
+
+    	<security:intercept-url pattern="/admin/**" access="hasAnyAuthority('Admin', 'Office')"/>
+    	<security:intercept-url pattern="/member/**" access="hasAnyAuthority('Admin', 'Office', 'Student')"/>
+    	
+    	<security:form-login/>
+    	<security:logout/>
+
+    </security:http>
+
+</beans>

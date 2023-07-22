@@ -1,0 +1,21 @@
+<h3>User List</h3>
+
+<table>
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Job</td>
+      <td>Nation</td>
+      <td>Language</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of usersFromParent">
+      <td>{{ item.name }}</td>
+      <td>{{ item.job }}</td>
+      <td>{{ item.nation }}</td>
+      <td>{{ item.language }}</td>
+    </tr>
+  </tbody>
+</table>

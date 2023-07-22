@@ -1,0 +1,34 @@
+<p>{{ parentUsers | json }}</p>
+
+<app-parent (onTransfer)="print($event)"></app-parent>
+
+<hr>
+
+<h1>Property Binding</h1>
+
+<img [src]="imageUrl">
+
+<hr>
+
+<h1>String Interpolation</h1>
+
+<h3>Result: {{ add(10, 20) }}</h3>
+
+<h4>Increment: {{ num1 }}</h4>
+<h4 [ngClass]="false ? 'bdr font-color' : 'fs-3'">{{ date }}</h4>
+
+<table>
+  <tr>
+    <td>
+      <!-- Property Binding and Event Biding like Two Way Binding -->
+      <input #val [value]="inputValue" (keyup)="inputValue = val.value" type="text">
+      <!-- ngModel Two Way Binding -->
+      <input [(ngModel)]="inputValue" type="text">
+    </td>
+    <td>
+      <input (click)="inputValue = val.value" type="submit" value="Click">
+    </td>
+  </tr>
+</table>
+
+<p>{{ inputValue || 'No input' }}</p>
