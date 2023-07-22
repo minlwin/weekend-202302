@@ -26,14 +26,12 @@
     <security:http pattern="/resources/**" security="none" />
 
     <security:http>
-		
-		<security:intercept-url pattern="/login" access="permitAll" />
+
     	<security:intercept-url pattern="/admin/**" access="hasAnyAuthority('Admin', 'Office')"/>
     	<security:intercept-url pattern="/member/**" access="hasAnyAuthority('Admin', 'Office', 'Student')"/>
     	
-    	<security:form-login login-page="/login" />
+    	<security:form-login/>
     	<security:logout/>
-    	<security:remember-me user-service-ref="accountDetailsService" />
 
     </security:http>
 

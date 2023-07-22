@@ -16,7 +16,8 @@
 
 	<tx:annotation-driven />
 	<context:component-scan base-package="com.jdc.demo.service" />
-	<jpa:repositories base-package="com.jdc.demo.service.repo" />
+	<jpa:repositories
+		base-package="com.jdc.demo.service.repo" />
 
 	<jdbc:embedded-database type="H2"
 		id="dataSource" />
