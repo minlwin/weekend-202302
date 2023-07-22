@@ -24,6 +24,9 @@ import { Component } from '@angular/core';
   ]
 })
 export class AppComponent {
+
+  parentUsers: any
+
   cssClass = ['fs-3', 'bgc', 'bdr']
   title = 'Hello Angular'
   num1 = 20
@@ -34,5 +37,9 @@ export class AppComponent {
   add = function(a: number, b: number) {return a + b};
 
   inputValue: any
+
+  print(data: any) {
+    this.parentUsers = data
+  }
 
 }
