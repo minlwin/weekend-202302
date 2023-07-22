@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/fragments/layout :: common(title = 'Edit Shop', content=~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		
+		<h3><i class="bi bi-gift"></i> [[${form.id == 0 ? 'Create New' : 'Edit' }]] Product</h3>
+
+		<div class="row">
+			
+			<div class="col-3">
+				<!-- Shop Information -->
+				<div th:replace="~{/fragments/shop :: information(data = ${shopInfo}, listView = true)}"></div>
+			</div>
+			
+			<div class="col">
+				<!-- Form -->
+				<form id="editForm" th:action="@{/member/product/edit}" method="post" th:object="${form}">
+				
+					<input type="hidden" th:field="*{id}" />
+					<input type="hidden" th:field="*{shop}" />
+					<input type="hidden" name="addFeature" id="addFeature" value="0" />
+					<input type="hidden" name="deleteIndex" id="deleteIndex" value="-1" />
+					
+					<div class="row">
+						<!-- Category -->
+						<div class="col">
+							<label class="form-label">Category</label>
+							<input th:field="*{category}" type="text" class="form-control" placeholder="Enter Category" />
+							<span th:errors="*{category}" class="text-secondary" />
+						</div>
+						
+						<!-- Brand -->
+						<div class="col">
+							<label class="form-label">Brand</label>
+							<input th:field="*{brand}" type="text" class="form-control" placeholder="Enter Brand" />
+							<span th:errors="*{brand}" class="text-secondary" />
+						</div>
+					</div>
+					
+					<div class="row my-3">
+						<!-- Name -->
+						<div class="col">
+							<label class="form-label">Name</label>
+							<input th:field="*{name}" type="text" class="form-control" placeholder="Enter Product Name" />
+							<span th:errors="*{name}" class="text-secondary" />
+						</div>
+						
+						<!-- Price -->
+						<div class="col">
+							<label class="form-label">Price</label>
+							<input th:field="*{price}" type="number" class="form-control" />
+							<span th:errors="*{price}" class="text-secondary" />
+						</div>
+					</div>
+										
+					<!-- Control Buttons -->
+					<div th:each="item,row : *{features}" class="row mb-3">
+						<div class="col">
+							<label th:if="${row.index == 0}" class="form-label">Feature Name</label>
+							<div class="input-group">
+								<button type="button" th:attr="data-app-index=${row.index}" class="delete-btn btn btn-outline-danger">
+									<i class="bi bi-trash"></i>
+								</button>
+								<input type="text" th:field="*{features[__${row.index}__].name}" class="form-control" 
+									placeholder="Enter Feature Name" />
+							</div>
+							<span th:errors="*{features[__${row.index}__].name}" class="text-secondary" />
+						</div>
+						<div class="col">
+							<label th:if="${row.index == 0}" class="form-label">Feature Value</label>
+							<input type="text" th:field="*{features[__${row.index}__].feature}" class="form-control" 
+								placeholder="Enter Feature Value" />
+							<span th:errors="*{features[__${row.index}__].feature}" class="text-secondary" />
+						</div>
+					</div>
+					
+					<div>
+						<button id="addFeatureBtn" type="button" class="btn btn-outline-primary">
+							<i class="bi bi-plus-lg"></i> Add Feature
+						</button>
+						
+						<button type="submit" class="btn btn-primary">
+							<i class="bi bi-save"></i> Save Product
+						</button>
+					</div>
+				
+				</form>
+			
+			</div>
+
+		</div>
+		
+		<script th:src="@{/js/product-edit.js}"></script>
+	
+	</main>
+
+</body>
+</html>

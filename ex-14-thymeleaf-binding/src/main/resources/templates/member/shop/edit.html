@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/fragments/layout :: common(title = 'Edit Shop', content=~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		
+		<h3><i class="bi bi-shop-window"></i> [[${form.id == 0 ? 'Create New' : 'Edit' }]] Shop</h3>
+
+		<div class="row">
+			<!-- Cover Image -->
+			<div class="col-8">
+				<img th:src="@{/images/shop-cover.png}" class="img-fluid w-100 img-thumbnail" alt="Shop Image" />
+			</div>	
+			
+			<!-- Form -->
+			<div class="col">
+							
+				<form th:action="@{/member/shop/edit}" method="post" th:object="${form}">
+					<!-- ID -->
+					<input type="hidden" th:field="*{id}" />
+					
+					<!-- Name -->
+					<div class="mb-3">
+						<label class="form-label">Shop Name</label>
+						<input th:field="*{name}" type="text" placeholder="Enter Shop Name" class="form-control" />
+						<div class="text-secondary" th:errors="*{name}"></div>
+					</div>
+					
+					<!-- Description -->
+					<div class="mb-3">
+						<label class="form-label">Greeting Message</label>
+						<textarea th:field="*{greeting}" placeholder="Enter Greeting Message" cols="20" rows="6" class="form-control"></textarea>
+						<div class="text-secondary" th:errors="*{greeting}"></div>
+					</div>
+					
+					<button class="btn btn-outline-primary">
+						<i class="bi bi-save"></i> [[${form.id == 0 ? 'Create' : 'Save'}]] Shop
+					</button>
+				
+				</form>
+			
+			</div>	
+		</div>
+	
+	</main>
+
+</body>
+</html>

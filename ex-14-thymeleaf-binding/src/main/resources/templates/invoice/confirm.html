@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Cart', content = ~{::main}, main = 'my-cart')}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		<h3>
+			<i class="bi bi-check"></i> Please Confirm Your Order
+		</h3>
+		
+		<div class="row mt-4">
+			<div class="col">
+				<!-- Cart Items -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<h4><i class="bi bi-cart"></i> Your Orders</h4>
+
+						<!-- Item List -->
+						<div th:each="item: ${@shoppingCart.invoiceItems}" class="mb-5">
+							<div th:replace="~{/fragments/invoice :: item(data = ${item})}"></div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Shipping Address -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<h4><i class="bi bi-truck"></i> Delivery Address</h4>
+						
+						<div th:replace="~{/fragments/invoice :: address(data = ${session.shipping})}"></div>
+					</div>
+				</div>
+				
+				<div class="mt-1">
+					
+					<form th:action="@{/member/checkout}" method="post">
+						<a th:href="@{/member/checkout}" class="btn btn-outline-primary">
+							<i class="bi bi-truck"></i> Delivery Address
+						</a>
+						
+						<button type="submit" class="btn btn-primary">
+							<i class="bi bi-check"></i> Confirm
+						</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="col-4">
+				<!-- Summary Information -->
+				<div th:replace="~{/fragments/invoice :: summary(data = ${@shoppingCart.summary})}"></div>
+			</div>
+		</div>
+	</main>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/fragments/layout :: common(title='Shops',content=~{ :: main},main='shops')}">
+<head>
+<meta charset="UTF-8">
+<title>Shop | Home</title>
+</head>
+<body>
+
+
+	<main>
+		<div class="d-flex justify-content-between">
+			<h3><i class="bi bi-shop"></i> Our Shops</h3>
+			
+			<form>
+				<div class="input-group">
+					<input name="keyword" type="text" th:value="${param.keyword}" class="form-control" placeholder="Search Keyword" />
+					<button class="btn btn-outline-primary">
+						<i class="bi bi-search"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+		
+		<div class="row row-cols-4">
+			<div th:each="shop : ${list}" >
+				<div th:replace="~{/fragments/shop :: information(data = ${shop}, listView = true)}"></div>
+			</div>
+		</div>
+	</main>	
+
+
+</body>
+</html>

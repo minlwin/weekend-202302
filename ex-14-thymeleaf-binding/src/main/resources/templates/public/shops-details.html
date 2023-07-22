@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Shop', content = ~{::main}, main = 'shops')}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		
+		<h3><i class="bi bi-shop"></i> <span th:text="${shopInfo.name}">Shop Name</span></h3>
+		<div class="row">
+			<div class="col-3">
+				<!-- Shop Information -->
+				<div class="mb-3" th:insert="~{/fragments/shop :: information(data = ${shopInfo}, listView = false)}"></div>
+				
+				<!-- Owner Controls -->
+				<div th:if="${owner}">
+					<a th:href="@{/member/product/edit(shop=${shopInfo.id})}" class="btn btn-primary d-block mb-2">
+						<i class="bi bi-plus-lg"></i> Add New Product
+					</a>
+
+					<a href="#" class="btn btn-primary d-block mb-2">
+						<i class="bi bi-camera"></i> Upload Cover Image
+					</a>
+
+					<a href="#" class="btn btn-primary d-block">
+						<i class="bi bi-pencil"></i> Edit Shop Information
+					</a>
+				</div>
+			
+			</div>		
+			
+			<div class="col">
+				<!-- Products -->
+				<div class="row row-cols-3">
+					
+					<div class="col" th:each="item : ${products}" >
+						<div th:replace="~{/fragments/product :: information(data = ${item})}"></div>
+					</div>
+				
+				</div>
+			
+			</div>
+		</div>
+		
+	
+	</main>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: common(title = 'My Cart', content = ~{::main}, main = 'my-cart')}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		<h3>
+			<i class="bi bi-calendar"></i> Invoice for [[${data.customerName}]]
+		</h3>
+		
+		<div class="row mt-4">
+			
+			<div class="col">
+				<!-- Invoice Items -->
+				<!-- Cart Items -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<h4><i class="bi bi-cart"></i> Orders</h4>
+						<div th:each="item, status: ${data.items}" th:classappend="${#lists.size(data.items) - 1} > ${status.index} ? 'mb-4' : ''">
+							<div th:replace="~{/fragments/invoice :: item(data = ${item})}"></div>
+						</div>
+					</div>
+				</div>
+									
+				<!-- Shipping Informations -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<h4><i class="bi bi-truck"></i> Delivery Address</h4>
+						
+						<div th:replace="~{/fragments/invoice :: address(data = ${data.shipping})}"></div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="col-4">
+				<!-- Summary -->
+				<div th:replace="~{/fragments/invoice :: summary(data = ${data.summary})}"></div>
+			</div>
+		</div>
+	</main>
+
+</body>
+</html>

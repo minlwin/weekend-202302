@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section th:fragment="information" th:object="${data}" class="card">
+		<img class="card-img-top" th:src="@{/images/shop-cover.png}" alt="Shop Image" />
+		<div class="card-body">
+			
+			<h5 th:if="${listView}" th:text="*{name}"></h5>
+		
+			<div class="text-secondary" th:classappend="${listView ? '' : 'mb-2'}" th:text="*{greeting}">
+				Greeting Message
+			</div>
+			
+			<div th:unless="${listView}">
+				<i class="bi bi-person"></i>
+				<span th:text="*{ownerName}">Owner Name</span>
+			</div>
+			
+			<div th:unless="${listView}">
+				<i class="bi bi-envelope"></i>
+				<span th:text="*{email}">Email Address</span>
+			</div>
+		</div>
+		<div class="card-footer d-flex justify-content-between">
+			<div>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+				<i class="bi bi-star"></i>
+			</div>
+			
+			<a href="#" th:unless="${owner} or ${listView}" class="text-decoration-none">Review</a>
+			
+			<a th:if="${listView}" th:href="@{|/public/shop/${data.id}|}" class="text-decoration-none">Visit</a>
+		</div>
+	</section>
+
+</body>
+</html>

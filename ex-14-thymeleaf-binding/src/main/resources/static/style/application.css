@@ -1,0 +1,37 @@
+.product-list-image {
+	height: 320px;
+	width: auto;
+	object-fit: cover;
+}
+
+.controls-wrapper {
+	width: 180px;
+	display: flex;
+	flex-direction: column;
+}
+
+.controls-wrapper img{
+	height: 188px;
+	width: 160px;
+	object-fit: cover;
+}
+
+.cover-wrapper {
+	padding-right: 60px;
+}
+
+.cover-wrapper img {
+	height: 600px;
+	width: 520px;
+	object-fit: cover;
+}
+
+.purchase-item-image {
+	width: 240px;
+	height: 280px;
+	object-fit: cover;
+}
+
+.btn-wrapper {
+	padding-top: 2rem;
+}

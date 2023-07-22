@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Menber Fragments</title>
+</head>
+<body>
+
+	<!-- Profile -->
+	<section th:fragment="profile">
+	
+		<div class="card">
+			<!-- Image -->
+			<img th:src="@{/images/profile.png}" alt="Profile Image" />
+			
+			<div class="card-body" th:object="${@loginUserHolder.user}">
+				<!-- Name -->
+				<div class="mb-2">
+					<i class="bi bi-person"></i> <span th:text="*{name}">Maung Maung</span>
+				</div>
+				
+				<!-- Email -->
+				<div class="mb-2">
+					<i class="bi bi-envelope"></i> <span th:text="*{email}">maung@gmail.com</span>
+				</div>
+						
+			</div>
+		</div>
+		
+		<!-- Controls -->
+		<div class="mt-3 list-group">
+			<a class="list-group-item"><i class="bi bi-camera"></i> Upload Photo</a>
+			<a class="list-group-item"><i class="bi bi-pencil"></i> Edit Profile</a>
+			<a class="list-group-item"><i class="bi bi-lock"></i> Change Password</a>
+		</div>
+		
+	</section>
+	
+	<section th:fragment="shopListGroup" class="list-group">
+		<div class="list-group-item active d-flex justify-content-between">
+			<div>
+				<i class="bi" th:classappend="${icon}"></i>
+				<span th:text="${header}"></span>
+			</div>
+		</div>
+		
+		<a th:each="data : ${list}" th:href="@{|/public/shop/${data.id}|}" class="list-group-item">
+			<i class="bi bi-check-circle"></i> [[${data.name}]]
+		</a>
+	
+	</section>
+	
+	<section th:fragment="customerListGroup" class="list-group">
+		<div class="list-group-item active d-flex justify-content-between">
+			<div>
+				<i class="bi" th:classappend="${icon}"></i>
+				<span th:text="${header}"></span>
+			</div>
+		</div>
+		
+		<a th:each="data : ${list}" th:href="@{/member/invoice/sales/customer(customer=${data.id})}" class="list-group-item">
+			<i class="bi bi-check-circle"></i> [[${data.name}]]
+		</a>
+	
+	</section>	
+
+</body>
+</html>

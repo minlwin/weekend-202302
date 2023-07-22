@@ -1,0 +1,25 @@
+<h1>Property Binding</h1>
+
+<img [src]="imageUrl">
+
+<hr>
+
+<h1>String Interpolation</h1>
+
+<h3>Result: {{ add(10, 20) }}</h3>
+
+<h4>Increment: {{ num1 }}</h4>
+<h4 [ngClass]="false ? 'bdr font-color' : 'fs-3'">{{ date }}</h4>
+
+<table>
+  <tr>
+    <td>
+      <input #val (keyup)="0" type="text">
+    </td>
+    <td>
+      <input (click)="inputValue = val.value" type="submit" value="Click">
+    </td>
+  </tr>
+</table>
+
+<p>{{ val.value || 'No input' }}</p>

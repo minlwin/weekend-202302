@@ -28,4 +28,8 @@ replay_pid*
 */.project
 */target
 
+*/.factorypath
+
 **/pom.properties
+
+**/Users

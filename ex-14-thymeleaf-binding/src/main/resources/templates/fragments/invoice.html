@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section th:fragment="item" class="d-flex">
+		<div class="me-5">
+			<!-- Image -->
+			<img th:if="${data.coverImage} == null" th:src="@{/images/product.jpg}" class="purchase-item-image" alt="Product Cover Image" />
+			<img th:unless="${data.coverImage} == null" th:src="@{|/photos/product/${data.coverImage}|}" class="purchase-item-image" alt="Product Cover Image" />
+		</div>
+		
+		<div class="w-100">
+			<!-- Product Information -->
+			<!-- Brand & Category -->
+			<h5>
+				<span th:text="${data.brand}">Brand</span> 
+				<span th:text="${data.category}">Category</span>
+			</h5>
+			<!-- Name -->
+			<h4 th:text="${data.name}" class="text-primary">Product Name</h4>
+			
+			<!-- Features -->
+			<div class="my-4">
+				<div th:each="item : ${data.features}" class="row">
+					<div class="col-3">
+						<label th:text="${item.name}" class="text-secondary">Feature Name</label>
+					</div>
+					<div class="col">
+						<span th:text="${item.feature}">Feature</span>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Purchase Item Information -->
+			<div class="row">
+				<div class="col text-end">
+					<!-- Unit Price -->
+					<label class="form-label">Unit Price</label>
+					<span th:text="${@numbers.format(data.price)}" class="form-control">87000</span>
+				</div>
+				
+				<div class="col text-center">
+					<!-- Quantity -->
+					<label class="form-label">Quantity</label>
+					<div class="d-flex justify-content-center">
+						<button th:if="${editable} != null" th:data-product-id="${data.id}" th:data-product-count="-1" class="cartCountBtn btn btn-outline-primary me-2">
+							<i class="bi bi-dash-lg"></i>
+						</button>	
+						
+						<span th:text="${data.quantity}" class="form-control text-center" th:classappend="${editable} != null ? 'me-2' : ''">
+							1
+						</span>	
+						
+						<button th:if="${editable} != null" th:data-product-id="${data.id}" th:data-product-count="1" class="cartCountBtn btn btn-outline-primary">
+							<i class="bi bi-plus-lg"></i>
+						</button>	
+					</div>
+				</div>
+				
+				<div class="col text-end">
+					<!-- Total -->
+					<label class="form-label">Total</label>
+					<span th:text="${@numbers.format(data.total)}" class="form-control">50000</span>
+				</div>
+			</div>
+		</div>
+	
+	</section>
+	
+	<section th:fragment="information" class="d-flex justify-content-between">
+		<label class="form-label" th:text="${name} ?: 'Name'"></label>
+		<span th:text="${value}"></span>
+	</section>
+	
+	<section th:fragment="dateTimeInformation" class="d-flex justify-content-between">
+		<label class="form-label" th:text="${name} ?: 'Name'"></label>
+		<span th:text="${@dates.formatDateTime(value)} ?: 'Value'"></span>
+	</section>
+	
+	
+	<div th:fragment="summary" class="card bg-primary text-white">
+		<div class="card-body">
+			<h4 class="cart-title d-flex justify-content-between mb-3">
+				<div>
+					<i class="bi bi-cart"></i> Amount
+				</div>
+				
+				<span th:text="${@numbers.format(data.total)} + ' MMK'">150,000 MMK</span>
+			</h4>
+			
+			<div th:if="${data.id != null}">
+			<div th:insert="~{::information(name='Invoice ID', value= ${@numbers.invoiceNumber(data.id)})}"></div>
+			<div th:insert="~{::information(name='Invoice Date', value= ${@dates.formatDateTime(data.time)})}"></div>
+			<div th:insert="~{::information(name='Status', value= ${data.status})}"></div>
+			</div>
+			<!-- Sub Total -->
+			<div th:insert="~{::information(name='Item Count', value= ${data.count})}"></div>
+			<hr />
+			
+			<!-- Sub Total -->
+			<div th:insert="~{::information(name='Sub Total', value= ${@numbers.format(data.subTotal)})}"></div>
+			
+			<!-- Tax -->
+			<div th:insert="~{::information(name='Tax', value= ${@numbers.format(data.tax)})}"></div>
+
+			<hr />
+			<!-- Total -->
+			<div th:insert="~{::information(name='Total', value= ${@numbers.format(data.total)})}"></div>
+			
+		</div>
+	</div>	
+	
+	<div th:fragment="address">
+		<!-- Name -->
+		<h5><i class="bi bi-person"></i> <span th:text="${data.name}">Name</span></h5>
+		
+		<!-- Building & Street -->
+		<div>
+			<i class="bi bi-house"></i>
+			<span th:text="${data.building}">Building Address</span>, 
+			<span th:text="${data.street}">Street Address</span>
+		</div>
+		
+		<!-- Township & State -->
+		<div>
+			<i class="bi bi-map"></i>
+			<span th:text="${data.township}">Township</span>, 
+			<span th:text="${data.state}">State</span>
+		</div>
+	</div>
+
+</body>
+</html>
