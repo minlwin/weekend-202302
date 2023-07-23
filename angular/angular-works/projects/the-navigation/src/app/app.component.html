@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['']"><i class="bi bi-house"></i> Navigation</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="ms-auto navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/one']" routerLinkActive="active">One</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLinkActive="active" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Two
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="['/two', 'two-sub-one']">Two Sub One</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/two', 'two-sub-two']">Two Sub Two</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/three']" routerLinkActive="active">Three</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
