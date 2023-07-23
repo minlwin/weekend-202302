@@ -6,4 +6,17 @@ import { Component } from '@angular/core';
 })
 export class TemplateComponent {
 
+  countries = [
+    'Myanmar', 'Thailand', 'Korea',
+    'Japan', 'Vietnam',
+    'Phillipine', 'Indonesia', 'Malaysia', 'Cambodia'
+  ]
+
+  formValue: any
+
+  save(form: any) {
+    console.log(form)
+    this.formValue = form.value
+  }
+
 }

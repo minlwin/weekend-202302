@@ -1,16 +1,62 @@
 <h3 class="text-primary">Template Driven From</h3>
 
 <div class="row">
-  <form class="col-6">
+  <form class="col-6" #form="ngForm">
 
     <label for="name" class="form-label">Name</label>
-    <input type="text" name="name" id="name" class="form-control mb-3">
+    <input type="text" ngModel name="name" id="name" class="form-control mb-3" placeholder="Enter name">
 
     <label for="email" class="form-label">Email</label>
-    <input type="email" name="email" id="email" class="form-control mb-3">
+    <input type="email" ngModel #email="ngModel" name="email" id="email" class="form-control mb-3"
+      placeholder="Enter email">
+
+    <div ngModelGroup="contact" class="mb-3">
+
+      <label for="phone" class="form-label">Phone</label>
+      <input type="tel" ngModel name="phone" id="phone" class="form-control" placeholder="Enter phone number">
+    </div>
+
+    <label for="country" class="form-label">Country</label>
+    <select name="country" ngModel id="country" class="form-select mb-3">
+      <option value="" selected>Select Country</option>
+      <option *ngFor="let item of countries" [value]="item">{{ item }}</option>
+    </select>
+
+    <div class="mb-3">
+      <input type="radio" ngModel value="Male" name="gender" id="gender" checked class="form-check-input me-2">
+      <label for="gender" class="form-check-label me-3">Male</label>
+      <input type="radio" ngModel value="Female" name="gender" id="gender" class="form-check-input me-2">
+      <label for="gender" class="form-check-label">Female</label>
+    </div>
+
+    <button class="btn btn-outline-primary" (click)="save(form)"><i class="bi bi-save"></i> Save
+      Data</button>
 
   </form>
-  <div class="col-6">
 
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <h3>Form Value</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4">
+            <p>Name</p>
+            <p>Email</p>
+            <p>Phone</p>
+            <p>Country</p>
+            <p>Gender</p>
+          </div>
+          <div class="col">
+            <p>{{ formValue?.name }}</p>
+            <p>{{ formValue?.email }}</p>
+            <p>{{ formValue?.contact.phone }}</p>
+            <p>{{ formValue?.country }}</p>
+            <p>{{ formValue?.gender }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
