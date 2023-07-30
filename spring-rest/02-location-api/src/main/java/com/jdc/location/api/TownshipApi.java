@@ -43,13 +43,13 @@ public class TownshipApi {
 	
 	@PostMapping
 	TownshipDTO create(@Validated @RequestBody TownshipForm form, BindingResult result) {
-		return null;
+		return service.create(form);
 	}
 	
 	@PutMapping("id")
 	TownshipDTO update(@PathVariable int id, 
 			@Validated @RequestBody TownshipForm form, 
 			BindingResult result) {
-		return null;
+		return service.update(id, form);
 	}
 }
