@@ -12,4 +12,5 @@ public interface DivisionRepo extends JpaRepositoryImplementation<Division, Inte
 	@Query("select distinct d.region from Division d order by d.region")
 	List<String> findAllRegions();
 
+	long countById(int id);
 }
