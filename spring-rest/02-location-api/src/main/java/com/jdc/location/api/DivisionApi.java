@@ -16,21 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jdc.location.model.dto.DivisionDTO;
 import com.jdc.location.model.dto.form.DivisionForm;
+import com.jdc.location.model.service.DivisionService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("division")
+@RequiredArgsConstructor
 public class DivisionApi {
+	
+	private final DivisionService service;
 	
 	@GetMapping("region")
 	public List<String> getAllRegions() {
-		return null;
+		return service.findAllRegions();
 	}
 
 	@GetMapping
 	public List<DivisionDTO> search(
 			@RequestParam Optional<String> region, 
 			@RequestParam Optional<String> keyword) {
-		return null;
+		return service.search(region, keyword);
 	}
 	
 	@PostMapping
@@ -38,12 +44,12 @@ public class DivisionApi {
 			@Validated @RequestBody DivisionForm form,
 			BindingResult result) {
 		
-		return null;
+		return service.create(form);
 	}
 	
 	@GetMapping("{id}")
 	public DivisionDTO findById(@PathVariable int id) {
-		return null;
+		return service.findById(id);
 	}
 	
 	@PutMapping("{id}")
@@ -51,6 +57,6 @@ public class DivisionApi {
 			 @Validated @RequestBody DivisionForm form,
 			 BindingResult result) {
 
-		return null;
+		return service.update(id, form);
 	}
 }
