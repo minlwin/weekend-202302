@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-5">
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Account Form</h3>
+      </div>
+
+      <form class="card-body" [formGroup]="form">
+
+        <label for="name" class="form-label">Name</label>
+        <div class="input-group mb-3">
+          <input formControlName="name" type="text" id="name" class="form-control" placeholder="Enter name">
+          <span class="input-group-text"><i class="bi"
+              [ngClass]="form.get('name')?.valid ? 'bi-check text-success' : 'bi-x text-danger'"></i></span>
+        </div>
+        <div class="text-danger mb-3" style="font-size: 15px"
+          *ngIf="!form.get('name')?.valid && (form.get('name')?.touched || form.get('name')?.dirty)">Name cannot be
+          empty!
+        </div>
+
+        <label for="email" class="form-label">Email</label>
+        <div class="input-group mb-3">
+          <input formControlName="email" type="email" id="email" class="form-control" placeholder="Enter email">
+          <span class="input-group-text"><i class="bi"
+              [ngClass]="form.get('email')?.valid ? 'bi-check text-success' : 'bi-x text-danger'"></i></span>
+        </div>
+        <div class="text-danger mb-3" style="font-size: 15px" *ngIf="!form.get('email')?.valid">Please enter correct
+          email address!</div>
+
+        <label for="phone" class="form-label">phone</label>
+        <div class="input-group mb-3">
+          <input formControlName="phone" type="text" id="phone" class="form-control" placeholder="Enter phone number">
+          <span class="input-group-text"><i class="bi"
+              [ngClass]="form.get('phone')?.valid ? 'bi-check text-success' : 'bi-x text-danger'"></i></span>
+        </div>
+        <div class="text-danger mb-3" style="font-size: 15px"
+          *ngIf="!form.get('phone')?.valid && (form.get('phone')?.touched || form.get('phone')?.dirty)">Phone cannot be
+          empty!
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!form.valid" (click)="saveAccount()"><i class="bi bi-save"></i> Save
+          Account</button>
+
+      </form>
+    </div>
+
+  </div>
+</div>
