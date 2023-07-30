@@ -27,9 +27,12 @@ replay_pid*
 */.classpath
 */.project
 */target
+**/.mvn
 
 */.factorypath
 
 **/pom.properties
 
 **/Users
+
+**/bin
