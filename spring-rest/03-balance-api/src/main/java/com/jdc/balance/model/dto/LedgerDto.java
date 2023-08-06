@@ -1,5 +1,11 @@
 package com.jdc.balance.model.dto;
 
-public record LedgerDto() {
+import com.jdc.balance.model.enums.LedgerType;
+
+public record LedgerDto(
+		int id, 
+		LedgerType type,
+		String name
+		) {
 
 }

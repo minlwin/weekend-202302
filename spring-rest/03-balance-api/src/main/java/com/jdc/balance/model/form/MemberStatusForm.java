@@ -1,5 +1,12 @@
 package com.jdc.balance.model.form;
 
-public record MemberStatusForm() {
+import com.jdc.balance.model.enums.MemberStatus;
+
+import jakarta.validation.constraints.NotNull;
+
+public record MemberStatusForm(
+		@NotNull(message = "Please select member status.")
+		MemberStatus status
+		) {
 
 }

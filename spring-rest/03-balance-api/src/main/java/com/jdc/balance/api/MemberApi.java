@@ -2,6 +2,8 @@ package com.jdc.balance.api;
 
 import java.util.Optional;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,17 +41,19 @@ public class MemberApi {
 	}
 	
 	@PostMapping
-	ApiResponse<Integer> create(@RequestBody MemberForm form) {
+	ApiResponse<Integer> create(@Validated @RequestBody MemberForm form, BindingResult result) {
 		return null;
 	}
 	
 	@PutMapping("{id}")
-	ApiResponse<Integer> update(@PathVariable int id, @RequestBody MemberForm form) {
+	ApiResponse<Integer> update(@PathVariable int id, 
+			@Validated @RequestBody MemberForm form, BindingResult result) {
 		return null;
 	}
 	
 	@PutMapping("{id}/status")
-	ApiResponse<Integer> updateStatus(@PathVariable int id, @RequestBody MemberStatusForm form) {
+	ApiResponse<Integer> updateStatus(@PathVariable int id, 
+			@Validated @RequestBody MemberStatusForm form, BindingResult result) {
 		return null;
 	}
 }

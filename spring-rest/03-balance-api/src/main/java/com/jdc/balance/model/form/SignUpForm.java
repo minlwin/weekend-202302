@@ -1,5 +1,16 @@
 package com.jdc.balance.model.form;
 
-public record SignUpForm() {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public record SignUpForm(
+		@NotBlank(message = "Please enter name.")
+		String name,
+		@NotBlank(message = "Please enter email.")
+		@Email(message = "Please enter vaild email.")
+		String email,
+		@NotBlank(message = "Please enter password.")
+		String password
+		) {
 
 }

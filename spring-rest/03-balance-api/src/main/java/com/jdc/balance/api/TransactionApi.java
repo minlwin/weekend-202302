@@ -3,6 +3,8 @@ package com.jdc.balance.api;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +35,13 @@ public class TransactionApi {
 	}
 	
 	@PostMapping
-	ApiResponse<Long> create(@RequestBody TransactionForm form) {
+	ApiResponse<Long> create(@Validated @RequestBody TransactionForm form, BindingResult result) {
 		return null;
 	}
 	
 	@PutMapping("{id}")
-	ApiResponse<Long> update(@PathVariable long id, @RequestBody TransactionForm form) {
+	ApiResponse<Long> update(@PathVariable long id, 
+			@Validated @RequestBody TransactionForm form, BindingResult result) {
 		return null;
 	}
 	

@@ -3,6 +3,7 @@ package com.jdc.balance.api;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class LedgerApi {
 	}
 	
 	@PostMapping
-	ApiResponse<Integer> create(@RequestBody LedgerForm form) {
+	ApiResponse<Integer> create(@Validated @RequestBody LedgerForm form) {
 		return null;
 	}
 

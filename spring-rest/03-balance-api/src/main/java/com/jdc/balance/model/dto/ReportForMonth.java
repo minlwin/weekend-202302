@@ -1,5 +1,12 @@
 package com.jdc.balance.model.dto;
 
-public record ReportForMonth() {
+import java.time.YearMonth;
+
+public record ReportForMonth(
+		YearMonth month,
+		LedgerDto ledger,
+		long transactionCount,
+		long transactionAmount
+		) {
 
 }

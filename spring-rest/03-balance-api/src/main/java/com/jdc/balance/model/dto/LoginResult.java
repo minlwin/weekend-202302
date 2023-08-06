@@ -1,5 +1,11 @@
 package com.jdc.balance.model.dto;
 
-public record LoginResult() {
+import com.jdc.balance.model.enums.MemberRole;
+
+public record LoginResult(
+		int id,
+		String email,
+		MemberRole role
+		) {
 
 }
