@@ -17,7 +17,8 @@ export class AccountFormComponent {
     this.form = builder.group({
       name: ['', Validators.required],
       email: ['', Validators.email],
-      phone: ['', Validators.required]
+      phone: ['', Validators.required],
+      createdAt: ''
     })
   }
 
@@ -25,7 +26,7 @@ export class AccountFormComponent {
     this.service.save(this.form.value).subscribe(result => {
       console.log(result)
       this.form.reset()
-      this.router.navigate(['/accounts', 'list'])
+      this.router.navigate(['/account', 'list'])
     })
   }
 

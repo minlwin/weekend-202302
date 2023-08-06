@@ -39,6 +39,11 @@
           empty!
         </div>
 
+        <label for="create" class="form-label">Creation</label>
+        <div class="input-group mb-3">
+          <input formControlName="createdAt" type="datetime-local" id="create" class="form-control">
+        </div>
+
         <button class="btn btn-primary" [disabled]="!form.valid" (click)="saveAccount()"><i class="bi bi-save"></i> Save
           Account</button>
 

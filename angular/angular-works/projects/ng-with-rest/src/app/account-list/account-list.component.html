@@ -7,15 +7,17 @@
       <td>Name</td>
       <td>Email</td>
       <td>Phone</td>
+      <td>Creation Time</td>
       <td></td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let acc of accounts">
       <td>{{ acc.id }}</td>
-      <td>{{ acc.name }}</td>
-      <td>{{ acc.email }}</td>
-      <td>{{ acc.phone }}</td>
+      <td>{{ acc.name | uppercase }}</td>
+      <td>{{ acc.email | lowercase }}</td>
+      <td>{{ acc.phone | number | mmk:'behind' }}</td>
+      <td>{{ acc.createdAt | date:'short' }}</td>
       <td>
         <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
       </td>

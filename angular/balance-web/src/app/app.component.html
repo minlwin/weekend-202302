@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
+  <div class="container">
+
+    <a [routerLink]="['']" class="navbar-brand">
+      <i class="bi bi-cash"></i> My Money
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a [routerLink]="['/balance']" routerLinkActive="active" class="nav-link">Balance</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/ledger']" routerLinkActive="active" class="nav-link">Ledger</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/member']" routerLinkActive="active" class="nav-link">Member</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/transaction']" routerLTransactioninkActive="active" class="nav-link">Transaction</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

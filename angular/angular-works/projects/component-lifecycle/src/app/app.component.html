@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['']"><i class="bi bi-ui-radios-grid"></i> Lifecycle</a>
+
+    <ul class="ms-auto navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/one']" routerLinkActive="active">Page One</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['two']" routerLinkActive="active">Page Two</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,9 @@
+<!-- <input #val type="text"> -->
+<button class="btn btn-primary" (click)="updateUsername()">Update</button>
+
+<br>
+<br>
+
+<app-lifecycle-child [username]="username">
+  <div #content>This is content in child component tag.</div>
+</app-lifecycle-child>

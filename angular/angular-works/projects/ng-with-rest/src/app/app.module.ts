@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AccountFormComponent } from './account-form/account-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { MmkPipe } from './pipe/mmk.pipe'
+import { DecimalPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountListComponent,
-    AccountFormComponent
+    AccountFormComponent,
+    MmkPipe
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http'
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
