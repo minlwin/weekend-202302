@@ -3,6 +3,7 @@ package com.jdc.balance.api;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,13 @@ import com.jdc.balance.model.dto.TransactionDetailsDto;
 import com.jdc.balance.model.dto.TransactionListDto;
 import com.jdc.balance.model.enums.LedgerType;
 import com.jdc.balance.model.form.TransactionForm;
+import com.jdc.balance.service.TransactionService;
 
 @RequestMapping("transaction")
 public class TransactionApi {
+	
+	@Autowired
+	private TransactionService service;
 
 	@GetMapping
 	ApiResponse<PageResult<TransactionListDto>> search(
@@ -31,22 +36,22 @@ public class TransactionApi {
 			@RequestParam(required = false, defaultValue = "") String keyword,
 			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "0") int pageSize) {
-		return null;
+		return ApiResponse.from(service.search(type, from, to, keyword, page, pageSize));
 	}
 	
 	@PostMapping
 	ApiResponse<Long> create(@Validated @RequestBody TransactionForm form, BindingResult result) {
-		return null;
+		return ApiResponse.from(service.create(form));
 	}
 	
 	@PutMapping("{id}")
 	ApiResponse<Long> update(@PathVariable long id, 
 			@Validated @RequestBody TransactionForm form, BindingResult result) {
-		return null;
+		return ApiResponse.from(service.update(id, form));
 	}
 	
 	@GetMapping("{id}")
 	ApiResponse<TransactionDetailsDto> findById(@PathVariable long id) {
-		return null;
+		return ApiResponse.from(service.findById(id));
 	}
 }

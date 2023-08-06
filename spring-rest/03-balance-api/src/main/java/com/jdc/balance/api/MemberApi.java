@@ -2,6 +2,7 @@ package com.jdc.balance.api;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,26 +19,31 @@ import com.jdc.balance.model.dto.MemberDetailsDto;
 import com.jdc.balance.model.dto.MemberListDto;
 import com.jdc.balance.model.dto.PageResult;
 import com.jdc.balance.model.enums.MemberRole;
+import com.jdc.balance.model.enums.MemberStatus;
 import com.jdc.balance.model.form.MemberForm;
 import com.jdc.balance.model.form.MemberStatusForm;
+import com.jdc.balance.service.MemberService;
 
 @RestController
 @RequestMapping("member")
 public class MemberApi {
+	
+	@Autowired
+	private MemberService service;
 
 	@GetMapping
 	ApiResponse<PageResult<MemberListDto>> search(
 			@RequestParam Optional<MemberRole> role,
-			@RequestParam Optional<Boolean> active,
+			@RequestParam Optional<MemberStatus> status,
 			@RequestParam(required = false, defaultValue = "") String keyword,
 			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "0") int pageSize) {
-		return null;
+		return ApiResponse.from(service.search(role, status, keyword, page, pageSize));
 	}
 	
 	@GetMapping("{id}")
 	ApiResponse<MemberDetailsDto> findById(@PathVariable int id) {
-		return null;
+		return ApiResponse.from(service.findById(id));
 	}
 	
 	@PostMapping
