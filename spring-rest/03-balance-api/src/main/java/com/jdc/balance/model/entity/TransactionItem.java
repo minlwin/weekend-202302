@@ -21,6 +21,9 @@ public class TransactionItem {
 	private Transaction transaction;
 	
 	@Column(nullable = false)
+	private String name;
+	
+	@Column(nullable = false)
 	private int unitPrice;
 	@Column(nullable = false)
 	private int quantity;

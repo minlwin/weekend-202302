@@ -1,4 +1,4 @@
-package com.jdc.balance.model.dto;
+package com.jdc.balance.model.dto.response;
 
 public record ApiResponse<T>(
 		boolean success, 

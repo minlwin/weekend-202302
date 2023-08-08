@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jdc.balance.model.dto.ApiResponse;
-import com.jdc.balance.model.dto.PageResult;
 import com.jdc.balance.model.dto.TransactionDetailsDto;
 import com.jdc.balance.model.dto.TransactionListDto;
+import com.jdc.balance.model.dto.response.ApiResponse;
+import com.jdc.balance.model.dto.response.PageResult;
 import com.jdc.balance.model.enums.LedgerType;
 import com.jdc.balance.model.form.TransactionForm;
 import com.jdc.balance.service.TransactionService;

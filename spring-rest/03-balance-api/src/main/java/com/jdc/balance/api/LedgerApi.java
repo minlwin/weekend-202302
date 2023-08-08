@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.balance.model.dto.ApiResponse;
 import com.jdc.balance.model.dto.LedgerDto;
+import com.jdc.balance.model.dto.response.ApiResponse;
 import com.jdc.balance.model.enums.LedgerType;
 import com.jdc.balance.model.form.LedgerForm;
 import com.jdc.balance.service.LedgerService;

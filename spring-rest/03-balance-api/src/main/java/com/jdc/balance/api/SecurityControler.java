@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.balance.model.dto.ApiResponse;
-import com.jdc.balance.model.dto.LoginResult;
+import com.jdc.balance.model.dto.LoginResultDto;
+import com.jdc.balance.model.dto.response.ApiResponse;
 import com.jdc.balance.model.form.SignInForm;
 import com.jdc.balance.model.form.SignUpForm;
 
@@ -17,12 +17,12 @@ import com.jdc.balance.model.form.SignUpForm;
 public class SecurityControler {
 
 	@PostMapping("authenticate")
-	ApiResponse<LoginResult> signIn(@Validated @RequestBody SignInForm form, BindingResult result) {
+	ApiResponse<LoginResultDto> signIn(@Validated @RequestBody SignInForm form, BindingResult result) {
 		return null;
 	}
 	
 	@PostMapping("register")
-	ApiResponse<LoginResult> signUp(@Validated @RequestBody SignUpForm form, BindingResult result) {
+	ApiResponse<LoginResultDto> signUp(@Validated @RequestBody SignUpForm form, BindingResult result) {
 		return null;
 	}
 	

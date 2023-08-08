@@ -2,7 +2,7 @@ package com.jdc.balance.model.dto;
 
 import java.time.LocalDate;
 
-public record ReportForDay(
+public record ReportForDayDto(
 		LocalDate date,
 		LedgerDto ledger,
 		long transactionCount,

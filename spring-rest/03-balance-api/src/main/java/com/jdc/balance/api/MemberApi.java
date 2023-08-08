@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.balance.model.dto.ApiResponse;
 import com.jdc.balance.model.dto.MemberDetailsDto;
 import com.jdc.balance.model.dto.MemberListDto;
-import com.jdc.balance.model.dto.PageResult;
+import com.jdc.balance.model.dto.response.ApiResponse;
+import com.jdc.balance.model.dto.response.PageResult;
 import com.jdc.balance.model.enums.MemberRole;
 import com.jdc.balance.model.enums.MemberStatus;
 import com.jdc.balance.model.form.MemberForm;
@@ -48,18 +48,18 @@ public class MemberApi {
 	
 	@PostMapping
 	ApiResponse<Integer> create(@Validated @RequestBody MemberForm form, BindingResult result) {
-		return null;
+		return ApiResponse.from(service.create(form));
 	}
 	
 	@PutMapping("{id}")
 	ApiResponse<Integer> update(@PathVariable int id, 
 			@Validated @RequestBody MemberForm form, BindingResult result) {
-		return null;
+		return ApiResponse.from(service.update(id, form));
 	}
 	
 	@PutMapping("{id}/status")
 	ApiResponse<Integer> updateStatus(@PathVariable int id, 
 			@Validated @RequestBody MemberStatusForm form, BindingResult result) {
-		return null;
+		return ApiResponse.from(service.updateStatus(id, form));
 	}
 }

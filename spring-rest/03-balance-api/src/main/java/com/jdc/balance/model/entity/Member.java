@@ -28,6 +28,8 @@ public class Member {
 	private String phone;
 	@Column(nullable = false)
 	private MemberRole role;
+	@Column(nullable = false)
+	private String password;
 
 	@Column(nullable = false, columnDefinition = "integer default 0")
 	private MemberStatus status;

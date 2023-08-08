@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.validation.annotation.Validated;
 
+import com.jdc.balance.model.entity.Member;
+import com.jdc.balance.model.entity.Transaction;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -21,4 +24,11 @@ public record TransactionForm(
 		List<TransactionItemForm> items
 		) {
 
+	public Transaction entity(Member owner) {
+		var entity = new Transaction();
+		entity.setOwner(owner);
+		entity.setIssueDate(issueDate);
+		entity.setIssueUser(userName);
+		return entity;
+	}
 }

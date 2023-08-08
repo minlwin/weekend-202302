@@ -2,6 +2,7 @@ package com.jdc.balance.model.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,12 +11,14 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Data;
 
@@ -30,7 +33,7 @@ public class Transaction {
 	private long id;
 	
 	@ManyToOne(optional = false)
-	private Member member;
+	private Member owner;
 	@ManyToOne(optional = false)
 	private Ledger ledger;
 	
@@ -38,6 +41,9 @@ public class Transaction {
 	private LocalDate issueDate;
 	@Column(nullable = false)
 	private String issueUser;
+	
+	@OneToMany(mappedBy = "transaction", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<TransactionItem> items;
 	
 	private boolean deleted;
 	

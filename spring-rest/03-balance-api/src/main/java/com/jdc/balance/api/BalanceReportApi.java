@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.balance.model.dto.ApiResponse;
-import com.jdc.balance.model.dto.PageResult;
-import com.jdc.balance.model.dto.ReportForDay;
-import com.jdc.balance.model.dto.ReportForMonth;
+import com.jdc.balance.model.dto.ReportForDayDto;
+import com.jdc.balance.model.dto.ReportForMonthDto;
+import com.jdc.balance.model.dto.response.ApiResponse;
+import com.jdc.balance.model.dto.response.PageResult;
 import com.jdc.balance.service.BalanceReportService;
 
 @RestController
@@ -23,7 +23,7 @@ public class BalanceReportApi {
 	private BalanceReportService service;
 
 	@GetMapping("{year}")
-	ApiResponse<PageResult<ReportForMonth>> monthlyReport(
+	ApiResponse<PageResult<ReportForMonthDto>> monthlyReport(
 			@PathVariable int year, 
 			@RequestParam Optional<Integer> ledger, 
 			@RequestParam(required = false, defaultValue = "0") int page,
@@ -32,13 +32,13 @@ public class BalanceReportApi {
 	}
 
 	@GetMapping("{year}/{month}")
-	ApiResponse<PageResult<ReportForDay>> dailyReport(
+	ApiResponse<PageResult<ReportForDayDto>> dailyReport(
 			@PathVariable int year, 
 			@PathVariable int month, 
 			@RequestParam Optional<Integer> ledger,
 			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "0") int pageSize) {
-		return null;
+		return ApiResponse.from(service.searchDailyReport(year, month, ledger, page, pageSize));
 	}
 	
 }

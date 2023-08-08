@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 
 import com.jdc.balance.model.entity.Ledger;
 
-public interface LadgerRepo extends JpaRepositoryImplementation<Ledger, Integer>{
+public interface LedgerRepo extends JpaRepositoryImplementation<Ledger, Integer>{
 
 }

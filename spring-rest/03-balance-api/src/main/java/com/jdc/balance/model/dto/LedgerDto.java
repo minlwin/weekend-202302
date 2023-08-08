@@ -1,5 +1,6 @@
 package com.jdc.balance.model.dto;
 
+import com.jdc.balance.model.entity.Ledger;
 import com.jdc.balance.model.enums.LedgerType;
 
 public record LedgerDto(
@@ -8,4 +9,7 @@ public record LedgerDto(
 		String name
 		) {
 
+	public static LedgerDto from(Ledger entity) {
+		return new LedgerDto(entity.getId(), entity.getType(), entity.getName());
+	}
 }

@@ -2,6 +2,7 @@ package com.jdc.balance.model.dto;
 
 import java.time.LocalDate;
 
+import com.jdc.balance.model.entity.Member;
 import com.jdc.balance.model.enums.MemberRole;
 import com.jdc.balance.model.enums.MemberStatus;
 
@@ -14,4 +15,13 @@ public record MemberListDto(
 		MemberStatus status
 		) {
 
+	public static MemberListDto from(Member entity) {
+		return new MemberListDto(
+				entity.getId(), 
+				entity.getEmail(), 
+				entity.getRole(), 
+				entity.getPhone(), 
+				entity.getRegistrationDate(), 
+				entity.getStatus());
+	}
 }
