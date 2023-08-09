@@ -26,12 +26,12 @@ public class JwtTokenProvider {
 	
 	private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 	private static final String AUTH_KEY = "rol";
-	private static final String TOKEN_HEADER = "Barrier:";
+	private static final String TOKEN_HEADER = "Bearer:";
 
 	public Authentication authenticate(String token) {
 		
 		if(StringUtils.hasLength(token)) {
-			var parser = Jwts.parserBuilder().requireIssuer(token).setSigningKey(key).build();
+			var parser = Jwts.parserBuilder().requireIssuer(issuer).setSigningKey(key).build();
 			var tokenValue = token.substring(TOKEN_HEADER.length());
 			
 			var jws = parser.parseClaimsJws(tokenValue);

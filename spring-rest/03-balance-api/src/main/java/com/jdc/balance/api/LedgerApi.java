@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,12 +36,12 @@ public class LedgerApi {
 	}
 	
 	@PostMapping
-	ApiResponse<Integer> create(@Validated @RequestBody LedgerForm form) {
+	ApiResponse<Integer> create(@Validated @RequestBody LedgerForm form, BindingResult result) {
 		return ApiResponse.from(service.create(form));
 	}
 
 	@PutMapping("{id}")
-	ApiResponse<Integer> update(@PathVariable int id, @RequestBody LedgerForm form) {
+	ApiResponse<Integer> update(@PathVariable int id, @RequestBody LedgerForm form, BindingResult result) {
 		return ApiResponse.from(service.update(id, form));
 	}
 }

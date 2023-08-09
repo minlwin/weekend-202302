@@ -13,16 +13,18 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.jdc.balance.utils.security.AppUserDetailsService;
+import com.jdc.balance.utils.security.JwtTokenAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @PropertySource("classpath:/jwt-tokens.properties")
 public class SecurityConfigurations {
-
+	
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -42,7 +44,10 @@ public class SecurityConfigurations {
 	}
 	
 	@Bean
-	SecurityFilterChain http(HttpSecurity security, HandlerMappingIntrospector introspector) throws Exception {
+	SecurityFilterChain http(
+			HttpSecurity security, 
+			HandlerMappingIntrospector introspector,
+			JwtTokenAuthenticationFilter jwtTokenAuthenticationFilter) throws Exception {
 		
 		security.csrf(csrf -> csrf.disable());
 		security.cors(cors -> {});
@@ -54,6 +59,7 @@ public class SecurityConfigurations {
 		});
 		
 		security.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		security.addFilterBefore(jwtTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 		
 		return security.build();
 	}
