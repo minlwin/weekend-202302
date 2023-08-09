@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.jdc.balance.model.dto.TransactionDetailsDto;
 import com.jdc.balance.model.dto.TransactionListDto;
@@ -23,6 +24,7 @@ import com.jdc.balance.model.enums.LedgerType;
 import com.jdc.balance.model.form.TransactionForm;
 import com.jdc.balance.service.TransactionService;
 
+@RestController
 @RequestMapping("transaction")
 public class TransactionApi {
 	

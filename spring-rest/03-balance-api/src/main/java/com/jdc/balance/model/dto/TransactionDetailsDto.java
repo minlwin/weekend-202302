@@ -9,9 +9,10 @@ import com.jdc.balance.model.entity.Transaction;
 public record TransactionDetailsDto(
 		long id,
 		LedgerDto ledger,
-		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+		@JsonFormat(pattern = "yyyy-MM-dd")
 		LocalDate issueDate,
 		String issueUser,
+		int total,
 		List<TransactionDetailsItemDto> items) {
 
 	public int getItemCount() {
@@ -29,6 +30,7 @@ public record TransactionDetailsDto(
 				LedgerDto.from(entity.getLedger()), 
 				entity.getIssueDate(), 
 				entity.getIssueUser(), 
+				entity.getTotal(),
 				entity.getItems().stream().map(TransactionDetailsItemDto::from).toList());
 	}
 }

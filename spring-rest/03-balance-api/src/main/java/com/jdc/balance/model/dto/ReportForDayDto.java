@@ -12,4 +12,7 @@ public record ReportForDayDto(
 		long transactionAmount
 		) {
 
+	public static ReportForDayDto from(LocalDate date, ReportProjectionDto dto) {
+		return new ReportForDayDto(date, LedgerDto.from(dto.getLedger()), dto.getTransactionCount(), dto.getTransactionAmount());
+	}
 }

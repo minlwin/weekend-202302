@@ -6,7 +6,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public enum AccessStatus {
 
-	Success, NoUserName, InvalidPassword, Others;
+	Success("Success"), 
+	NoUserName("Invalid User Name"), 
+	InvalidPassword("Invalid Password"), 
+	Others("Other Authentication Error.");
+	
+	private String value;
+	
+	private AccessStatus(String value) {
+		this.value = value;
+	}
+	
+	public String getValue() {
+		return value;
+	}
 	
 	public static AccessStatus getStatus(AuthenticationException e) {
 		

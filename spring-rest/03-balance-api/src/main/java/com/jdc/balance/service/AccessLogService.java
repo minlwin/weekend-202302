@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.authentication.event.AbstractAuthenticationFailureEvent;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.balance.model.dto.AccessLogDto;
@@ -75,7 +76,7 @@ public class AccessLogService {
 		return (root, query, cb) -> cb.lessThan(root.get("access"), input.get().plusDays(1).atStartOfDay());
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void success(AuthenticationSuccessEvent event) {
 		var authentication = event.getAuthentication();
 		var log = new AccessLog();
@@ -84,7 +85,7 @@ public class AccessLogService {
 		repo.save(log);
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void fails(AbstractAuthenticationFailureEvent event) {
 		var authentication = event.getAuthentication();
 		var log = new AccessLog();

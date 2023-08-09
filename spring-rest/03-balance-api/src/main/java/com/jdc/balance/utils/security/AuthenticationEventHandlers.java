@@ -10,10 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.jdc.balance.service.AccessLogService;
 
-import jakarta.transaction.Transactional;
-
 @Component
-@Transactional
 public class AuthenticationEventHandlers {
 	
 	private Logger logger = LoggerFactory.getLogger(AuthenticationEventHandlers.class);

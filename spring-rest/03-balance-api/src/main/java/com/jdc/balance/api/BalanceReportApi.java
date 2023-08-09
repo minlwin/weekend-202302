@@ -1,5 +1,6 @@
 package com.jdc.balance.api;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jdc.balance.model.dto.ReportForDayDto;
 import com.jdc.balance.model.dto.ReportForMonthDto;
 import com.jdc.balance.model.dto.response.ApiResponse;
-import com.jdc.balance.model.dto.response.PageResult;
 import com.jdc.balance.service.BalanceReportService;
 
 @RestController
@@ -23,7 +23,7 @@ public class BalanceReportApi {
 	private BalanceReportService service;
 
 	@GetMapping("{year}")
-	ApiResponse<PageResult<ReportForMonthDto>> monthlyReport(
+	ApiResponse<List<ReportForMonthDto>> monthlyReport(
 			@PathVariable int year, 
 			@RequestParam Optional<Integer> ledger, 
 			@RequestParam(required = false, defaultValue = "0") int page,
@@ -32,7 +32,7 @@ public class BalanceReportApi {
 	}
 
 	@GetMapping("{year}/{month}")
-	ApiResponse<PageResult<ReportForDayDto>> dailyReport(
+	ApiResponse<List<ReportForDayDto>> dailyReport(
 			@PathVariable int year, 
 			@PathVariable int month, 
 			@RequestParam Optional<Integer> ledger,

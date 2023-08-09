@@ -45,6 +45,8 @@ public class Transaction {
 	@OneToMany(mappedBy = "transaction", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<TransactionItem> items;
 	
+	private int total;
+	
 	private boolean deleted;
 	
 	@CreatedDate

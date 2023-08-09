@@ -22,6 +22,6 @@ public record TransactionListDto(
 				entity.getIssueDate(), 
 				entity.getIssueUser(), 
 				entity.getItems().size(), 
-				entity.getItems().stream().mapToInt(a -> a.getQuantity() * a.getUnitPrice()).sum());
+				entity.getTotal());
 	}
 }

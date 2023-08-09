@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import com.jdc.balance.model.entity.TransactionItem;
 
 public interface TransactionItemRepo extends JpaRepositoryImplementation<TransactionItem, Long>{
-
 }

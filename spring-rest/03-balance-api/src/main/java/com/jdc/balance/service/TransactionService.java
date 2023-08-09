@@ -16,9 +16,11 @@ import com.jdc.balance.model.dto.TransactionDetailsDto;
 import com.jdc.balance.model.dto.TransactionListDto;
 import com.jdc.balance.model.dto.response.PageResult;
 import com.jdc.balance.model.entity.Transaction;
+import com.jdc.balance.model.entity.TransactionItem;
 import com.jdc.balance.model.enums.LedgerType;
 import com.jdc.balance.model.form.TransactionForm;
 import com.jdc.balance.model.repo.LedgerRepo;
+import com.jdc.balance.model.repo.TransactionItemRepo;
 import com.jdc.balance.model.repo.TransactionRepo;
 import com.jdc.balance.utils.exceptions.BalanceBusinessException;
 
@@ -30,6 +32,8 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepo repo;
 	@Autowired
+	private TransactionItemRepo itemRepo;
+	@Autowired
 	private LoginUserService loginUserService;
 	@Autowired
 	private LedgerRepo ledgerRepo;
@@ -39,8 +43,12 @@ public class TransactionService {
 		
 		var owner = loginUserService.getLoginUser();
 		var transaction = form.entity(owner);
+
+		transaction.setLedger(ledgerRepo.findById(form.ledgerId())
+				.orElseThrow(() -> new BalanceBusinessException("There is no ledger with id %d.".formatted(form.ledgerId()))));
 		
 		transaction.setItems(form.items().stream().map(a -> a.entity(transaction)).toList());
+		transaction.setTotal(form.items().stream().mapToInt(a -> a.quantity() * a.unitPrice()).sum());
 		
 		var savedTransaction = repo.save(transaction);
 		
@@ -62,7 +70,11 @@ public class TransactionService {
 		transaction.setLedger(ledgerRepo.findById(form.ledgerId())
 				.orElseThrow(() -> new BalanceBusinessException("There is no ledger with id %d.".formatted(form.ledgerId()))));
 		
+		var itemIds = transaction.getItems().stream().map(TransactionItem::getId).toList();
+		itemRepo.deleteAllByIdInBatch(itemIds);
+		
 		transaction.setItems(form.items().stream().map(a -> a.entity(transaction)).toList());;
+		transaction.setTotal(form.items().stream().mapToInt(a -> a.quantity() * a.unitPrice()).sum());
 		
 		return transaction.getId();
 	}

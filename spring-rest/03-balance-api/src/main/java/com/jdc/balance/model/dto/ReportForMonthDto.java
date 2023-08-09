@@ -9,4 +9,7 @@ public record ReportForMonthDto(
 		long transactionAmount
 		) {
 
+	public static ReportForMonthDto from(YearMonth month, ReportProjectionDto dto) {
+		return new ReportForMonthDto(month, LedgerDto.from(dto.getLedger()), dto.getTransactionCount(), dto.getTransactionAmount());
+	}
 }
