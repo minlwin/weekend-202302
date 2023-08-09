@@ -1,5 +1,7 @@
 package com.jdc.balance.model.form;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -11,4 +13,7 @@ public record SignInForm(
 		String password
 		) {
 
+	public UsernamePasswordAuthenticationToken token() {
+		return new UsernamePasswordAuthenticationToken(email, password);
+	}
 }
