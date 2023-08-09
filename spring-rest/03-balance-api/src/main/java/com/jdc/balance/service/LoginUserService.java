@@ -1,6 +1,7 @@
 package com.jdc.balance.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.balance.model.entity.Member;
+import com.jdc.balance.model.form.PasswordForm;
 import com.jdc.balance.model.form.SignUpForm;
 import com.jdc.balance.model.repo.MemberRepo;
 import com.jdc.balance.utils.exceptions.BalanceBusinessException;
@@ -44,4 +46,21 @@ public class LoginUserService {
 		
 		repo.save(form.entity(passwordEncoder));
 	}
+	
+	@Transactional
+	@PreAuthorize("isAuthenticated")
+	public String chanePassword(PasswordForm form) {
+		
+		var member = repo.findOneByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
+				.orElseThrow(() -> new BalanceBusinessException("You need to be a member for this operation."));
+		
+		if(!passwordEncoder.matches(form.oldPass(), member.getPassword())) {
+			throw new BalanceBusinessException("Please check your old password.");
+		}
+		
+		member.setPassword(passwordEncoder.encode(form.newPass()));
+		
+		return "Your password has been changed successfully.";
+	}	
+	
 }

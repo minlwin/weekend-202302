@@ -25,6 +25,7 @@ public record MemberForm(
 		entity.setEmail(email);
 		entity.setName(name);
 		entity.setPhone(phone);
+		entity.setPassword(encoder.apply(phone));
 		entity.setRegistrationDate(LocalDate.now());
 		entity.setRole(MemberRole.Admin);
 		entity.setStatus(MemberStatus.Active);

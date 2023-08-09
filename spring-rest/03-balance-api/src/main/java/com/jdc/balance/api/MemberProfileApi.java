@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jdc.balance.model.dto.MemberDetailsDto;
 import com.jdc.balance.model.dto.response.ApiResponse;
 import com.jdc.balance.model.form.MemberForm;
+import com.jdc.balance.model.form.PasswordForm;
 import com.jdc.balance.service.LoginUserService;
 import com.jdc.balance.service.MemberService;
 
@@ -38,5 +39,11 @@ public class MemberProfileApi {
 		var loginUser = loginUserService.getLoginUser();
 		return ApiResponse.from(service.update(loginUser.getId(), form));
 	}
-
+	
+	@PutMapping("password")
+	ApiResponse<String> changePassword( 
+			@Validated @RequestBody PasswordForm form, BindingResult result) {
+		return ApiResponse.from(loginUserService.chanePassword(form));
+	}
+	
 }

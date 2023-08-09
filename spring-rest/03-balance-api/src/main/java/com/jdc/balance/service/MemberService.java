@@ -113,5 +113,6 @@ public class MemberService {
 		}
 		
 		return (root, query, cb) -> cb.like(cb.lower(root.get("name")), param.toLowerCase().concat("%"));
-	}	
+	}
+
 }
