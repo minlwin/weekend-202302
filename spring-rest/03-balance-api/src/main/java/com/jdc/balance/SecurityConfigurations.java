@@ -17,7 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import com.jdc.balance.model.enums.MemberRole;
 import com.jdc.balance.utils.security.AppUserDetailsService;
+import com.jdc.balance.utils.security.CustomAccessDeniedHandler;
 import com.jdc.balance.utils.security.JwtTokenAuthenticationFilter;
 
 @Configuration
@@ -47,19 +49,25 @@ public class SecurityConfigurations {
 	SecurityFilterChain http(
 			HttpSecurity security, 
 			HandlerMappingIntrospector introspector,
-			JwtTokenAuthenticationFilter jwtTokenAuthenticationFilter) throws Exception {
+			JwtTokenAuthenticationFilter jwtTokenAuthenticationFilter,
+			CustomAccessDeniedHandler customAccessDeniedHandler) throws Exception {
 		
 		security.csrf(csrf -> csrf.disable());
 		security.cors(cors -> {});
 		
 		security.authorizeHttpRequests(request -> {
 			request.requestMatchers(new MvcRequestMatcher(introspector, "/public/**")).permitAll();
-			request.requestMatchers(new MvcRequestMatcher(introspector, "/member/**")).hasAuthority("Admin");
+			request.requestMatchers(new MvcRequestMatcher(introspector, "/member/**")).hasAuthority(MemberRole.Admin.name());
 			request.anyRequest().authenticated();
 		});
 		
 		security.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		security.addFilterBefore(jwtTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+		
+		security.exceptionHandling(config -> {
+			config.accessDeniedHandler(customAccessDeniedHandler);
+			config.authenticationEntryPoint(customAccessDeniedHandler);
+		});
 		
 		return security.build();
 	}

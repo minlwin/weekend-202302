@@ -35,7 +35,7 @@ public class TransactionApi {
 			@RequestParam Optional<LocalDate> to,
 			@RequestParam(required = false, defaultValue = "") String keyword,
 			@RequestParam(required = false, defaultValue = "0") int page,
-			@RequestParam(required = false, defaultValue = "0") int pageSize) {
+			@RequestParam(required = false, defaultValue = "10") int pageSize) {
 		return ApiResponse.from(service.search(type, from, to, keyword, page, pageSize));
 	}
 	

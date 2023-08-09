@@ -27,7 +27,7 @@ public class BalanceReportApi {
 			@PathVariable int year, 
 			@RequestParam Optional<Integer> ledger, 
 			@RequestParam(required = false, defaultValue = "0") int page,
-			@RequestParam(required = false, defaultValue = "0") int pageSize) {
+			@RequestParam(required = false, defaultValue = "10") int pageSize) {
 		return ApiResponse.from(service.searhMonthlyReport(year, ledger, page, pageSize));
 	}
 
@@ -37,7 +37,7 @@ public class BalanceReportApi {
 			@PathVariable int month, 
 			@RequestParam Optional<Integer> ledger,
 			@RequestParam(required = false, defaultValue = "0") int page,
-			@RequestParam(required = false, defaultValue = "0") int pageSize) {
+			@RequestParam(required = false, defaultValue = "10") int pageSize) {
 		return ApiResponse.from(service.searchDailyReport(year, month, ledger, page, pageSize));
 	}
 	

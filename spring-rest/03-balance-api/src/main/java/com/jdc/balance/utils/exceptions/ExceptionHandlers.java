@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
@@ -33,19 +34,24 @@ public class ExceptionHandlers {
 	}
 
 	@ExceptionHandler
-	public ApiResponse<ErrorResponse> handleBusiness(BalanceBusinessException e) {
+	public ApiResponse<ErrorResponse> handle(BalanceBusinessException e) {
 		return ApiResponse.from(ErrorResponse.business(e.getMessages()));
 	}
 	
 	@ExceptionHandler
-	public ApiResponse<ErrorResponse> handleValidation(BalanceValidationException e) {
+	public ApiResponse<ErrorResponse> handle(BalanceValidationException e) {
 		return ApiResponse.from(ErrorResponse.business(e.getMessages()));
 	}	
 	
 	@ExceptionHandler
-	public ApiResponse<ErrorResponse> handleAuthenticationFailure(AuthenticationException e) {
+	public ApiResponse<ErrorResponse> handle(AccessDeniedException e) {
+		return ApiResponse.from(ErrorResponse.business(List.of("You have no permission for this operation.")));
+	}	
+
+	@ExceptionHandler
+	public ApiResponse<ErrorResponse> handle(AuthenticationException e) {
 		var message = Optional.ofNullable(authErrorMapping.get(e.getClass().getName()));
-		return ApiResponse.from(ErrorResponse.business(List.of(message.orElse("Authentication Error."))));
+		return ApiResponse.from(ErrorResponse.business(List.of(message.orElse("You need to login for this operation."))));
 	}
 
 	

@@ -30,16 +30,20 @@ public class JwtTokenProvider {
 
 	public Authentication authenticate(String token) {
 		
-		if(StringUtils.hasLength(token)) {
-			var parser = Jwts.parserBuilder().requireIssuer(issuer).setSigningKey(key).build();
-			var tokenValue = token.substring(TOKEN_HEADER.length());
-			
-			var jws = parser.parseClaimsJws(tokenValue);
-			
-			var username = jws.getBody().getSubject();
-			var authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(jws.getBody().get(AUTH_KEY).toString());
-			
-			return UsernamePasswordAuthenticationToken.authenticated(username, null, authorities);
+		try {
+			if(StringUtils.hasLength(token)) {
+				var parser = Jwts.parserBuilder().requireIssuer(issuer).setSigningKey(key).build();
+				var tokenValue = token.substring(TOKEN_HEADER.length());
+				
+				var jws = parser.parseClaimsJws(tokenValue);
+				
+				var username = jws.getBody().getSubject();
+				var authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(jws.getBody().get(AUTH_KEY).toString());
+				
+				return UsernamePasswordAuthenticationToken.authenticated(username, null, authorities);
+			}
+		} catch (Exception e) {
+			// Nothing To Do for Invalid Token
 		}
 		
 		return null;

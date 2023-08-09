@@ -37,7 +37,7 @@ public class MemberApi {
 			@RequestParam Optional<MemberStatus> status,
 			@RequestParam(required = false, defaultValue = "") String keyword,
 			@RequestParam(required = false, defaultValue = "0") int page,
-			@RequestParam(required = false, defaultValue = "0") int pageSize) {
+			@RequestParam(required = false, defaultValue = "10") int pageSize) {
 		return ApiResponse.from(service.search(role, status, keyword, page, pageSize));
 	}
 	
