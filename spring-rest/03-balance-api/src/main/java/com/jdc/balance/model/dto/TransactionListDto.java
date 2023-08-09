@@ -2,11 +2,13 @@ package com.jdc.balance.model.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jdc.balance.model.entity.Transaction;
 
 public record TransactionListDto(
 		long id,
 		LedgerDto ledger,
+		@JsonFormat(pattern = "yyyy-MM-dd")
 		LocalDate issueDate,
 		String issueUser,
 		long itemCount,

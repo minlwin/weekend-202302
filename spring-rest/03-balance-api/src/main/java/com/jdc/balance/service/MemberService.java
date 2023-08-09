@@ -31,11 +31,22 @@ public class MemberService {
 	private MemberRepo repo;
 	
 	@Autowired
+	private LedgerService ledgerService;
+	@Autowired
+	private TransactionService transactionService;
+	@Autowired
+	private AccessLogService accessLogService;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	public MemberDetailsDto findById(int id) {
-		return repo.findById(id).map(MemberDetailsDto::from)
-				.orElseThrow(() -> new BalanceBusinessException("There is no member with id %d.".formatted(id)));
+		return repo.findById(id).map(member -> 
+			MemberDetailsDto.from(member)
+					.lastAccessTime(accessLogService.findLastAccess(member.getEmail()))
+					.transactions(transactionService.findCountByMemberId(member.getId()))
+					.ledgers(ledgerService.findCountByMemberId(member.getId())))
+		.orElseThrow(() -> new BalanceBusinessException("There is no member with id %d.".formatted(id)));
 	}
 
 	public int create(MemberForm form) {

@@ -6,4 +6,6 @@ import com.jdc.balance.model.entity.Transaction;
 
 public interface TransactionRepo extends JpaRepositoryImplementation<Transaction, Long>{
 
+	Long countByOwnerId(int id);
+
 }

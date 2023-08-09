@@ -78,4 +78,8 @@ public class LedgerService {
 		return Specification.where((root, query, cb) -> 
 				cb.like(cb.lower(root.get("name")), data.toLowerCase().concat("%")));
 	}
+
+	public Long findCountByMemberId(int id) {
+		return repo.countByOwnerId(id);
+	}
 }

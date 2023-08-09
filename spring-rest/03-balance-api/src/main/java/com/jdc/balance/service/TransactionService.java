@@ -109,5 +109,9 @@ public class TransactionService {
 		}
 		return (root, query, cb) -> cb.like(cb.lower(root.get("issueUser")), type.toLowerCase().concat("%"));
 	}
+
+	public Long findCountByMemberId(int id) {
+		return repo.countByOwnerId(id);
+	}
 	
 }

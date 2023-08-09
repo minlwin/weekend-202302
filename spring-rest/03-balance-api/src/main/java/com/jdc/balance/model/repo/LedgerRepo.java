@@ -6,4 +6,6 @@ import com.jdc.balance.model.entity.Ledger;
 
 public interface LedgerRepo extends JpaRepositoryImplementation<Ledger, Integer>{
 
+	Long countByOwnerId(int id);
+
 }

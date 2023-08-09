@@ -50,13 +50,7 @@ public class MemberApi {
 	ApiResponse<Integer> create(@Validated @RequestBody MemberForm form, BindingResult result) {
 		return ApiResponse.from(service.create(form));
 	}
-	
-	@PutMapping("{id}")
-	ApiResponse<Integer> update(@PathVariable int id, 
-			@Validated @RequestBody MemberForm form, BindingResult result) {
-		return ApiResponse.from(service.update(id, form));
-	}
-	
+		
 	@PutMapping("{id}/status")
 	ApiResponse<Integer> updateStatus(@PathVariable int id, 
 			@Validated @RequestBody MemberStatusForm form, BindingResult result) {
