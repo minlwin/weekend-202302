@@ -1,1 +1,41 @@
-<p>transaction works!</p>
+<app-main-layout title="Transactions" icon="bi-receipt-cutoff">
+
+  <form [formGroup]="form" class="row">
+
+    <div class="col">
+      <label class="form-label">Ledger Type</label>
+      <select formControlName="type" class="form-select">
+        <option value="">Select Type</option>
+        <option value="Credit">Credit</option>
+        <option value="Debit">Debit</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label class="form-label">Date From</label>
+      <input formControlName="from" type="date" class="form-control">
+    </div>
+
+    <div class="col">
+      <label class="form-label">Date To</label>
+      <input formControlName="to" type="date" class="form-control">
+    </div>
+
+    <div class="col">
+      <label class="form-label">Keyword</label>
+      <input formControlName="keyword" type="text" class="form-control" placeholder="Search Keyword">
+    </div>
+
+    <div class="col align-self-end">
+      <button class="btn btn-dark me-3" (click)="search()">
+        <i class="bi bi-search"></i> Search
+      </button>
+
+      <button class="btn btn-outline-dark" [routerLink]="['../transaction-form']">
+        <i class="bi bi-plus-lg"></i> Create
+      </button>
+    </div>
+
+  </form>
+
+</app-main-layout>

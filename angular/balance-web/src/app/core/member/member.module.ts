@@ -10,6 +10,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { WidgetsModule } from 'src/app/widgets/widgets.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LedgerFormComponent } from '../../core/member/ledger/ledger-form/ledger-form.component';
+import { TransactionFormComponent } from './transaction/transaction-form/transaction-form.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LedgerFormComponent } from '../../core/member/ledger/ledger-form/ledger
     LedgerComponent,
     ProfileComponent,
     TransactionComponent,
-    LedgerFormComponent
+    LedgerFormComponent,
+    TransactionFormComponent
   ],
   imports: [
     CommonModule,

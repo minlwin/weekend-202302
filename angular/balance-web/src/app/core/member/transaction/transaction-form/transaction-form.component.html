@@ -1,0 +1,62 @@
+<div class="row">
+  <h3><i class="bi bi-pencil-square"></i> Transaction Form</h3>
+  <div class="col-6">
+    <form [formGroup]="form">
+
+      <app-form-group label="Ledger" [valid]="form.get('ledgerId')?.valid" [margin]="true">
+        <select formControlName="ledgerId" class="form-select">
+          <option value="">Select Ledger</option>
+          <option *ngFor="let item of ledgers" [value]="item.id">{{ item.name }}</option>
+        </select>
+      </app-form-group>
+
+      <app-form-group label="Issued Date" [valid]="form.get('issueDate')?.valid" [margin]="true">
+        <input formControlName="issueDate" type="date" class="form-control" placeholder="Issued Date">
+      </app-form-group>
+
+      <app-form-group label="Issued User" [valid]="form.get('userName')?.valid" [margin]="true">
+        <input formControlName="userName" type="text" class="form-control" placeholder="Issued User">
+      </app-form-group>
+
+      <div class="row mb-3">
+        <label class="col">Item Name</label>
+        <label class="col">Qty</label>
+        <label class="col">Unit Price</label>
+        <label class="col">Total</label>
+        <label class="col"></label>
+      </div>
+
+      <div formArrayName="items" class="mb-3" *ngFor="let item of itemControls.controls; index as i">
+        <div class="row justify-content-between" [formGroupName]="i">
+          <div class="col">
+            <input formControlName="itemName" type="text" class="form-control" placeholder="Item Name">
+          </div>
+          <div class="col">
+            <input formControlName="quantity" type="number" class="form-control" placeholder="Quantity">
+          </div>
+          <div class="col">
+            <input formControlName="unitPrice" type="number" class="form-control" placeholder="Unit Price">
+          </div>
+          <div class="col">
+            <input formControlName="total" type="number" class="form-control" placeholder="Total"
+              [value]="item.get('quantity')?.value * item.get('unitPrice')?.value">
+          </div>
+          <div class="col">
+            <button [class.disabled]="!itemControls.valid" class="btn btn-outline-success me-4" (click)="addItem()"><i
+                class="bi bi-plus-lg"></i></button>
+            <button [class.disabled]="itemControls.length == 1" class="btn btn-outline-danger"
+              (click)="removeItem(i)"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-end">
+        <button [routerLink]="['../transaction']" type=" button" class="btn btn-outline-dark me-3"><i
+            class="bi bi-x-lg"></i>Close</button>
+        <button [class.disabled]="!form.valid" type="button" class="btn btn-dark" (click)="save()"><i
+            class="bi bi-save"></i> Save</button>
+      </div>
+
+    </form>
+  </div>
+</div>
