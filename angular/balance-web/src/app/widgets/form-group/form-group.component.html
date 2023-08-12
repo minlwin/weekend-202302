@@ -1,0 +1,9 @@
+<div [class.mb-3]="margin">
+  <label *ngIf="label" class="form-label">{{ label }}</label>
+  <div class="input-group">
+    <ng-content></ng-content>
+    <span class="input-group-text">
+      <i class="bi" [ngClass]="valid ? 'text-success bi-check' : 'text-danger bi-x'"></i>
+    </span>
+  </div>
+</div>

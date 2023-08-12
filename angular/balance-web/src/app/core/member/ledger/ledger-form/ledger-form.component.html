@@ -1,0 +1,36 @@
+<div class="modal fade" id="ledgerForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="bi bi-pencil-square"></i> Ledger Form</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form [formGroup]="form">
+
+        <div class="modal-body">
+
+          <app-form-group title="Ledger Type" [valid]="form.get('type')?.valid" [margin]="true">
+            <select formControlName="type" class="form-select">
+              <option value="">Select Type</option>
+              <option value="Credit">Credit</option>
+              <option value="Debit">Debit</option>
+            </select>
+          </app-form-group>
+
+          <app-form-group title="Name" [valid]="form.get('name')?.valid">
+            <input formControlName="name" type="text" class="form-control" placeholder="Ledger Name">
+          </app-form-group>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-dark" (click)="save()"><i class="bi bi-save"></i> Save</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

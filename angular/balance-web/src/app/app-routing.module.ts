@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BalanceReportComponent } from './balance-report/balance-report.component';
-import { LedgerComponent } from './ledger/ledger.component';
-import { MemberComponent } from './member/member.component';
-import { TransactionComponent } from './transaction/transaction.component';
 
 const routes: Routes = [
-  {path: "balance", component: BalanceReportComponent, title: "Balance Report"},
-  {path: "ledger", component: LedgerComponent, title: "Ledger"},
-  {path: "member", component: MemberComponent, title: "Member"},
-  {path: "transaction", component: TransactionComponent, title: "Transaction"},
-  {path: "", redirectTo: "/balance", pathMatch: 'full'}
+  { path: 'public', loadChildren: () =>
+  import('./core/public/public.module').then(m => m.PublicModule) },
+  { path: 'admin', loadChildren: () =>
+  import('./core/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'member', loadChildren: () =>
+  import('./core/member/member.module').then(m => m.MemberModule) },
+  { path: '', redirectTo: 'public', pathMatch: 'full' }
 ];
 
 @NgModule({

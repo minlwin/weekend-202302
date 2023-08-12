@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <app-form-group [margin]="true" label="Email" [valid]="form.get('email')?.valid">
+    <input formControlName="email" type="email" class="form-control" placeholder="Email">
+  </app-form-group>
+
+  <app-form-group [margin]="true" label="Password" [valid]="form.get('password')?.valid">
+    <input formControlName="password" type="password" class="form-control" placeholder="Password">
+  </app-form-group>
+
+  <div class="text-end">
+    <button [routerLink]="['../sign-up']" class="btn btn-outline-dark me-3">
+      <i class="bi bi-person-check"></i> Sign Up
+    </button>
+    <button class="btn btn-dark" type="button" (click)="signIn()">
+      <i class="bi bi-unlock"></i> Sign In
+    </button>
+  </div>
+</form>

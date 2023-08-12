@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light px-3">
+  <a [routerLink]="['']" class="navbar-brand">
+    <i class="bi bi-cash"></i> My Money
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="nav">
+    <ul class="navbar-nav mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a [routerLink]="['/member/transaction']" routerLinkActive="active" class="nav-link">Transaction</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/member/ledger']" routerLinkActive="active" class="nav-link">Ledger</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/member/report']" routerLinkActive="active" class="nav-link">Report</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+      <li class="nav-item dropdown dropstart">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle"></i>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" [routerLink]="">Pyae Phyo</a></li>
+          <li><a class="dropdown-item" (click)="signOut()"><i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</nav>
+
+<div class="px-3 mt-4">
+  <router-outlet></router-outlet>
+</div>

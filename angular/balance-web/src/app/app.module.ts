@@ -3,22 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BalanceReportComponent } from './balance-report/balance-report.component';
-import { LedgerComponent } from './ledger/ledger.component';
-import { MemberComponent } from './member/member.component';
-import { TransactionComponent } from './transaction/transaction.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BalanceReportComponent,
-    LedgerComponent,
-    MemberComponent,
-    TransactionComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

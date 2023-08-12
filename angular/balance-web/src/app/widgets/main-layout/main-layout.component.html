@@ -1,0 +1,13 @@
+<!-- title with icon -->
+<h3 *ngIf="title">
+  <i class="bi" [ngClass]="icon"></i> {{ title }}
+</h3>
+
+<!-- search bar -->
+<section class="mb-3">
+  <ng-content select="[search]"></ng-content>
+</section>
+
+<main>
+  <ng-content></ng-content>
+</main>

@@ -1,0 +1,40 @@
+<app-main-layout icon="bi-file-ruled" title="Ledger">
+
+  <form class="row" [formGroup]="form" search>
+    <div class="col-3">
+      <label class="form-label">Ledger Type</label>
+      <select formControlName="type" class="form-select">
+        <option value="">Select Type</option>
+        <option value="Credit">Credit</option>
+        <option value="Debit">Debit</option>
+      </select>
+    </div>
+
+    <div class="col-3">
+      <label class="form-label">Keyword</label>
+      <input formControlName="keyword" type="text" class="form-control" placeholder="Search Keyword">
+    </div>
+
+    <div class="col align-self-end">
+      <button class="btn btn-dark me-4" (click)="search()">
+        <i class="bi bi-search"></i> Search
+      </button>
+      <button class="btn btn-outline-dark" (click)="openLedgerForm()">
+        <i class="bi bi-plus-lg"></i> Create
+      </button>
+    </div>
+  </form>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Type</td>
+        <td>Name</td>
+        <td></td>
+      </tr>
+    </thead>
+  </table>
+
+</app-main-layout>
+
+<app-ledger-form></app-ledger-form>
