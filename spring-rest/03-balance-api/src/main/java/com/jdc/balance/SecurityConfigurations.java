@@ -53,7 +53,6 @@ public class SecurityConfigurations {
 			CustomAccessDeniedHandler customAccessDeniedHandler) throws Exception {
 		
 		security.csrf(csrf -> csrf.disable());
-		security.cors(cors -> {});
 		
 		security.authorizeHttpRequests(request -> {
 			request.requestMatchers(new MvcRequestMatcher(introspector, "/public/**")).permitAll();

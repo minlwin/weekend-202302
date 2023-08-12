@@ -1,0 +1,46 @@
+<div class="row col-4 mt-4">
+  <h5>Member Sign In</h5>
+  <form [formGroup]="form">
+
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <div class="input-group">
+        <input formControlName="name" type="tel" placeholder="Enter Name" class="form-control">
+        <span class="input-group-text">
+          <i [className]="form.get('name')?.valid ? 'bi-check' : 'bi-x'"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <div class="input-group">
+        <input formControlName="email" type="email" placeholder="Enter Email" class="form-control">
+        <span class="input-group-text">
+          <i [className]="form.get('email')?.valid ? 'bi-check' : 'bi-x'"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <div class="input-group">
+        <input formControlName="password" type="password" placeholder="Enter Password" class="form-control">
+        <span class="input-group-text">
+          <i [className]="form.get('password')?.valid ? 'bi-check' : 'bi-x'"></i>
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <button (click)="signUp()" [class.disabled]="!form.valid" class="btn btn-outline-dark me-2">
+        <i class="bi-person-plus"></i> Sign Up
+      </button>
+
+      <a [routerLink]="['/signin']" class="btn btn-outline-danger">
+        <i class="bi-unlock"></i> Sign In
+      </a>
+    </div>
+
+  </form>
+</div>
