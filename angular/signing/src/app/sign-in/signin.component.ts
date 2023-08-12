@@ -24,8 +24,10 @@ export class SignInComponent {
   signIn() {
     if(this.form.valid) {
       this.api.signIn(this.form.value).subscribe(data => {
-        this.security.loginUser = data
-        this.router.navigate(['/home'])
+        if(data.success) {
+          this.security.loginUser = data.result
+          this.router.navigate(['/home'])
+        }
       })
     }
   }

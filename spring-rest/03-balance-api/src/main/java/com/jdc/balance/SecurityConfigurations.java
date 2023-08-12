@@ -54,6 +54,8 @@ public class SecurityConfigurations {
 		
 		security.csrf(csrf -> csrf.disable());
 		
+		security.cors(cors -> {});
+		
 		security.authorizeHttpRequests(request -> {
 			request.requestMatchers(new MvcRequestMatcher(introspector, "/public/**")).permitAll();
 			request.requestMatchers(new MvcRequestMatcher(introspector, "/member/**")).hasAuthority(MemberRole.Admin.name());

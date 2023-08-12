@@ -12,7 +12,7 @@ export class JwtTokenInterceptor implements HttpInterceptor {
 
     let request = req
 
-    if(this.security.loginUser) {
+    if(this.security.loginUser && this.security.loginUser.token) {
       request = req.clone({headers: req.headers.append('Authorization', this.security.loginUser?.token)})
     }
 

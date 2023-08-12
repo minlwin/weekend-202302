@@ -1,0 +1,61 @@
+<h5 class="d-flex justify-content-between">
+  <span>
+    <i class="bi-house"></i>
+    Access Logs
+  </span>
+
+  <button (click)="logout()" class="btn btn-outline-danger">
+    <i class="bi-lock"></i> Sign Out
+  </button>
+</h5>
+
+<form [formGroup]="form" class="row">
+  <div class="col-auto">
+    <label class="form-label">Type</label>
+    <select formControlName="status" class="form-select">
+      <option value="">Select All</option>
+      <option *ngFor="let item of typeList" [value]="item.value">{{item.display}}</option>
+    </select>
+  </div>
+
+  <div class="col-auto">
+    <label class="form-label">Date From</label>
+    <input formControlName="from" type="date" class="form-control">
+  </div>
+
+  <div class="col-auto">
+    <label class="form-label">Date To</label>
+    <input formControlName="to" type="date" class="form-control">
+  </div>
+
+  <div class="col btn-wrapper">
+    <button (click)="search()" class="btn btn-outline-dark">
+      <i class="bi-search"></i> Search
+    </button>
+  </div>
+</form>
+
+<table  *ngIf="pageResult" class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User Name</th>
+      <th>Access At</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of pageResult?.content">
+      <td>{{item.id}}</td>
+      <td>{{item.username}}</td>
+      <td>{{item.access}}</td>
+      <td>{{item.status}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="pageResult" class="mt-4">
+  <pager [sizes]="pageSizeList" [pager]="pageResult.page"
+   (onPageLinkClick)="clickPageLink($event)" (onPageSizeChange)="changePageSize($event)"></pager>
+</div>

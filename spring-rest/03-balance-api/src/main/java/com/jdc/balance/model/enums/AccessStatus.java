@@ -9,7 +9,7 @@ public enum AccessStatus {
 	Success("Success"), 
 	NoUserName("Invalid User Name"), 
 	InvalidPassword("Invalid Password"), 
-	Others("Other Authentication Error.");
+	Others("Other Authentication Error");
 	
 	private String value;
 	

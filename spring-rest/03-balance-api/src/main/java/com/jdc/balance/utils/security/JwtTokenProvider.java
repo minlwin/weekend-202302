@@ -44,6 +44,7 @@ public class JwtTokenProvider {
 			}
 		} catch (Exception e) {
 			// Nothing To Do for Invalid Token
+			e.printStackTrace();
 		}
 		
 		return null;

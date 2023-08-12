@@ -1,8 +1,11 @@
 export interface PageResult {
   content:any[]
-  page: {
-    currentPage: number
-    pageSize:number
-    totalSize:number
-  }
+  page: Pager
+}
+
+export interface Pager {
+  currentPage: number
+  pageSize:number
+  totalPage:number
+  totalSize:number
 }
