@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 @Component({
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent {
 
   pageResult:PageResult | undefined | null
 
@@ -27,16 +27,14 @@ export class HomeComponent implements OnInit{
     private security:SecurityContextHolder,
     private service:AccessLogService,
     private router:Router) {
-      this.form = builder.group({
-        status: '',
-        from: '',
-        to: '',
-        page: 0,
-        pageSize: 10
-      })
-  }
 
-  ngOnInit(): void {
+    this.form = builder.group({
+      status: '',
+      from: '',
+      to: '',
+      page: 0,
+      pageSize: 10
+    })
     this.search()
   }
 

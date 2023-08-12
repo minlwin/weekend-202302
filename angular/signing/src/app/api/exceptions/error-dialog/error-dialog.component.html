@@ -1,0 +1,16 @@
+<modal-dialog id="errorDialog">
+  <h5 header>Error Message</h5>
+
+  <ul body>
+    <li *ngFor="let item of messages">
+      <span>{{item}}</span>
+    </li>
+  </ul>
+
+  <div footer>
+    <button (click)="close()" class="btn btn-outline-danger">
+      <i class="bi-x"></i> Close
+    </button>
+  </div>
+
+</modal-dialog>

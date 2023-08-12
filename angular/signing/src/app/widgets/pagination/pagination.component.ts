@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Pager } from "../api/model/page-result";
+import { Pager } from "../../api/model/page-result";
 
 @Component({
   selector: 'pager',
@@ -35,7 +35,7 @@ export class PaginationComponent {
   set pager(pager:Pager | undefined) {
     this.pages = []
 
-    if(pager && pager.pageSize > 1) {
+    if(pager && pager.totalPage > 1) {
 
       this.lastPage = pager.totalPage - 1
       this.current = pager.currentPage

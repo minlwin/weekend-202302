@@ -45,13 +45,13 @@ public class ExceptionHandlers {
 	
 	@ExceptionHandler
 	public ApiResponse<ErrorResponse> handle(AccessDeniedException e) {
-		return ApiResponse.from(ErrorResponse.business(List.of("You have no permission for this operation.")));
+		return ApiResponse.from(ErrorResponse.platform(List.of("You have no permission for this operation.")));
 	}	
 
 	@ExceptionHandler
 	public ApiResponse<ErrorResponse> handle(AuthenticationException e) {
 		var message = Optional.ofNullable(authErrorMapping.get(e.getClass().getName()));
-		return ApiResponse.from(ErrorResponse.business(List.of(message.orElse("You need to login for this operation."))));
+		return ApiResponse.from(ErrorResponse.platform(List.of(message.orElse("Authentication Fails."))));
 	}
 
 	

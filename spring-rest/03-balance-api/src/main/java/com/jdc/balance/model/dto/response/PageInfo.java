@@ -7,7 +7,7 @@ public record PageInfo(
 		int pageSize,
 		long totalSize) {
 	
-	public long totalPage() {
+	public long getTotalPage() {
 		var remain = totalSize % pageSize;
 		var totalPage = totalSize / pageSize;
 		return remain > 0 ? totalPage + 1 : totalPage;
