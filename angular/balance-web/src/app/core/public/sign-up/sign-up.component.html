@@ -9,14 +9,14 @@
   </app-form-group>
 
   <app-form-group label="Password" [margin]="true" [valid]="form.get('password')?.valid">
-    <input type="password" class="form-control" placeholder="Password">
+    <input formControlName="password" type="password" class="form-control" placeholder="Password">
   </app-form-group>
 
   <div class="text-end">
     <button [routerLink]="['../sign-in']" class="btn btn-outline-dark me-3">
       <i class="bi bi-person-check"></i> Sign In
     </button>
-    <button class="btn btn-dark" type="button" (click)="signUp()">
+    <button [class.disabled]="!form.valid" class="btn btn-dark" type="button" (click)="signUp()">
       <i class="bi bi-unlock"></i> Sign Up
     </button>
   </div>

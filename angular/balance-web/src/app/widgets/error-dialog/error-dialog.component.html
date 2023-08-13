@@ -1,0 +1,13 @@
+<app-modal-dialog id="errorDialog">
+
+  <h3 header>API Errors</h3>
+
+  <div body>
+    <ul *ngFor="let item of messages">
+      <li>{{ item }}</li>
+    </ul>
+  </div>
+
+  <button class="btn btn-outline-dark" (click)="close()">Close</button>
+
+</app-modal-dialog>

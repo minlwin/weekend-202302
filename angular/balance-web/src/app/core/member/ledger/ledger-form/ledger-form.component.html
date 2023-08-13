@@ -27,7 +27,8 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-dark" (click)="save()"><i class="bi bi-save"></i> Save</button>
+          <button [class.disabled]="!form.valid" type="button" class="btn btn-dark" (click)="save()"><i
+              class="bi bi-save"></i> Save</button>
         </div>
 
       </form>
