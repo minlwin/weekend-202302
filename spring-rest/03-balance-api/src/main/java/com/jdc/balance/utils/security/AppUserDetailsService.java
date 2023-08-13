@@ -30,7 +30,7 @@ public class AppUserDetailsService implements UserDetailsService{
 	}
 	
 	private boolean isActive(Member member) {
-		if(null != member.getRegistrationDate() && member.getRegistrationDate().isBefore(LocalDate.now())) {
+		if(null != member.getRegistrationDate() && member.getRegistrationDate().isAfter(LocalDate.now())) {
 			return false;
 		}
 		

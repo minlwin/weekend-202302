@@ -40,7 +40,7 @@ public class ExceptionHandlers {
 	
 	@ExceptionHandler
 	public ApiResponse<ErrorResponse> handle(BalanceValidationException e) {
-		return ApiResponse.from(ErrorResponse.business(e.getMessages()));
+		return ApiResponse.from(ErrorResponse.validation(e.getMessages()));
 	}	
 	
 	@ExceptionHandler

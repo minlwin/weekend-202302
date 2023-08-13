@@ -89,9 +89,13 @@ public class TransactionService {
 		
 		var pageParam = PageRequest.of(page, pageSize);
 		var result = repo.findAll(
-				type(type).and(from(from)).and(to(to)).and(keyword(keyword)), 
+				owner().and(type(type)).and(from(from)).and(to(to)).and(keyword(keyword)), 
 				pageParam);
 		return PageResult.of(result.map(TransactionListDto::from));
+	}
+	
+	private Specification<Transaction> owner() {
+		return (root, query, cb) -> cb.equal(root.get("owner").get("id"), loginUserService.getLoginUser().getId());
 	}
 	
 	private Specification<Transaction> type(Optional<LedgerType> type) {
