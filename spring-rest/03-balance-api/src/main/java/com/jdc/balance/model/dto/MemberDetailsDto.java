@@ -10,6 +10,7 @@ import com.jdc.balance.model.enums.MemberStatus;
 
 public record MemberDetailsDto(
 		int id,
+		String name,
 		String email,
 		MemberRole role,
 		String phone,
@@ -23,20 +24,21 @@ public record MemberDetailsDto(
 		) {
 	
 	public MemberDetailsDto lastAccessTime(LocalDateTime time) {
-		return new MemberDetailsDto(id, email, role, phone, registAt, status, time, ledgers, transactions);
+		return new MemberDetailsDto(id, name, email, role, phone, registAt, status, time, ledgers, transactions);
 	}
 	
 	public MemberDetailsDto ledgers(long count) {
-		return new MemberDetailsDto(id, email, role, phone, registAt, status, lastAccessTime, count, transactions);
+		return new MemberDetailsDto(id, name, email, role, phone, registAt, status, lastAccessTime, count, transactions);
 	}
 	
 	public MemberDetailsDto transactions(long count) {
-		return new MemberDetailsDto(id, email, role, phone, registAt, status, lastAccessTime, ledgers, count);
+		return new MemberDetailsDto(id, name, email, role, phone, registAt, status, lastAccessTime, ledgers, count);
 	}
 
 	public static MemberDetailsDto from(Member entity) {
 		return new MemberDetailsDto(
 				entity.getId(), 
+				entity.getName(),
 				entity.getEmail(), 
 				entity.getRole(), 
 				entity.getPhone(), 

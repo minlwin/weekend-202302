@@ -29,7 +29,7 @@
         </a>
 
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" [routerLink]="">Pyae Phyo</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/member', 'profile']">{{ name }}</a></li>
           <li><a class="dropdown-item" (click)="signOut()"><i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
         </ul>
       </li>

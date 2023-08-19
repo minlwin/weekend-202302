@@ -7,6 +7,7 @@ import { BalanceReportComponent } from './balance-report/balance-report.componen
 import { TransactionFormComponent } from './transaction/transaction-form/transaction-form.component';
 import { AccessLogComponent } from './access-log/access-log.component';
 import { TransactionDetailComponent } from './transaction/transaction-detail/transaction-detail.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: MemberComponent, children: [
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'ledger', component: LedgerComponent, title: 'Balance | Ledger' },
     { path: 'report', component: BalanceReportComponent, title: 'Balance | Report' },
     { path: 'access', component: AccessLogComponent, title: 'Balance | Access Log'},
+    { path: 'profile', component: ProfileComponent, title: 'Balance | Profile' },
     { path: '', redirectTo: 'transaction', pathMatch: 'full' }
   ] }
 ];

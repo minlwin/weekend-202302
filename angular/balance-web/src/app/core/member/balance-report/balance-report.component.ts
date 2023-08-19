@@ -18,7 +18,7 @@ export class BalanceReportComponent implements OnInit {
     private ledgerService: LedgerApiService,
     private balanceReportService: BalanceReportApiService) {
     this.form = builder.group({
-      year: [0, [Validators.required, Validators.min(1000)]],
+      year: ['2023', [Validators.required, Validators.min(1000)]],
       month: 0,
       ledger: 0,
       page: 0,

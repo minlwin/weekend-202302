@@ -13,6 +13,7 @@ export class AppErrorHandler implements ErrorHandler {
     if(error.type) {
       this.zone.run(() => this.errorDialog?.show(error))
     } else {
+      console.log(error)
       this.zone.run(() => this.errorDialog?.showForFrontEndError())
     }
   }

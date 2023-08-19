@@ -8,8 +8,12 @@ import { SecurityContextService } from 'src/app/apis/security/security-context.s
 })
 export class MemberComponent {
 
+  name: string | undefined
+
   constructor(private context: SecurityContextService,
-        private router: Router) {}
+        private router: Router) {
+    this.name = context.activeUser.name
+  }
 
   signOut() {
     this.context.signOut()

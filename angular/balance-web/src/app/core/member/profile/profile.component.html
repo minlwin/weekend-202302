@@ -1,1 +1,126 @@
-<p>profile works!</p>
+<h4 class="text-secondary fw-bold"><i class="bi bi-person-square"></i> User Profile</h4>
+
+<form class="mt-4" [formGroup]="updateProfileForm">
+
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 align-self-end">
+      <label for="name" class="form-label">Name</label>
+    </div>
+    <div class="col-auto">
+      <input formControlName="name" type="text" class="col-auto form-control" id="name" [value]="profile?.name"
+        [readonly]="nameReadOnly">
+    </div>
+    <div class="col align-self-end">
+      <a (click)="enableName()" class="text-primary btn-link">Update Name</a>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 align-self-end">
+      <label for="email" class="form-label">Email</label>
+    </div>
+    <div class="col-auto">
+      <input formControlName="email" type="email" class="col-auto form-control" id="email" [value]="profile?.email"
+        [readonly]="emailReadOnly">
+    </div>
+    <div class="col align-self-end">
+      <a (click)="enableEmail()" class="text-primary btn-link">Update email</a>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 align-self-end">
+      <label for="role" class="form-label">Role</label>
+    </div>
+    <div class="col-auto">
+      <input type="role" class="col-auto form-control" id="role" [value]="profile?.role" [readonly]>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 align-self-end">
+      <label for="phone" class="form-label">Phone</label>
+    </div>
+    <div class="col-auto">
+      <input formControlName="phone" type="tel" class="col-auto form-control" id="phone"
+        [value]="profile?.phone || 'Not Set'" [readonly]="phoneReadOnly">
+    </div>
+    <div class="col align-self-end">
+      <a (click)="enablePhone()" class="text-primary btn-link">Update phone</a>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 align-self-end">
+      <label for="registerAt" class="form-label">Register At</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" class="col-auto form-control" id="registerAt" [value]="profile?.registAt || 'Not Set'"
+        [readonly]>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 align-self-end">
+      <label for="status" class="form-label">Member Status</label>
+    </div>
+    <div class="col-auto">
+      <input type="phone" class="col-auto form-control" id="status" [value]="profile?.status || 'Not Set'" [readonly]>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center mb-3">
+    <div class="col-2 align-self-end">
+      <label for="last" class="form-label">Last Access Time</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" class="col-auto form-control" id="last" [value]="profile?.lastAccessTime || 'Not Set'"
+        [readonly]>
+    </div>
+  </div>
+
+  <div class="row justify-content-end align-items-center">
+    <div class="col">
+      <button class="btn btn-outline-dark me-3" (click)="openForm()">
+        <i class="bi bi-key"></i> Change Password
+      </button>
+
+      <button type="button" class="btn btn-dark" (click)="updateProfile()">
+        <i class="bi bi-save"></i> Save Info
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<app-modal-dialog modalId="passwordForm">
+
+  <h3 header><i class="bi bi-key"></i> Change Password?</h3>
+
+  <form body [formGroup]="changePasswordForm">
+    <app-form-group label="Old Password" [valid]="changePasswordForm.get('oldPass')?.valid" [margin]="true">
+      <input formControlName="oldPass" type="password" class="form-control" placeholder="Enter old password">
+    </app-form-group>
+
+    <app-form-group label="Repeat Old Password" [valid]="changePasswordForm.get('oldPass')?.value === repeat.value"
+      [margin]="true">
+      <input #repeat type="password" class="form-control" placeholder="Enter repeat old one">
+    </app-form-group>
+
+    <span class="mb-3 text-danger" style="font-size: 14px"
+      *ngIf="changePasswordForm.get('oldPass')?.value !== repeat.value">
+      Old Password and Repeat Password must exactly same!
+    </span>
+
+    <app-form-group label="New Password" [valid]="changePasswordForm.get('newPass')?.valid">
+      <input formControlName="newPass" type="password" class="form-control" placeholder="Enter new password">
+    </app-form-group>
+  </form>
+
+  <div footer>
+    <button type="button" class="btn btn-outline-dark me-3" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>
+      Close</button>
+    <button [class.disabled]="!changePasswordForm.valid" type="button" class="btn btn-dark"
+      (click)="saveChangedPassword()"><i class="bi bi-save"></i> Save</button>
+  </div>
+</app-modal-dialog>
