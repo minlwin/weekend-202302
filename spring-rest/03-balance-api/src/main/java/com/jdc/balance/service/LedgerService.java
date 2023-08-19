@@ -56,7 +56,11 @@ public class LedgerService {
 
 	@Transactional(readOnly = true)
 	public List<LedgerDto> search(Optional<LedgerType> type, String keyword) {
-		return repo.findAll(type(type).and(keyword(keyword))).stream().map(LedgerDto::from).toList();
+		return repo.findAll(owner().and(type(type)).and(keyword(keyword))).stream().map(LedgerDto::from).toList();
+	}
+	
+	private Specification<Ledger> owner() {
+		return (root, query, cb) -> cb.equal(root.get("owner").get("id"), loginUserService.getLoginUser().getId());
 	}
 	
 	private Specification<Ledger> type(Optional<LedgerType> data) {
