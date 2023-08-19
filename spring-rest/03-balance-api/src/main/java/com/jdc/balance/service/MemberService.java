@@ -66,7 +66,7 @@ public class MemberService {
 			entity.setEmail(form.email());
 		}
 		
-		entity.setName(form.email());
+		entity.setName(form.name());
 		entity.setPhone(form.phone());
 		
 		return id;

@@ -5,7 +5,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { LedgerComponent } from './ledger/ledger.component';
 import { BalanceReportComponent } from './balance-report/balance-report.component';
 import { TransactionFormComponent } from './transaction/transaction-form/transaction-form.component';
-import { AccessLogComponent } from './access-log/access-log.component';
+import { MemberAccessLogComponent } from './member-access-log/member-access-log.component';
 import { TransactionDetailComponent } from './transaction/transaction-detail/transaction-detail.component';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'transaction-form', component: TransactionFormComponent, title: 'Balance | Transaction Form' },
     { path: 'ledger', component: LedgerComponent, title: 'Balance | Ledger' },
     { path: 'report', component: BalanceReportComponent, title: 'Balance | Report' },
-    { path: 'access', component: AccessLogComponent, title: 'Balance | Access Log'},
+    { path: 'access', component: MemberAccessLogComponent, title: 'Balance | Access Log'},
     { path: 'profile', component: ProfileComponent, title: 'Balance | Profile' },
     { path: '', redirectTo: 'transaction', pathMatch: 'full' }
   ] }

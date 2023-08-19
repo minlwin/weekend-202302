@@ -38,9 +38,9 @@
 
   </form>
 
-  <app-no-data *ngIf="transactions.length == 0" data="Transaction"></app-no-data>
+  <app-no-data *ngIf="pageResult?.content?.length == 0" data="Transaction"></app-no-data>
 
-  <table *ngIf="transactions.length > 0" class="table table-striped mt-3">
+  <table *ngIf="pageResult?.content?.length" class="table table-striped mt-3">
     <thead>
       <tr>
         <td>Ledger Name</td>
@@ -54,7 +54,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let item of transactions">
+      <tr *ngFor="let item of pageResult?.content">
         <td>{{ item.ledger.name }}</td>
         <td>{{ item.ledger.type }}</td>
         <td>{{ item.issueDate }}</td>

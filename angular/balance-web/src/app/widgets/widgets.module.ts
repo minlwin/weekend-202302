@@ -6,6 +6,8 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { NoDataComponent } from './no-data/no-data.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { AccessLogComponent } from './access-log/access-log.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import { PaginationComponent } from './pagination/pagination.component';
     ModalDialogComponent,
     NoDataComponent,
     ErrorDialogComponent,
-    PaginationComponent
+    PaginationComponent,
+    AccessLogComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     FormGroupComponent,
@@ -25,7 +29,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     ModalDialogComponent,
     NoDataComponent,
     ErrorDialogComponent,
-    PaginationComponent
+    PaginationComponent,
+    AccessLogComponent
   ]
 })
 export class WidgetsModule { }

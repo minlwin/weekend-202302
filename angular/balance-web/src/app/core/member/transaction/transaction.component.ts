@@ -14,8 +14,6 @@ export class TransactionComponent implements OnInit {
   pageResult:PageResult | undefined | null
   pageSizeList = [5, 10, 25, 50]
 
-  transactions: any = []
-
   constructor(builder: FormBuilder, private transactionService: TransactionApiService) {
     this.form = builder.group({
       type: '',
@@ -35,7 +33,6 @@ export class TransactionComponent implements OnInit {
     this.transactionService.search(this.form.value).subscribe(data => {
       if(data.success) {
         this.pageResult = data.result
-        this.transactions = this.pageResult?.content
       }
     })
   }

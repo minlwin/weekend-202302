@@ -23,9 +23,9 @@ export class AccessLogComponent {
   ]
 
   constructor(
-    builder:FormBuilder,
-    private security:SecurityContextService,
-    private service:AccessLogApiService) {
+    builder: FormBuilder,
+    private security: SecurityContextService,
+    private service: AccessLogApiService) {
 
     this.form = builder.group({
       status: '',

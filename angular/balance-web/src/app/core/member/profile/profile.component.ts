@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
     if(this.updateProfileForm.valid) {
       this.profileService.updateProfile(this.updateProfileForm.value).subscribe(resp => {
         if(resp.success) {
-          this.router.navigate(['/member', 'profile'])
+          this.router.navigate(['/member'])
         }
       })
     }
@@ -62,15 +62,25 @@ export class ProfileComponent implements OnInit {
   }
 
   enableName() {
-    this.nameReadOnly = ''
+    if(this.nameReadOnly) {
+      this.nameReadOnly = ''
+    } else {
+      this.nameReadOnly = 'readonly'
+    }
   }
 
   enableEmail() {
-    this.emailReadOnly = ''
+    if(this.emailReadOnly)
+      this.emailReadOnly = ''
+    else
+      this.emailReadOnly = 'readonly'
   }
 
   enablePhone() {
-    this.phoneReadOnly = ''
+    if(this.phoneReadOnly)
+      this.phoneReadOnly = ''
+    else
+      this.phoneReadOnly = 'readonly'
   }
 
 }

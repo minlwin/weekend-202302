@@ -1,1 +1,104 @@
-<p>members works!</p>
+<app-main-layout title="Member Management" icon="bi-person-lines-fill">
+
+  <form search class="row" [formGroup]="form">
+
+    <div class="col-auto">
+      <label for="role" class="form-label">Member Role</label>
+      <select formControlName="role" id="role" class="form-select">
+        <option value="">Select Role</option>
+        <option value="Admin">Admin</option>
+        <option value="Member">Member</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <label for="status" class="form-label">Member Status</label>
+      <select formControlName="status" id="status" class="form-select">
+        <option value="">Select Status</option>
+        <option value="Active">Active</option>
+        <option value="Denied">Inactive</option>
+        <option value="Lock">Locked</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <label for="keyword" class="form-label">Keyword</label>
+      <input formControlName="keyword" type="text" id="keyword" class="form-control" placeholder="Search Keyword">
+    </div>
+
+    <div class="col-auto align-self-end" (click)="search()">
+      <button class="btn btn-outline-dark me-4">
+        <i class="bi bi-search"></i> Search
+      </button>
+      <button class="btn btn-dark" (click)="openMemberForm()">
+        <i class="bi bi-plus-lg"></i> Create
+      </button>
+    </div>
+
+  </form>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Email</td>
+        <td>Role</td>
+        <td>Phone</td>
+        <td>Registered Date</td>
+        <td>Status</td>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of pageResult?.content">
+        <td>{{ item.email }}</td>
+        <td>{{ item.role }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.registAt }}</td>
+        <td>{{ item.status }}</td>
+        <td>
+          <a [routerLink]="['/admin', 'member', 'detail']" [queryParams]="{id: item.id}"
+            class="btn btn-sm btn-outline-danger me-3">
+            <i class="bi bi-send"></i>
+          </a>
+          <button class="btn btn-sm btn-outline-primary" (click)="openStatusForm()">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</app-main-layout>
+
+<app-modal-dialog id="memberForm">
+  <h3 header><i class="bi bi-plus-square-fill"></i> Add Member</h3>
+
+  <form body [formGroup]="memberForm">
+
+    <app-form-group label="Name" [valid]="memberForm.get('name')?.valid" [margin]="true">
+      <input formControlName="name" type="text" class="form-control" placeholder="Member name">
+    </app-form-group>
+
+    <app-form-group label="Email" [valid]="memberForm.get('email')?.valid" [margin]="true">
+      <input formControlName="email" type="email" class="form-control" placeholder="Member email">
+    </app-form-group>
+
+    <app-form-group label="Phone" [valid]="memberForm.get('phone')?.valid">
+      <input formControlName="phone" type="tel" class="form-control" placeholder="Member phone">
+    </app-form-group>
+
+  </form>
+
+  <div footer>
+    <button footer type="button" class="btn btn-outline-dark me-3" (click)="closeModalForm()">
+      <i class="bi bi-x"> Close</i>
+    </button>
+    <button class="btn btn-dark" (click)="saveMember()">
+      <i class="bi bi-save"></i> Save
+    </button>
+  </div>
+</app-modal-dialog>
+
+<app-modal-dialog id="statusForm"></app-modal-dialog>

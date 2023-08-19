@@ -11,7 +11,7 @@
         [readonly]="nameReadOnly">
     </div>
     <div class="col align-self-end">
-      <a (click)="enableName()" class="text-primary btn-link">Update Name</a>
+      <a (click)="enableName()" class="text-primary btn-link">{{ nameReadOnly ? 'Enable Name' : 'Disable Name' }}</a>
     </div>
   </div>
 
@@ -24,7 +24,8 @@
         [readonly]="emailReadOnly">
     </div>
     <div class="col align-self-end">
-      <a (click)="enableEmail()" class="text-primary btn-link">Update email</a>
+      <a (click)="enableEmail()" class="text-primary btn-link">{{ emailReadOnly ? 'Enable Email' : 'Disable Email'
+        }}</a>
     </div>
   </div>
 
@@ -46,7 +47,8 @@
         [value]="profile?.phone || 'Not Set'" [readonly]="phoneReadOnly">
     </div>
     <div class="col align-self-end">
-      <a (click)="enablePhone()" class="text-primary btn-link">Update phone</a>
+      <a (click)="enablePhone()" class="text-primary btn-link">{{ phoneReadOnly ? 'Enable Phone' : 'Disable Phone'
+        }}</a>
     </div>
   </div>
 
