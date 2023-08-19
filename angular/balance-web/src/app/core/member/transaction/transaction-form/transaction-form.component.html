@@ -1,11 +1,12 @@
 <div class="row">
-  <h3><i class="bi bi-pencil-square"></i> Transaction Form</h3>
+  <h3><i class="bi bi-{{ isNew ? 'plus-square-fill' : 'pencil-square'}}"></i> {{ isNew ? 'Add New ' : 'Edit '
+    }} Transaction</h3>
   <div class="col-6">
     <form [formGroup]="form">
 
       <app-form-group label="Ledger" [valid]="form.get('ledgerId')?.valid" [margin]="true">
         <select formControlName="ledgerId" class="form-select">
-          <option value="">Select Ledger</option>
+          <option value="0">Select Ledger</option>
           <option *ngFor="let item of ledgers" [value]="item.id">{{ item.name }}</option>
         </select>
       </app-form-group>
@@ -27,7 +28,7 @@
       </div>
 
       <div formArrayName="items" class="mb-3" *ngFor="let item of itemControls.controls; index as i">
-        <div class="row justify-content-between" [formGroupName]="i">
+        <div class="row" [formGroupName]="i">
           <div class="col">
             <input formControlName="itemName" type="text" class="form-control" placeholder="Item Name">
           </div>

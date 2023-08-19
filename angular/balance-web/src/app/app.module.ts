@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { SecurityInteceptor } from './apis/security/security-inteceptor';
-import { ErrorResponseInterceptor } from './apis/error/response-error-inteceptor';
+import { SecurityInterceptor } from './apis/security/security-interceptor';
+import { WidgetsModule } from './widgets/widgets.module';
+import { ErrorTranslationInterceptor } from './apis/error/error-translation-interceptor';
 import { AppErrorHandler } from './apis/error/app-error-handler';
 
 @NgModule({
@@ -15,13 +16,14 @@ import { AppErrorHandler } from './apis/error/app-error-handler';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    WidgetsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,
-      useClass: SecurityInteceptor, multi: true },
+      useClass: SecurityInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS,
-      useClass: ErrorResponseInterceptor, multi: true },
+      useClass: ErrorTranslationInterceptor, multi: true },
     { provide: ErrorHandler,
       useClass: AppErrorHandler }
   ],

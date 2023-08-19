@@ -3,8 +3,11 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="bi bi-pencil-square"></i> Ledger Form</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><i
+            class="bi bi-{{ isNew ? 'plus-square-fill' : 'pencil-square'}}"></i> {{ isNew ? 'Add New ' : 'Edit '
+          }}Ledger</h1>
+        <button (click)="initForm()" type="button" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
 
       <form [formGroup]="form">
@@ -26,7 +29,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" (click)="initForm()">Close</button>
           <button [class.disabled]="!form.valid" type="button" class="btn btn-dark" (click)="save()"><i
               class="bi bi-save"></i> Save</button>
         </div>

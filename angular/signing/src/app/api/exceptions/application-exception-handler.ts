@@ -14,7 +14,6 @@ export class ApplicationExceptionHandler implements ErrorHandler {
       // API Error
       this.zone.run(() => this.errorDialog?.show(error))
     } else {
-      console.log(error)
       this.zone.run(() => this.errorDialog?.showForFrontEndError())
     }
   }

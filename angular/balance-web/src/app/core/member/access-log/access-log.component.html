@@ -1,0 +1,57 @@
+<app-main-layout title="Access Log" icon="bi-receipt-cutoff">
+
+  <form search [formGroup]="form" class="row">
+
+    <div class="col-auto">
+      <label class="form-label">Type</label>
+      <select formControlName="status" class="form-select">
+        <option value="">Select All</option>
+        <option *ngFor="let item of typeList" [value]="item.value">{{item.display}}</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <label class="form-label">Date From</label>
+      <input formControlName="from" type="date" class="form-control">
+    </div>
+
+    <div class="col-auto">
+      <label class="form-label">Date To</label>
+      <input formControlName="to" type="date" class="form-control">
+    </div>
+
+    <div class="col align-self-end">
+      <button (click)="search()" class="btn btn-outline-dark">
+        <i class="bi-search"></i> Search
+      </button>
+    </div>
+  </form>
+
+  <app-no-data *ngIf="!pageResult" data="Transaction"></app-no-data>
+
+  <table *ngIf="pageResult" class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Access At</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of pageResult?.content">
+        <td>{{item.id}}</td>
+        <td>{{item.username}}</td>
+        <td>{{item.access}}</td>
+        <td>{{item.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</app-main-layout>
+
+<div *ngIf="pageResult" class="mt-4">
+  <pager [sizes]="pageSizeList" [pager]="pageResult.page" (onPageLinkClick)="clickPageLink($event)"
+    (onPageSizeChange)="changePageSize($event)"></pager>
+</div>

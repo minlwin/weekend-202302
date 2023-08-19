@@ -11,7 +11,7 @@
     <button [routerLink]="['../sign-up']" class="btn btn-outline-dark me-3">
       <i class="bi bi-person-check"></i> Sign Up
     </button>
-    <button class="btn btn-dark" type="button" (click)="signIn()">
+    <button [class.disabled]="!form.valid" class="btn btn-dark" type="button" (click)="signIn()">
       <i class="bi bi-unlock"></i> Sign In
     </button>
   </div>

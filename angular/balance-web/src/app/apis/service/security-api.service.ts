@@ -12,7 +12,7 @@ export class SecurityApiService {
 
   constructor(private http: HttpClient) {}
 
-  singIn(form: any) {
+  signIn(form: any) {
     return this.http.post<ApiResponse>(`${DOMAIN}/authenticate`, form)
   }
 

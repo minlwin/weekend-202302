@@ -1,13 +1,16 @@
 <app-modal-dialog id="errorDialog">
+  <h5 header>Error</h5>
 
-  <h3 header>API Errors</h3>
+  <ul body>
+    <li *ngFor="let item of messages">
+      <span>{{item}}</span>
+    </li>
+  </ul>
 
-  <div body>
-    <ul *ngFor="let item of messages">
-      <li>{{ item }}</li>
-    </ul>
+  <div footer>
+    <button (click)="close()" class="btn btn-outline-danger">
+      <i class="bi-x"></i> Close
+    </button>
   </div>
-
-  <button class="btn btn-outline-dark" (click)="close()">Close</button>
 
 </app-modal-dialog>

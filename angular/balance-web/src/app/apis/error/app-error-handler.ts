@@ -9,10 +9,11 @@ export class AppErrorHandler implements ErrorHandler {
   constructor(private zone: NgZone) {}
 
   handleError(error: any): void {
+
     if(error.type) {
       this.zone.run(() => this.errorDialog?.show(error))
     } else {
-      this.zone.run(() => this.errorDialog?.showAppError())
+      this.zone.run(() => this.errorDialog?.showForFrontEndError())
     }
   }
 

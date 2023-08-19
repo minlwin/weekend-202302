@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 
 declare const bootstrap: any
 
@@ -6,15 +6,15 @@ declare const bootstrap: any
   selector: 'app-modal-dialog',
   templateUrl: './modal-dialog.component.html'
 })
-export class ModalDialogComponent {
+export class ModalDialogComponent implements AfterViewInit {
 
   @Input()
   modalId?: string
 
   private dialog: any
 
-  ngAFterViewInit(): void {
-    this.dialog = new bootstrap.Modal(`#${this.modalId}`, {backdrop: false})
+  ngAfterViewInit(): void {
+    this.dialog = new bootstrap.Modal(`#${this.modalId}`)
   }
 
   show() {

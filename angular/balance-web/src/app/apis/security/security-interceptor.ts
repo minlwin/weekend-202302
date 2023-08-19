@@ -4,7 +4,7 @@ import { Observable, tap } from "rxjs";
 import { SecurityContextService } from "./security-context.service";
 
 @Injectable()
-export class SecurityInteceptor implements HttpInterceptor {
+export class SecurityInterceptor implements HttpInterceptor {
 
   constructor(private context: SecurityContextService) {}
 

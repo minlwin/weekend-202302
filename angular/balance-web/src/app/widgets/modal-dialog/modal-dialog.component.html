@@ -3,15 +3,15 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <ng-content select="header"></ng-content>
+        <ng-content select="[header]"></ng-content>
       </div>
 
       <div class="modal-body">
-        <ng-content select="body"></ng-content>
+        <ng-content select="[body]"></ng-content>
       </div>
 
       <div class="modal-footer">
-        <ng-content select="footer"></ng-content>
+        <ng-content select="[footer]"></ng-content>
       </div>
 
     </div>

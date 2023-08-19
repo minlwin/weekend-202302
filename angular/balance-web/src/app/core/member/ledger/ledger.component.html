@@ -1,7 +1,7 @@
 <app-main-layout icon="bi-file-ruled" title="Ledger">
 
   <form class="row" [formGroup]="form" search>
-    <div class="col-3">
+    <div class="col-2">
       <label class="form-label">Ledger Type</label>
       <select formControlName="type" class="form-select">
         <option value="">Select Type</option>
@@ -25,16 +25,26 @@
     </div>
   </form>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <td>Type</td>
-        <td>Name</td>
-        <td></td>
-      </tr>
-    </thead>
-  </table>
+  <app-no-data *ngIf="ledgers.length == 0" data="Ledger"></app-no-data>
+
+  <div *ngIf="ledgers.length > 0">
+    <div class="row">
+      <div class="col-3 p-2" *ngFor="let item of ledgers">
+        <div class="d-flex border border-secondary rounded-2 p-3">
+          <div class="w-100">
+            <h4>{{ item.name }}</h4>
+            <h6 class="text-danger">{{ item.type }}</h6>
+          </div>
+          <div class="align-self-center">
+            <button (click)="edit(item)" class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </app-main-layout>
 
-<app-ledger-form (onSave)="save($event)"></app-ledger-form>
+<app-ledger-form [data]="targetLedger" (onSave)="save($event)"></app-ledger-form>

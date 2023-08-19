@@ -13,6 +13,7 @@ export class LedgerComponent implements OnInit {
   form: FormGroup
   ledgerFormModal: any
   ledgers: any = []
+  targetLedger: any
 
   constructor(builder: FormBuilder,
     private ledgerService: LedgerApiService) {
@@ -32,19 +33,21 @@ export class LedgerComponent implements OnInit {
   }
 
   search() {
-    if(this.form.valid) {
-      this.ledgerService.search(this.form.value).subscribe(data => this.ledgers = data)
-    }
+    this.ledgerService.search(this.form.value).subscribe(data => this.ledgers = data.result)
   }
 
   save(data: any) {
-    this.ledgerService.createLedger(data).subscribe(resp => {
+    this.ledgerService.saveLedger(data).subscribe(resp => {
       if(resp.success) {
         this.ledgerFormModal.hide()
       }
+      this.search()
     })
+  }
 
-    this.search()
+  edit(data: any) {
+    this.targetLedger = data
+    this.ledgerFormModal.show()
   }
 
 }

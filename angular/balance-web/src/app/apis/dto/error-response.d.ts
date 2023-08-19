@@ -1,4 +1,4 @@
 export class ErrorResponse {
-  errorType: string
+  type: string
   messages: []
 }

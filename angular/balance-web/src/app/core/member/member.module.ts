@@ -11,6 +11,8 @@ import { WidgetsModule } from 'src/app/widgets/widgets.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LedgerFormComponent } from '../../core/member/ledger/ledger-form/ledger-form.component';
 import { TransactionFormComponent } from './transaction/transaction-form/transaction-form.component';
+import { AccessLogComponent } from './access-log/access-log.component';
+import { TransactionDetailComponent } from './transaction/transaction-detail/transaction-detail.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { TransactionFormComponent } from './transaction/transaction-form/transac
     ProfileComponent,
     TransactionComponent,
     LedgerFormComponent,
-    TransactionFormComponent
+    TransactionFormComponent,
+    AccessLogComponent,
+    TransactionDetailComponent
   ],
   imports: [
     CommonModule,

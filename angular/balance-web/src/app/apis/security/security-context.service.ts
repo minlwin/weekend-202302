@@ -22,7 +22,7 @@ export class SecurityContextService {
       this._activeUser = user
       localStorage.setItem(ACTIVE_USER_KEY, JSON.stringify(user))
     } else {
-
+      this.signOut()
     }
 
   }

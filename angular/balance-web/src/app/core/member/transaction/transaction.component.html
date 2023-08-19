@@ -1,8 +1,8 @@
 <app-main-layout title="Transactions" icon="bi-receipt-cutoff">
 
-  <form [formGroup]="form" class="row">
+  <form search [formGroup]="form" class="row">
 
-    <div class="col">
+    <div class="col-2">
       <label class="form-label">Ledger Type</label>
       <select formControlName="type" class="form-select">
         <option value="">Select Type</option>
@@ -11,12 +11,12 @@
       </select>
     </div>
 
-    <div class="col">
+    <div class="col-2">
       <label class="form-label">Date From</label>
       <input formControlName="from" type="date" class="form-control">
     </div>
 
-    <div class="col">
+    <div class="col-2">
       <label class="form-label">Date To</label>
       <input formControlName="to" type="date" class="form-control">
     </div>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="col align-self-end">
-      <button class="btn btn-dark me-3" (click)="search()">
+      <button class="btn btn-dark me-4" (click)="search()">
         <i class="bi bi-search"></i> Search
       </button>
 
@@ -38,4 +38,46 @@
 
   </form>
 
+  <app-no-data *ngIf="transactions.length == 0" data="Transaction"></app-no-data>
+
+  <table *ngIf="transactions.length > 0" class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <td>Ledger Name</td>
+        <td>Ledger Type</td>
+        <td>Issued Date</td>
+        <td>Issued User</td>
+        <td>Item Count</td>
+        <td>Total</td>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of transactions">
+        <td>{{ item.ledger.name }}</td>
+        <td>{{ item.ledger.type }}</td>
+        <td>{{ item.issueDate }}</td>
+        <td>{{ item.issueUser }}</td>
+        <td>{{ item.itemCount }}</td>
+        <td class="text-end pe-3">{{ item.total }}</td>
+        <td class="text-end pe-3">
+          <a [routerLink]="['/member/transaction/detail']" [queryParams]="{id: item.id}"
+            class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-send"></i>
+          </a>
+          <a [routerLink]="['/member', 'transaction-form']" [queryParams]="{id: item.id}"
+            class="btn btn-sm btn-outline-primary ms-3">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </app-main-layout>
+
+<div *ngIf="pageResult" class="mt-4">
+  <pager [sizes]="pageSizeList" [pager]="pageResult.page" (onPageLinkClick)="clickPageLink($event)"
+    (onPageSizeChange)="changePageSize($event)"></pager>
+</div>
