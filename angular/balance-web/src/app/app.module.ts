@@ -24,8 +24,8 @@ import { AppErrorHandler } from './apis/error/app-error-handler';
       useClass: SecurityInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS,
       useClass: ErrorTranslationInterceptor, multi: true },
-    { provide: ErrorHandler,
-      useClass: AppErrorHandler }
+    // { provide: ErrorHandler,
+    //   useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

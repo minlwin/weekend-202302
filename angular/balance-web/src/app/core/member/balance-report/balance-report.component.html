@@ -1,1 +1,59 @@
-<p>balance works!</p>
+<app-main-layout title="Balance Report{{ isDaily ? '(Daily)' : '(Monthly)' }}" icon="bi-graph-up-arrow">
+
+  <form search [formGroup]="form" class="row">
+
+    <div class="col-auto">
+      <label class="form-label">Year</label>
+      <input formControlName="year" type="date" class="form-control">
+    </div>
+
+    <div class="col-auto">
+      <label class="form-label">Month</label>
+      <input formControlName="month" type="date" class="form-control">
+    </div>
+
+    <div class="col-auto">
+      <label class="form-label">Ledger</label>
+      <select formControlName="ledger" class="form-select">
+        <option value="0">Select Ledger</option>
+        <option *ngFor="let item of ledgers" [value]="item.id">{{ item.name }}</option>
+      </select>
+    </div>
+
+    <div class="col align-self-end">
+      <button class="btn btn-dark me-4" (click)="search()">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
+
+  </form>
+
+  <app-no-data *ngIf="reports.length == 0" data="Balance Report"></app-no-data>
+
+  <table *ngIf="reports.length > 0" class="table table-striped">
+    <thead>
+      <tr>
+        <td>{{ isDaily ? 'Date' : 'Month' }}</td>
+        <td>Ledger Name</td>
+        <td>Ledger Type</td>
+        <td>Count</td>
+        <td>Amount</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of reports">
+        <td>{{ isDaily ? item.date : item.month }}</td>
+        <td>{{ item.ledger.name }}</td>
+        <td>{{ item.ledger.type }}</td>
+        <td>{{ item.transactionCount }}</td>
+        <td>{{ item.transactionAmount }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</app-main-layout>
+
+<!-- <div *ngIf="pageResult" class="mt-4">
+  <pager [sizes]="pageSizeList" [pager]="pageResult.page" (onPageLinkClick)="clickPageLink($event)"
+    (onPageSizeChange)="changePageSize($event)"></pager>
+</div> -->
