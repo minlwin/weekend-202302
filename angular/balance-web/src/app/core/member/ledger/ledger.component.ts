@@ -50,4 +50,12 @@ export class LedgerComponent implements OnInit {
     this.ledgerFormModal.show()
   }
 
+  upload(files: FileList) {
+    if(files.length > 0)
+      this.ledgerService.upload(files[0]).subscribe(resp => {
+        if(resp.success)
+          this.search()
+      })
+  }
+
 }

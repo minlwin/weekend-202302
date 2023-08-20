@@ -25,7 +25,7 @@ export class MembersApiService {
   }
 
   updateStatus(form: any) {
-    const { id, status } = form
+    const { id, ...status } = form
     return this.http.put<ApiResponse>(`${DOMAIN}/${id}/status`, status)
   }
 

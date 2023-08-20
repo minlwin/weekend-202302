@@ -4,6 +4,8 @@ import { PageResult } from 'src/app/apis/dto/page-result';
 import { MembersApiService } from 'src/app/apis/service/members-api.service';
 import { ModalDialogComponent } from 'src/app/widgets/modal-dialog/modal-dialog.component';
 
+declare var bootstrap: any
+
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html'
@@ -11,7 +13,9 @@ import { ModalDialogComponent } from 'src/app/widgets/modal-dialog/modal-dialog.
 export class MembersComponent implements OnInit {
 
   @ViewChild(ModalDialogComponent)
-  modal?: ModalDialogComponent
+  memberModal?: ModalDialogComponent
+
+  statusModal: any
 
   form: FormGroup
   memberForm: FormGroup
@@ -36,11 +40,13 @@ export class MembersComponent implements OnInit {
     })
 
     this.statusForm = builder.group({
+      id: 0,
       status: ['', Validators.required]
     })
   }
 
   ngOnInit(): void {
+    this.statusModal = new bootstrap.Modal('#statusForm')
     this.search()
   }
 
@@ -51,25 +57,49 @@ export class MembersComponent implements OnInit {
   }
 
   openMemberForm() {
-    this.modal?.show()
+    this.memberModal?.show()
   }
 
-  openStatusForm(){
-    this.modal?.show()
+  openStatusForm(id: number, status: string){
+    this.statusForm.patchValue({
+      id: id,
+      status: status
+    })
+    this.statusModal?.show()
   }
 
   closeModalForm() {
-    this.modal?.hide()
+    this.memberModal?.hide()
   }
 
   saveMember() {
     if(this.memberForm.valid) {
       this.memberService.create(this.memberForm.value).subscribe(resp => {
-        console.log(resp)
         if(resp.success)
-          this.modal?.hide()
+          this.memberModal?.hide()
+
+        this.search()
+        this.initMemberForm()
       })
     }
+  }
+
+  updateStatus() {
+    if(this.statusForm.valid)
+      this.memberService.updateStatus(this.statusForm.value).subscribe(resp => {
+        if(resp.success)
+          this.statusModal.hide()
+
+        this.search()
+      })
+  }
+
+  initMemberForm() {
+    this.memberForm.patchValue({
+      name: '',
+      phone: '',
+      email: ''
+    })
   }
 
 }

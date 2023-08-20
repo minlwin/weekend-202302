@@ -32,4 +32,10 @@ export class LedgerApiService {
     return this.http.get<ApiResponse>(DOMAIN, {params: searchParams})
   }
 
+  upload(file: any) {
+    var fd = new FormData
+    fd.append('file', file, file.name)
+    return this.http.post<ApiResponse>(`${DOMAIN}/upload`, fd)
+  }
+
 }

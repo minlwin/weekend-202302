@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SecurityContextService } from 'src/app/apis/security/security-context.service';
 import { ProfileApiService } from 'src/app/apis/service/profile.service';
 import { ModalDialogComponent } from 'src/app/widgets/modal-dialog/modal-dialog.component';
 
@@ -21,12 +22,13 @@ export class ProfileComponent implements OnInit {
   nameReadOnly = 'readonly'
 
   constructor(private builder: FormBuilder,
+    private context: SecurityContextService,
     private profileService: ProfileApiService,
     private router: Router) {
 
     this.updateProfileForm = this.builder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      name: [context.activeUser.name, Validators.required],
+      email: [context.activeUser.email, [Validators.required, Validators.email]],
       phone: ''
     })
 

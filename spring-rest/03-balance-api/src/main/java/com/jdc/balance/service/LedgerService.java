@@ -86,4 +86,18 @@ public class LedgerService {
 	public Long findCountByMemberId(int id) {
 		return repo.countByOwnerId(id);
 	}
+
+	public Integer upload(List<String> lines) {
+		
+		try {
+			for(String line : lines) {
+				var arr = line.split("\t");
+				create(new LedgerForm(LedgerType.valueOf(arr[1]), arr[0]));
+			}
+		} catch (Exception e) {
+			throw new BalanceBusinessException("Invalid File Format.");
+		}
+		
+		return lines.size();
+	}
 }

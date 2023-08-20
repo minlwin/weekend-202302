@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.balance.model.dto.LedgerDto;
 import com.jdc.balance.model.dto.response.ApiResponse;
 import com.jdc.balance.model.enums.LedgerType;
 import com.jdc.balance.model.form.LedgerForm;
 import com.jdc.balance.service.LedgerService;
+import com.jdc.balance.service.ParserService;
 
 @RestController
 @RequestMapping("ledger")
@@ -27,6 +29,9 @@ public class LedgerApi {
 	
 	@Autowired
 	private LedgerService service;
+	
+	@Autowired
+	private ParserService parse;
 
 	@GetMapping
 	ApiResponse<List<LedgerDto>> search(
@@ -43,5 +48,10 @@ public class LedgerApi {
 	@PutMapping("{id}")
 	ApiResponse<Integer> update(@PathVariable int id, @RequestBody LedgerForm form, BindingResult result) {
 		return ApiResponse.from(service.update(id, form));
+	}
+	
+	@PostMapping("upload")
+	ApiResponse<Integer> upload(@RequestParam MultipartFile file) {
+		return ApiResponse.from(service.upload(parse.parse(file)));
 	}
 }

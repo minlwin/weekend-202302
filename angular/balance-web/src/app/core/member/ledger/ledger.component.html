@@ -16,11 +16,14 @@
     </div>
 
     <div class="col align-self-end">
-      <button class="btn btn-dark me-4" (click)="search()">
+      <button class="btn btn-outline-dark me-4" (click)="search()">
         <i class="bi bi-search"></i> Search
       </button>
-      <button class="btn btn-outline-dark" (click)="openLedgerForm()">
+      <button class="btn btn-dark me-4" (click)="openLedgerForm()">
         <i class="bi bi-plus-lg"></i> Create
+      </button>
+      <button class="btn btn-outline-dark" (click)="ledgerUpload.click()">
+        <i class="bi bi-upload"></i> Upload
       </button>
     </div>
   </form>
@@ -48,3 +51,7 @@
 </app-main-layout>
 
 <app-ledger-form [data]="targetLedger" (onSave)="save($event)"></app-ledger-form>
+
+<form action="#" method="post" class="d-none">
+  <input type="file" #ledgerUpload (change)="upload(ledgerUpload.files!)">
+</form>
